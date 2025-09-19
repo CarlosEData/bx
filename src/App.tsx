@@ -15,6 +15,13 @@ function App() {
     telefone: ''
   });
 
+  const scrollToContact = () => {
+    const contactSection = document.getElementById('contato');
+    if (contactSection) {
+      contactSection.scrollIntoView({ behavior: 'smooth' });
+    }
+  };
+
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     const message = `Olá! Vim através do site da bx.\n\nDados de contato:\nNome: ${formData.nome}\nE-mail: ${formData.email}\nTelefone: ${formData.telefone}\n\nGostaria de saber mais sobre os serviços de marketing para clínicas.`;
@@ -52,7 +59,10 @@ function App() {
               <a href="#servicos" className="text-gray-300 hover:text-bx-blue transition-colors">Serviços</a>
               <a href="#sobre" className="text-gray-300 hover:text-bx-blue transition-colors">Sobre</a>
               <a href="#contato" className="text-gray-300 hover:text-bx-blue transition-colors">Contato</a>
-              <button className="bg-bx-gradient text-white px-6 py-2 rounded-lg hover:opacity-90 transition-all transform hover:scale-105">
+              <button 
+                onClick={scrollToContact}
+                className="bg-bx-gradient text-white px-6 py-2 rounded-lg hover:opacity-90 transition-all transform hover:scale-105"
+              >
                 Fale Conosco
               </button>
             </nav>
@@ -72,7 +82,10 @@ function App() {
                 <a href="#servicos" className="text-gray-300 hover:text-bx-blue transition-colors">Serviços</a>
                 <a href="#sobre" className="text-gray-300 hover:text-bx-blue transition-colors">Sobre</a>
                 <a href="#contato" className="text-gray-300 hover:text-bx-blue transition-colors">Contato</a>
-                <button className="bg-bx-gradient text-white px-6 py-2 rounded-lg hover:opacity-90 transition-all">
+                <button 
+                  onClick={scrollToContact}
+                  className="bg-bx-gradient text-white px-6 py-2 rounded-lg hover:opacity-90 transition-all"
+                >
                   Fale Conosco
                 </button>
               </nav>
@@ -98,7 +111,10 @@ function App() {
           <p className="text-xl md:text-2xl mb-8 max-w-4xl mx-auto text-gray-200">
             Estrutura e estratégias de marketing sob medida para clínicas que querem atrair mais pacientes e construir uma presença sólida no mercado.
           </p>
-          <button className="bg-white text-bx-black px-8 py-4 rounded-lg text-lg font-semibold hover:bg-gray-100 transition-all transform hover:scale-105 mb-12">
+          <button 
+            onClick={scrollToContact}
+            className="bg-white text-bx-black px-8 py-4 rounded-lg text-lg font-semibold hover:bg-gray-100 transition-all transform hover:scale-105 mb-12"
+          >
             Fale com um Especialista
             <ChevronRight className="inline-block ml-2 w-5 h-5" />
           </button>
@@ -159,7 +175,7 @@ function App() {
             </p>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-8">
             <div className="bg-gray-800 rounded-xl p-6 shadow-lg hover:shadow-xl transition-all group border border-gray-700">
               <div className="bg-bx-gradient w-14 h-14 rounded-lg flex items-center justify-center mb-4 group-hover:scale-110 transition-transform">
                 <Target className="w-7 h-7 text-white" />
@@ -168,14 +184,16 @@ function App() {
               <p className="text-gray-300 text-sm mb-4">
                 Soluções completas de marketing digital para maximizar sua presença online e atrair mais clientes.
               </p>
-              <ul className="text-xs text-gray-400 space-y-1">
-                <li>• Construção de SEO (sites, páginas, posicionamento orgânico do Google)</li>
-                <li>• Google ADS</li>
-                <li>• Meta ADS</li>
-                <li>• E-mail marketing</li>
-                <li>• Automação de fluxos de nutrição de leads</li>
-                <li>• Social Mídia</li>
-              </ul>
+              <div className="text-xs text-gray-400 space-y-1">
+                <div className="flex flex-wrap gap-2">
+                  <span className="bg-gray-700 px-2 py-1 rounded">SEO</span>
+                  <span className="bg-gray-700 px-2 py-1 rounded">Google ADS</span>
+                  <span className="bg-gray-700 px-2 py-1 rounded">Meta ADS</span>
+                  <span className="bg-gray-700 px-2 py-1 rounded">E-mail Marketing</span>
+                  <span className="bg-gray-700 px-2 py-1 rounded">Automação</span>
+                  <span className="bg-gray-700 px-2 py-1 rounded">Social Mídia</span>
+                </div>
+              </div>
             </div>
 
             <div className="bg-gray-800 rounded-xl p-6 shadow-lg hover:shadow-xl transition-all group border border-gray-700">
@@ -186,12 +204,14 @@ function App() {
               <p className="text-gray-300 text-sm mb-4">
                 Produção completa de conteúdo audiovisual para fortalecer sua marca e engajar seu público.
               </p>
-              <ul className="text-xs text-gray-400 space-y-1">
-                <li>• Captura de vídeos</li>
-                <li>• Captura de fotos</li>
-                <li>• Edição de vídeos</li>
-                <li>• Criação de roteiro</li>
-              </ul>
+              <div className="text-xs text-gray-400 space-y-1">
+                <div className="flex flex-wrap gap-2">
+                  <span className="bg-gray-700 px-2 py-1 rounded">Captura de Vídeos</span>
+                  <span className="bg-gray-700 px-2 py-1 rounded">Captura de Fotos</span>
+                  <span className="bg-gray-700 px-2 py-1 rounded">Edição de Vídeos</span>
+                  <span className="bg-gray-700 px-2 py-1 rounded">Criação de Roteiro</span>
+                </div>
+              </div>
             </div>
 
             <div className="bg-gray-800 rounded-xl p-6 shadow-lg hover:shadow-xl transition-all group border border-gray-700">
@@ -202,9 +222,11 @@ function App() {
               <p className="text-gray-300 text-sm mb-4">
                 Análise inteligente de dados para tomada de decisões estratégicas baseadas em métricas reais.
               </p>
-              <ul className="text-xs text-gray-400 space-y-1">
-                <li>• Dashboards de acompanhamento de métricas Microsoft B.I.</li>
-              </ul>
+              <div className="text-xs text-gray-400 space-y-1">
+                <div className="flex flex-wrap gap-2">
+                  <span className="bg-gray-700 px-2 py-1 rounded">Dashboards Microsoft B.I.</span>
+                </div>
+              </div>
             </div>
 
             <div className="bg-gray-800 rounded-xl p-6 shadow-lg hover:shadow-xl transition-all group border border-gray-700">
@@ -215,11 +237,13 @@ function App() {
               <p className="text-gray-300 text-sm mb-4">
                 Sistema completo de gestão de relacionamento com clientes e automação de processos de vendas.
               </p>
-              <ul className="text-xs text-gray-400 space-y-1">
-                <li>• CRM</li>
-                <li>• Automação de primeiro atendimento</li>
-                <li>• Automação para vendas</li>
-              </ul>
+              <div className="text-xs text-gray-400 space-y-1">
+                <div className="flex flex-wrap gap-2">
+                  <span className="bg-gray-700 px-2 py-1 rounded">CRM</span>
+                  <span className="bg-gray-700 px-2 py-1 rounded">Automação Atendimento</span>
+                  <span className="bg-gray-700 px-2 py-1 rounded">Automação Vendas</span>
+                </div>
+              </div>
             </div>
           </div>
         </div>
@@ -287,23 +311,6 @@ function App() {
 
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-start">
             <div>
-              <div className="mb-8">
-                <div className="flex items-center mb-4">
-                  <Phone className="w-6 h-6 text-gray-300 mr-3" />
-                  <div>
-                    <div className="font-semibold">WhatsApp</div>
-                    <div className="text-gray-300">(19) 991042675</div>
-                  </div>
-                </div>
-                <div className="flex items-center">
-                  <Mail className="w-6 h-6 text-gray-300 mr-3" />
-                  <div>
-                    <div className="font-semibold">E-mail</div>
-                    <div className="text-gray-300">bx2gestao@gmail.com</div>
-                  </div>
-                </div>
-              </div>
-
               <div className="bg-white bg-opacity-10 backdrop-blur-lg rounded-xl p-6 mb-6">
                 <h4 className="text-lg font-semibold mb-2 text-gray-200">Consulta Gratuita</h4>
                 <p className="text-gray-300 text-sm">
@@ -405,7 +412,10 @@ function App() {
               <p className="text-gray-400 mb-6">
                 Entre em contato e descubra como podemos impulsionar seus resultados.
               </p>
-              <button className="bg-white text-black px-6 py-3 rounded-lg hover:bg-gray-100 transition-all transform hover:scale-105">
+              <button 
+                onClick={scrollToContact}
+                className="bg-white text-black px-6 py-3 rounded-lg hover:bg-gray-100 transition-all transform hover:scale-105"
+              >
                 Fale conosco agora
               </button>
             </div>
