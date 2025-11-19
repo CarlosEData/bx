@@ -1,0 +1,1223 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>BX - Contatos</title>
+  <link rel="stylesheet" href="assets/WhatsApp Image 2025-11-14 at 00.31.37.jpeg">
+  <style>
+    :root{
+      --bg-dark: #06021a;
+      --blue-900: #010033;
+      --blue-700: #0b2bff;
+      --accent: #070a3f;
+      --white: #ffffff;
+      --gray-100: #f8f9fa;
+      --gray-200: #e9ecef;
+      --gray-600: #6c757d;
+      --gray-800: #343a40;
+      --gray-900: #000000;
+      --card-bg: #ffffff;
+      --shadow: 0 8px 30px rgba(0,0,0,0.12);
+      --dropdown-bg: #ffffff;
+      --space-xs: 8px;
+      --space-sm: 16px;
+      --space-md: 24px;
+      --space-lg: 48px;
+      --space-xl: 80px;
+      --ff: 'Poppins', system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+      --h1: 48px;
+      --h2: 36px;
+      --h3: 20px;
+      --regular: 16px;
+    }
+
+    *{box-sizing:border-box}
+    html,body{height:100%}
+    body{
+      margin:0;
+      font-family:var(--ff);
+      background: #ffffff;
+      color: var(--gray-900);
+      -webkit-font-smoothing:antialiased;
+      -moz-osx-font-smoothing:grayscale;
+      line-height:1.5;
+      overflow-x: hidden;
+    }
+
+    .container{
+      width: min(1200px, 92%);
+      margin: 0 auto;
+    }
+
+    .topstrip{
+      background: linear-gradient(90deg, var(--accent), #0b2bff);
+      color: var(--white);
+      text-align:center;
+      padding: 12px;
+      font-size:14px;
+      font-weight: 500;
+    }
+
+    .header{
+      padding: 0;
+      position:sticky;
+      top:0;
+      z-index:1000;
+      background: var(--accent);
+      box-shadow: 0 2px 20px rgba(0,0,0,0.08);
+      border-bottom: 1px solid var(--gray-200);
+    }
+
+    .header__inner{
+      display:flex;
+      align-items:center;
+      gap: 40px;
+      position:relative;
+      height: 80px;
+    }
+
+    .header__left{display:flex; align-items:center}
+    .header__logo{height: 100px; margin-left: 0px; display:block;}
+
+    .nav__list{
+      display:flex;
+      gap: 8px;
+      list-style:none;
+      padding:0;
+      margin:0;
+      align-items:center;
+      height: 100%;
+    }
+
+    .nav__item{
+      position:relative; 
+      display:block;
+      height: 100%;
+    }
+
+    .nav__link{
+      color: var(--white);
+      text-decoration:none;
+      font-weight:500;
+      font-size:15px;
+      padding: 0 20px;
+      display:flex;
+      align-items:center;
+      gap: 8px;
+      height: 100%;
+      transition: all 0.2s ease;
+      position: relative;
+      border-bottom: 3px solid transparent;
+      white-space: nowrap;
+    }
+
+    .nav__link:hover,
+    .nav__link:focus{
+      color: var(--white);
+      border-bottom-color: var(--white);
+    }
+
+    .nav__arrow{
+      transition: transform 0.2s ease;
+    }
+
+    .has-mega:hover .nav__arrow,
+    .has-dropdown:hover .nav__arrow{
+      transform: rotate(180deg);
+    }
+
+    .header__cta{margin-left:auto; display:flex; align-items:center; gap:16px}
+    .btn{
+      font-family:var(--ff); 
+      cursor:pointer; 
+      border-radius:8px; 
+      padding:12px 24px; 
+      border:0; 
+      display:inline-block; 
+      text-decoration:none; 
+      text-align:center; 
+      transition: all 0.3s ease;
+      font-weight: 600;
+      font-size: 14px;
+      white-space: nowrap;
+    }
+    .btn--primary{
+      margin-left: 150px;
+      background: var(--white); 
+      color:var(--accent);
+    }
+    .btn--primary:hover{
+      background: #f8f9fa; 
+      transform: translateY(-2px);
+      box-shadow: 0 8px 20px rgba(255,255,255,0.3);
+    }
+
+    .hamburger{
+      display:none; 
+      background:transparent; 
+      border:0; 
+      padding:8px; 
+      cursor: pointer; 
+      position: relative; 
+      z-index: 1001;
+      flex-direction: column;
+      gap: 4px;
+    }
+    .hamburger span{
+      display:block; 
+      width:24px; 
+      height:2px; 
+      background:var(--white); 
+      border-radius:2px; 
+      transition: transform .3s ease, opacity .3s ease;
+    }
+
+    /* Mega Menu Styles */
+    .mega-menu{
+      position: absolute;
+      top: 100%;
+      left: 0;
+      width: 700px;
+      background: var(--dropdown-bg);
+      box-shadow: var(--shadow);
+      border-radius: 0 0 12px 12px;
+      opacity: 0;
+      visibility: hidden;
+      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+      z-index: 999;
+      transform: translateY(-10px);
+      border: 1px solid var(--gray-200);
+      border-top: none;
+    }
+
+    .nav__item.has-mega:hover .mega-menu{
+      opacity:1;
+      visibility:visible;
+      transform: translateY(0);
+    }
+
+    .mega-menu__content{
+      padding: 32px;
+    }
+
+    .mega-menu__grid{
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 40px;
+    }
+
+    .mega-menu__col{
+      display: flex;
+      flex-direction: column;
+    }
+
+    .mega-menu__section{
+      flex: 1;
+    }
+
+    .mega-menu__list{
+      list-style: none;
+      padding: 0;
+      margin: 0;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .mega-menu__link{
+      color: var(--gray-800);
+      text-decoration: none;
+      font-size: 14px;
+      font-weight: 500;
+      padding: 8px 0;
+      display: block;
+      transition: all 0.2s ease;
+      border-left: 2px solid transparent;
+      padding-left: 12px;
+    }
+
+    .mega-menu__link:hover{
+      color: var(--accent);
+      border-left-color: var(--accent);
+      padding-left: 16px;
+    }
+
+    .mega-menu__link--parent{
+      font-weight: 600;
+      color: var(--gray-900);
+      margin-bottom: 8px;
+    }
+
+    .mega-menu__sublist{
+      list-style: none;
+      padding: 0;
+      margin: 8px 0 16px 0;
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+
+    .mega-menu__link--child{
+      font-weight: 400;
+      color: var(--gray-600);
+      font-size: 13px;
+      padding-left: 24px;
+    }
+
+    .mega-menu__link--child:hover{
+      color: var(--accent);
+      padding-left: 28px;
+    }
+
+    /* Dropdown Styles */
+    .dropdown{
+      position:absolute;
+      top: 100%;
+      left: 50%;
+      transform: translateX(-50%) translateY(-10px);
+      min-width: 220px;
+      background: var(--dropdown-bg);
+      box-shadow: var(--shadow);
+      border-radius: 0 0 12px 12px;
+      opacity:0;
+      visibility:hidden;
+      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+      z-index:999;
+      border: 1px solid var(--gray-200);
+      border-top: none;
+    }
+
+    .nav__item.has-dropdown:hover .dropdown{
+      opacity:1;
+      visibility:visible;
+      transform: translateX(-50%) translateY(0);
+    }
+
+    .dropdown__list{
+      list-style:none; 
+      padding: 20px 0; 
+      margin:0;
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+    }
+
+    .dropdown__link{
+      color: var(--gray-800);
+      text-decoration:none;
+      display:block;
+      font-size:14px;
+      padding: 10px 24px;
+      transition: all 0.2s ease;
+      font-weight: 500;
+    }
+
+    .dropdown__link:hover{
+      color: var(--accent);
+      background: var(--gray-100);
+      padding-left: 28px;
+    }
+
+    /* Contact Hero Section */
+    .contact-hero {
+      padding: 100px 0 80px;
+      background: linear-gradient(135deg, var(--bg-dark) 0%, var(--blue-900) 100%);
+      color: var(--white);
+      text-align: center;
+    }
+
+    .contact-hero__title {
+      font-size: 52px;
+      margin: 0 0 24px;
+      font-weight: 700;
+      line-height: 1.2;
+    }
+
+    .contact-hero__description {
+      font-size: 20px;
+      max-width: 800px;
+      margin: 0 auto 40px;
+      color: rgba(255,255,255,0.9);
+      line-height: 1.6;
+    }
+
+    .btn--secondary {
+      background: var(--white);
+      color: var(--accent);
+      font-weight: 600;
+      padding: 14px 32px;
+      border-radius: 8px;
+      display: inline-block;
+      text-decoration: none;
+      transition: all 0.3s ease;
+    }
+
+    .btn--secondary:hover {
+      background: #f8f9fa;
+      transform: translateY(-2px);
+      box-shadow: 0 8px 20px rgba(255,255,255,0.3);
+    }
+
+    /* Contact Methods Section */
+    .contact-methods {
+      padding: 100px 0;
+      background: var(--white);
+    }
+
+    .section-title {
+      font-size: var(--h2);
+      margin: 0 0 16px;
+      color: var(--gray-900);
+      text-align: left;
+      font-weight: 700;
+    }
+
+    .section-title--center {
+      text-align: center;
+    }
+
+    .section-subtitle {
+      font-size: 18px;
+      color: var(--gray-600);
+      max-width: 600px;
+      margin: 0 auto 60px;
+      text-align: center;
+      line-height: 1.6;
+    }
+
+    .contact-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 40px;
+      margin-top: 60px;
+      max-width: 900px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    .contact-card {
+      background: var(--gray-100);
+      border-radius: 12px;
+      padding: 40px 30px;
+      transition: all 0.3s ease;
+      border: 1px solid var(--gray-200);
+      text-align: center;
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+
+    .contact-card:hover {
+      transform: translateY(-5px);
+      box-shadow: var(--shadow);
+    }
+
+    .contact-icon {
+      width: 80px;
+      height: 80px;
+      background: var(--accent);
+      color: var(--white);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 32px;
+      margin: 0 auto 24px;
+    }
+
+    .contact-title {
+      font-size: 20px;
+      font-weight: 600;
+      margin: 0 0 16px;
+      color: var(--gray-900);
+    }
+
+    .contact-description {
+      color: var(--gray-600);
+      line-height: 1.6;
+      margin-bottom: 24px;
+      flex-grow: 1;
+    }
+
+    .btn--contact {
+      background: var(--accent);
+      color: var(--white);
+      font-weight: 600;
+      padding: 12px 24px;
+      border-radius: 8px;
+      display: inline-block;
+      text-decoration: none;
+      transition: all 0.3s ease;
+      width: 100%;
+    }
+
+    .btn--contact:hover {
+      background: var(--blue-700);
+      transform: translateY(-2px);
+      box-shadow: 0 8px 20px rgba(11, 43, 255, 0.3);
+    }
+
+    .btn--whatsapp {
+      background: #25D366;
+    }
+
+    .btn--whatsapp:hover {
+      background: #128C7E;
+    }
+
+    /* Contact Form Section */
+    .contact-form-section {
+      padding: 100px 0;
+      background: linear-gradient(135deg, var(--bg-dark) 0%, var(--blue-900) 100%);
+      color: var(--white);
+    }
+
+    .contact-form-container {
+      max-width: 800px;
+      margin: 0 auto;
+      background: var(--white);
+      border-radius: 12px;
+      padding: 40px;
+      box-shadow: var(--shadow);
+    }
+
+    .contact-form-container .section-title {
+      color: var(--accent);
+      text-align: center;
+      margin-bottom: 40px;
+    }
+
+    .form-group {
+      margin-bottom: 24px;
+    }
+
+    .form-label {
+      display: block;
+      margin-bottom: 8px;
+      font-weight: 600;
+      color: var(--gray-800);
+    }
+
+    .form-control {
+      width: 100%;
+      padding: 12px 16px;
+      border: 1px solid var(--gray-200);
+      border-radius: 8px;
+      font-size: 16px;
+      font-family: var(--ff);
+      transition: all 0.3s ease;
+    }
+
+    .form-control:focus {
+      outline: none;
+      border-color: var(--accent);
+      box-shadow: 0 0 0 3px rgba(7, 10, 63, 0.1);
+    }
+
+    textarea.form-control {
+      resize: vertical;
+      min-height: 120px;
+    }
+
+    .btn--submit {
+      background: var(--accent);
+      color: var(--white);
+      font-weight: 600;
+      padding: 14px 32px;
+      border-radius: 8px;
+      border: none;
+      cursor: pointer;
+      font-size: 16px;
+      width: 100%;
+      transition: all 0.3s ease;
+    }
+
+    .btn--submit:hover {
+      background: var(--blue-700);
+      transform: translateY(-2px);
+      box-shadow: 0 8px 20px rgba(11, 43, 255, 0.3);
+    }
+
+    /* Footer */
+    .footer{
+      background-color: #000000;
+      color:rgba(255,255,255,0.8);
+      padding:60px 0 40px;
+    }
+    .footer__inner{
+      display:flex; 
+      gap:40px; 
+      align-items:flex-start; 
+      flex-wrap:wrap;
+    }
+    .footer__brand img{height:300px; margin-bottom: 20px; margin-top: -30px;}
+    .footer__cols{
+      display:flex; 
+      gap:60px; 
+      margin-left:auto; 
+      flex-wrap:wrap;
+    }
+    .footer__col h4{
+      margin:0 0 20px 0; 
+      font-size:16px; 
+      color: var(--white);
+      font-weight: 600;
+    }
+    .footer__col ul{list-style:none; padding:0; margin:0}
+    .footer__col li{margin-bottom: 12px;}
+    .footer__col li a{
+      color: rgba(255,255,255,0.7); 
+      text-decoration: none; 
+      transition: color 0.2s ease;
+      font-size: 14px;
+    }
+    .footer__col li a:hover{color: var(--white);}
+
+    /* Responsive Styles */
+    @media (max-width:1024px){
+      .contact-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 30px;
+      }
+      
+      .footer__brand img {
+        height: 200px;
+      }
+    }
+
+    @media (max-width:768px){
+      .header__inner{
+        height: 70px;
+        gap: 20px;
+      }
+      
+      .header__logo{
+        height: 80px;
+        margin-top: 0;
+      }
+      
+      .nav__list{
+        display:none;
+        position: fixed;
+        top: 70px;
+        left: 0;
+        right: 0;
+        background: var(--accent);
+        padding: 20px;
+        margin: 0;
+        flex-direction: column;
+        z-index: 998;
+        max-height: calc(100vh - 70px);
+        overflow-y: auto;
+        box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+        gap: 0;
+      }
+      
+      .nav__list.nav__list--open{
+        display:flex !important;
+      }
+
+      .hamburger{
+        display:flex;
+      }
+      
+      .hamburger.active span:nth-child(1){
+        transform: rotate(45deg) translate(6px, 6px);
+      }
+      
+      .hamburger.active span:nth-child(2){
+        opacity: 0;
+      }
+      
+      .hamburger.active span:nth-child(3){
+        transform: rotate(-45deg) translate(6px, -6px);
+      }
+
+      .mega-menu, .dropdown{
+        display: none !important;
+        position: static !important;
+        transform: none !important;
+        width: 100% !important;
+        background: var(--gray-100) !important;
+        box-shadow: none !important;
+        border: none !important;
+        margin: 8px 0;
+        opacity: 1 !important;
+        visibility: visible !important;
+      }
+      
+      .nav__item.open .mega-menu,
+      .nav__item.open .dropdown{
+        display: block !important;
+      }
+      
+      .mega-menu__content{
+        padding: 20px;
+      }
+      
+      .mega-menu__grid{
+        grid-template-columns: 1fr;
+        gap: 0;
+      }
+      
+      .nav__list .nav__item{
+        width: 100%;
+        margin-bottom: 4px;
+      }
+      
+      .nav__list .nav__link{
+        width: 100%;
+        padding: 16px;
+        border-bottom: 1px solid rgba(255,255,255,0.2);
+        justify-content: space-between;
+      }
+      
+      .nav__list .nav__link::after{
+        content: "›";
+        font-size: 18px;
+        transition: transform 0.3s ease;
+      }
+      
+      .nav__item.open .nav__link::after{
+        transform: rotate(90deg);
+      }
+      
+      .header__cta{
+        margin-left: auto;
+      }
+
+      .contact-hero {
+        padding: 80px 0 60px;
+      }
+      
+      .contact-hero__title {
+        font-size: 36px;
+      }
+      
+      .contact-hero__description {
+        font-size: 18px;
+      }
+      
+      .contact-methods {
+        padding: 80px 0;
+      }
+      
+      .contact-grid {
+        grid-template-columns: 1fr;
+        gap: 30px;
+      }
+      
+      .contact-card {
+        padding: 30px 20px;
+      }
+      
+      .contact-form-container {
+        padding: 30px 20px;
+      }
+      
+      .footer__brand img{
+        height: 120px;
+        margin-top: 0;
+      }
+      
+      .footer__cols{
+        gap: 30px;
+        margin-left: 0;
+        width: 100%;
+      }
+      
+      .btn--primary {
+        margin-left: 0;
+      }
+    }
+
+    @media (max-width:480px){
+      :root{
+        --h1: 36px;
+        --h2: 28px;
+      }
+      
+      .contact-hero__title{
+        font-size: 32px;
+      }
+      
+      .header__inner{
+        gap: 12px;
+      }
+      
+      .footer__cols{
+        grid-template-columns: 1fr;
+        gap: 30px;
+      }
+      
+      .footer__inner{
+        flex-direction: column;
+        gap: 30px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="topstrip" role="region" aria-label="Promoção">
+    Agende uma reunião diagnóstica gratuitamente
+  </div>
+
+  <header class="header" role="banner">
+    <div class="container header__inner">
+      <div class="header__left">
+        <a href="index.html" class="brand" aria-label="BX - Home">
+          <img src="assets/ibx.png" alt="BX - Consultoria em Marketing Digital" class="header__logo" />
+        </a>
+      </div>
+
+      <button class="hamburger" aria-label="Abrir menu" id="hamburger" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+
+      <nav class="nav header__nav" aria-label="Main Navigation">
+        <ul class="nav__list" id="navList">
+          <li class="nav__item">
+            <a href="index.html" class="nav__link">Home</a>
+          </li>
+
+          <li class="nav__item has-mega" data-key="servicos">
+            <a href="servicos.html" class="nav__link" aria-haspopup="true" aria-expanded="false">
+              Serviços
+              <svg class="nav__arrow" width="12" height="12" viewBox="0 0 12 12" fill="none">
+                <path d="M3 4.5L6 7.5L9 4.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+            </a>
+
+            <div class="mega-menu" role="menu" aria-hidden="true">
+              <div class="mega-menu__content">
+                <div class="mega-menu__grid">
+                  <div class="mega-menu__col">
+                    <div class="mega-menu__section">
+                      <ul class="mega-menu__list">
+                        <li><a href="#" class="mega-menu__link">Implementação de CRM</a></li>
+                        <li><a href="#" class="mega-menu__link">Criação de sites e landing Pages</a></li>
+                        <li><a href="#" class="mega-menu__link">Criação de e-commerce</a></li>
+                        <li><a href="#" class="mega-menu__link">Gravação de vídeos profissionais</a></li>
+                        <li><a href="#" class="mega-menu__link">Cobertura de eventos</a></li>
+                        <li><a href="#" class="mega-menu__link">Dashboards de performance</a></li>
+                        <li><a href="#" class="mega-menu__link">Automações com IA</a></li>
+                        <li><a href="#" class="mega-menu__link">Social Media</a></li>
+                      </ul>
+                    </div>
+                  </div>
+                  
+                  <div class="mega-menu__col">
+                    <div class="mega-menu__section">
+                      <ul class="mega-menu__list">
+                        <li>
+                          <a href="#" class="mega-menu__link mega-menu__link--parent">Tráfego Pago</a>
+                          <ul class="mega-menu__sublist">
+                            <li><a href="#" class="mega-menu__link mega-menu__link--child">Google Ads</a></li>
+                            <li><a href="#" class="mega-menu__link mega-menu__link--child">Meta Ads</a></li>
+                            <li><a href="#" class="mega-menu__link mega-menu__link--child">TikTok Ads</a></li>
+                          </ul>
+                        </li>
+                        <li><a href="#" class="mega-menu__link">Edição de Vídeos</a></li>
+                        <li><a href="#" class="mega-menu__link">SDR (Sales Development Representative)</a></li>
+                        <li><a href="#" class="mega-menu__link">Closers</a></li>
+                      </ul>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </li>
+
+          <li class="nav__item has-dropdown" data-key="nosso-trabalho">
+            <a href="manutenção.html" class="nav__link" aria-haspopup="true" aria-expanded="false">
+              Nosso Trabalho
+              <svg class="nav__arrow" width="12" height="12" viewBox="0 0 12 12" fill="none">
+                <path d="M3 4.5L6 7.5L9 4.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+            </a>
+            <div class="dropdown" role="menu" aria-hidden="true">
+              <ul class="dropdown__list">
+                <li><a href="#" class="dropdown__link">Sobre nós</a></li>
+                <li><a href="#" class="dropdown__link">Equipe BX</a></li>
+                <li><a href="#" class="dropdown__link">Missão, Visão e Valores</a></li>
+              </ul>
+            </div>
+          </li>
+
+          <li class="nav__item has-dropdown" data-key="sistemas">
+            <a href="manutenção.html" class="nav__link" aria-haspopup="true" aria-expanded="false">
+              Sistemas
+              <svg class="nav__arrow" width="12" height="12" viewBox="0 0 12 12" fill="none">
+                <path d="M3 4.5L6 7.5L9 4.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+            </a>
+            <div class="dropdown" role="menu" aria-hidden="true">
+              <ul class="dropdown__list">
+                <li><a href="#" class="dropdown__link">Nour Clínicas</a></li>
+              </ul>
+            </div>
+          </li>
+
+          <li class="nav__item has-dropdown" data-key="assessoria">
+            <a href="manutenção.html" class="nav__link" aria-haspopup="true" aria-expanded="false">
+              Assessoria
+              <svg class="nav__arrow" width="12" height="12" viewBox="0 0 12 12" fill="none">
+                <path d="M3 4.5L6 7.5L9 4.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+            </a>
+            <div class="dropdown" role="menu" aria-hidden="true">
+              <ul class="dropdown__list">
+                <li><a href="#" class="dropdown__link">Consultoria de marketing</a></li>
+                <li><a href="#" class="dropdown__link">Treinamentos corporativos</a></li>
+                <li><a href="#" class="dropdown__link">Materiais Gratuitos</a></li>
+              </ul>
+            </div>
+          </li>
+
+          <li class="nav__item">
+            <a href="contatos.html" class="nav__link">Contato</a>
+          </li>
+        </ul>
+      </nav>
+
+      <div class="header__cta">
+        <a class="btn btn--primary" href="#">Agende já</a>
+      </div>
+    </div>
+  </header>
+
+  <section class="contact-hero">
+    <div class="container">
+      <h1 class="contact-hero__title">Entre em Contato</h1>
+      <p class="contact-hero__description">
+        Nossa equipe responderá o mais rápido possível e ajudará você a escolher a melhor solução para sua clínica.
+      </p>
+      <a href="#contact-form" class="btn btn--secondary">Enviar Mensagem</a>
+    </div>
+  </section>
+
+  <section class="contact-methods">
+    <div class="container">
+      <h2 class="section-title section-title--center">Escolha Sua Forma de Contato</h2>
+      <p class="section-subtitle">
+        Estamos disponíveis através de múltiplos canais para melhor atendê-lo
+      </p>
+      
+      <div class="contact-grid">
+        <div class="contact-card">
+          <div class="contact-icon">📱</div>
+          <h3 class="contact-title">Mensagem</h3>
+          <p class="contact-description">
+            Nos envie uma mensagem no WhatsApp. Nossa equipe responderá o mais rápido possível e ajudará você a escolher a melhor solução para sua clínica.
+          </p>
+          <a href="https://wa.me/5511999999999?text=Olá, gostaria de mais informações" class="btn btn--contact btn--whatsapp">
+            Envie uma mensagem...
+          </a>
+        </div>
+        
+        <div class="contact-card">
+          <div class="contact-icon">✉️</div>
+          <h3 class="contact-title">Entre em Contato</h3>
+          <p class="contact-description">
+            Prefere falar por e-mail? Envie sua mensagem para: <strong>gestao@bxassessessoria.com.br</strong> e retornaremos em até 1 dia útil.
+          </p>
+          <a href="mailto:gestao@bxassessessoria.com.br" class="btn btn--contact">
+            Envie um e-mail...
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="contact-form-section">
+    <div class="container">
+      <div class="contact-form-container">
+        <h2 class="section-title">Formulário</h2>
+        <form id="contact-form">
+          <div class="form-group">
+            <label for="name" class="form-label">Seu nome</label>
+            <input type="text" id="name" class="form-control" placeholder="Seu nome" required>
+          </div>
+          
+          <div class="form-group">
+            <label for="email" class="form-label">Seu e-mail</label>
+            <input type="email" id="email" class="form-control" placeholder="Seu e-mail" required>
+          </div>
+          
+          <div class="form-group">
+            <label for="phone" class="form-label">Seu Telefone</label>
+            <input type="tel" id="phone" class="form-control" placeholder="Seu Telefone" required>
+          </div>
+          
+          <div class="form-group">
+            <label for="message" class="form-label">Para mais detalhes!</label>
+            <textarea id="message" class="form-control" rows="4" placeholder="Para mais detalhes!"></textarea>
+          </div>
+          
+          <button type="submit" class="btn--submit">
+            Enviar Mensagem
+          </button>
+        </form>
+      </div>
+    </div>
+  </section>
+
+  <footer class="footer" role="contentinfo">
+    <div class="container footer__inner">
+      <div class="footer__brand">
+        <img src="assets/ibx.png" alt="BX - Consultoria em Marketing Digital" />
+      </div>
+
+      <div class="footer__cols">
+        <div class="footer__col">
+          <h4>INSTITUCIONAL</h4>
+          <ul>
+            <li><a href="index.html">Home</a></li>
+            <li><a href="#">Nosso Trabalho</a></li>
+            <li><a href="#">Sobre Nós</a></li>
+            <li><a href="#">Equipe BX</a></li>
+            <li><a href="#">Missão, Visão e Valores</a></li>
+          </ul>
+        </div>
+        <div class="footer__col">
+          <h4>SERVIÇOS</h4>
+          <ul>
+            <li><a href="#">Implementação de CRM</a></li>
+            <li><a href="#">Criação de Sites</a></li>
+            <li><a href="#">Landing Pages</a></li>
+            <li><a href="#">Tráfego Pago</a></li>
+            <li><a href="#">Automação com IA</a></li>
+          </ul>
+        </div>
+        <div class="footer__col">
+          <h4>SOLUÇÕES</h4>
+          <ul>
+            <li><a href="#">Sistema Nour Clínicas</a></li>
+            <li><a href="#">Consultoria de Marketing</a></li>
+            <li><a href="#">Treinamentos</a></li>
+            <li><a href="#">Materiais Gratuitos</a></li>
+          </ul>
+        </div>
+        <div class="footer__col">
+          <h4>CONTATO</h4>
+          <ul>
+            <li><a href="mailto:gestao@bxassessessoria.com.br">Email</a></li>
+            <li><a href="tel:+551133334444">Telefone</a></li>
+            <li><a href="#">Endereço</a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', function(){
+      const hamburger = document.getElementById('hamburger');
+      const navList = document.getElementById('navList');
+      const navItems = document.querySelectorAll('.nav__item');
+      const breakpointMobile = 768;
+      let isMobile = window.innerWidth <= breakpointMobile;
+
+      function updateMobileState() {
+        isMobile = window.innerWidth <= breakpointMobile;
+        
+        if (!isMobile) {
+          navList.classList.remove('nav__list--open');
+          hamburger.classList.remove('active');
+          hamburger.setAttribute('aria-expanded', 'false');
+          closeAllDropdowns();
+        }
+      }
+
+      function closeAllDropdowns() {
+        navItems.forEach(item => {
+          item.classList.remove('open');
+          const link = item.querySelector('.nav__link');
+          if (link) {
+            link.setAttribute('aria-expanded', 'false');
+          }
+        });
+        
+        document.querySelectorAll('.dropdown, .mega-menu').forEach(dropdown => {
+          dropdown.setAttribute('aria-hidden', 'true');
+        });
+      }
+
+      if (hamburger) {
+        hamburger.addEventListener('click', (e) => {
+          e.stopPropagation();
+          const isOpen = navList.classList.toggle('nav__list--open');
+          hamburger.classList.toggle('active');
+          hamburger.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
+          
+          if (!isOpen) {
+            closeAllDropdowns();
+          }
+        });
+      }
+
+      document.addEventListener('click', (e) => {
+        if (!e.target.closest('.header__inner')) {
+          navList.classList.remove('nav__list--open');
+          hamburger.classList.remove('active');
+          hamburger.setAttribute('aria-expanded', 'false');
+          closeAllDropdowns();
+        }
+      });
+
+      navItems.forEach(item => {
+        const link = item.querySelector('.nav__link');
+        const dropdown = item.querySelector('.dropdown');
+        const mega = item.querySelector('.mega-menu');
+
+        if (!isMobile) {
+          item.addEventListener('mouseenter', () => {
+            closeAllDropdowns();
+            item.classList.add('open');
+            link.setAttribute('aria-expanded', 'true');
+            if (dropdown) dropdown.setAttribute('aria-hidden', 'false');
+            if (mega) mega.setAttribute('aria-hidden', 'false');
+          });
+
+          item.addEventListener('mouseleave', () => {
+            item.classList.remove('open');
+            link.setAttribute('aria-expanded', 'false');
+            if (dropdown) dropdown.setAttribute('aria-hidden', 'true');
+            if (mega) mega.setAttribute('aria-hidden', 'true');
+          });
+        }
+
+        if (link) {
+          link.addEventListener('click', (e) => {
+            if (isMobile && (dropdown || mega)) {
+              e.preventDefault();
+              e.stopPropagation();
+              
+              const isOpen = item.classList.contains('open');
+              
+              navItems.forEach(otherItem => {
+                if (otherItem !== item) {
+                  otherItem.classList.remove('open');
+                  const otherLink = otherItem.querySelector('.nav__link');
+                  if (otherLink) otherLink.setAttribute('aria-expanded', 'false');
+                  const otherDropdown = otherItem.querySelector('.dropdown');
+                  const otherMega = otherItem.querySelector('.mega-menu');
+                  if (otherDropdown) otherDropdown.setAttribute('aria-hidden', 'true');
+                  if (otherMega) otherMega.setAttribute('aria-hidden', 'true');
+                }
+              });
+              
+              if (!isOpen) {
+                item.classList.add('open');
+                link.setAttribute('aria-expanded', 'true');
+                if (dropdown) dropdown.setAttribute('aria-hidden', 'false');
+                if (mega) mega.setAttribute('aria-hidden', 'false');
+              } else {
+                item.classList.remove('open');
+                link.setAttribute('aria-expanded', 'false');
+                if (dropdown) dropdown.setAttribute('aria-hidden', 'true');
+                if (mega) mega.setAttribute('aria-hidden', 'true');
+              }
+            }
+          });
+        }
+
+        if (link) {
+          link.addEventListener('keydown', (e) => {
+            if (e.key === 'Enter' || e.key === ' ') {
+              if (isMobile && (dropdown || mega)) {
+                e.preventDefault();
+                link.click();
+              }
+            }
+            
+            if (e.key === 'Escape') {
+              closeAllDropdowns();
+              if (isMobile) {
+                navList.classList.remove('nav__list--open');
+                hamburger.classList.remove('active');
+                hamburger.setAttribute('aria-expanded', 'false');
+              }
+            }
+          });
+
+          link.addEventListener('focus', () => {
+            if (!isMobile) {
+              closeAllDropdowns();
+              item.classList.add('open');
+              link.setAttribute('aria-expanded', 'true');
+              if (dropdown) dropdown.setAttribute('aria-hidden', 'false');
+              if (mega) mega.setAttribute('aria-hidden', 'false');
+            }
+          });
+        }
+      });
+
+      document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape') {
+          if (isMobile) {
+            navList.classList.remove('nav__list--open');
+            hamburger.classList.remove('active');
+            hamburger.setAttribute('aria-expanded', 'false');
+          }
+          closeAllDropdowns();
+          
+          if (hamburger && hamburger.getAttribute('aria-expanded') === 'true') {
+            hamburger.focus();
+          }
+        }
+      });
+
+      document.addEventListener('keydown', (e) => {
+        if (e.key === 'Tab') {
+          setTimeout(() => {
+            const focused = document.activeElement;
+            if (!focused.closest('.nav__item') && !focused.closest('.header__inner')) {
+              closeAllDropdowns();
+            }
+          }, 10);
+        }
+      });
+
+      // Contact Form Submission
+      const contactForm = document.getElementById('contact-form');
+      if (contactForm) {
+        contactForm.addEventListener('submit', function(e) {
+          e.preventDefault();
+          
+          // Aqui você pode adicionar o código para enviar o formulário
+          // Por exemplo, usando AJAX ou redirecionando para um processador de formulário
+          
+          alert('Mensagem enviada com sucesso! Entraremos em contato em breve.');
+          this.reset();
+        });
+      }
+
+      // Phone Mask
+      const phoneInput = document.getElementById('phone');
+      if (phoneInput) {
+        phoneInput.addEventListener('input', function(e) {
+          let value = e.target.value.replace(/\D/g, '');
+          if (value.length > 11) value = value.substring(0, 11);
+          
+          if (value.length <= 10) {
+            value = value.replace(/(\d{2})(\d{4})(\d{0,4})/, '($1) $2-$3');
+          } else {
+            value = value.replace(/(\d{2})(\d{5})(\d{0,4})/, '($1) $2-$3');
+          }
+          
+          e.target.value = value;
+        });
+      }
+
+      window.addEventListener('resize', () => {
+        updateMobileState();
+      });
+
+      updateMobileState();
+    });
+  </script>
+</body>
+</html>

@@ -1,0 +1,1545 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>BX - Assessorias</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    /* ===== VARIÁVEIS GLOBAIS ===== */
+    :root{
+      --bg-dark: #06021a;          /* Cor de fundo escura */
+      --blue-900: #010033;         /* Azul escuro */
+      --blue-700: #0b2bff;         /* Azul principal */
+      --accent: #070a3f;           /* Cor de destaque */
+      --white: #ffffff;            /* Branco */
+      --gray-100: #f8f9fa;         /* Cinza claro */
+      --gray-200: #e9ecef;         /* Cinza médio claro */
+      --gray-600: #6c757d;         /* Cinza médio */
+      --gray-800: #343a40;         /* Cinza escuro */
+      --gray-900: #000000;         /* Preto */
+      --card-bg: #ffffff;          /* Cor de fundo dos cards */
+      --shadow: 0 8px 30px rgba(0,0,0,0.12); /* Sombra padrão */
+      --dropdown-bg: #ffffff;      /* Cor de fundo dos dropdowns */
+      --space-xs: 8px;             /* Espaçamento extra pequeno */
+      --space-sm: 16px;            /* Espaçamento pequeno */
+      --space-md: 24px;            /* Espaçamento médio */
+      --space-lg: 48px;            /* Espaçamento grande */
+      --space-xl: 80px;            /* Espaçamento extra grande */
+      --ff: 'Poppins', system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial; /* Fonte padrão */
+      --h1: 48px;                  /* Tamanho do H1 */
+      --h2: 36px;                  /* Tamanho do H2 */
+      --h3: 20px;                  /* Tamanho do H3 */
+      --regular: 16px;             /* Tamanho de texto regular */
+    }
+
+    /* ===== RESET E CONFIGURAÇÕES GLOBAIS ===== */
+    *{box-sizing:border-box}       /* Modelo de caixa border-box para todos os elementos */
+    html,body{height:100%}         /* Altura 100% para html e body */
+    body{
+      margin:0;                    /* Remove margens padrão */
+      font-family:var(--ff);       /* Define a fonte padrão */
+      background: #ffffff;         /* Cor de fundo branca */
+      color: var(--gray-900);      /* Cor do texto preta */
+      -webkit-font-smoothing:antialiased; /* Suavização de fontes no Webkit */
+      -moz-osx-font-smoothing:grayscale;  /* Suavização de fontes no Firefox */
+      line-height:1.5;             /* Altura da linha */
+      overflow-x: hidden;          /* Remove rolagem horizontal */
+    }
+
+    /* ===== CONTAINER PRINCIPAL ===== */
+    .container{
+      width: min(1200px, 92%);     /* Largura máxima de 1200px ou 92% da tela */
+      margin: 0 auto;              /* Centraliza o container */
+    }
+
+    /* ===== FAIXA SUPERIOR FIXA ===== */
+    .topstrip{
+      background: linear-gradient(90deg, var(--accent), #0b2bff); /* Gradiente de fundo */
+      color: var(--white);         /* Texto branco */
+      text-align:center;           /* Texto centralizado */
+      padding: 12px;               /* Espaçamento interno */
+      font-size:14px;              /* Tamanho da fonte */
+      font-weight: 500;            /* Peso da fonte */
+      z-index: 1001;               /* Z-index alto para ficar acima de outros elementos */
+      position: fixed;             /* Posição fixa no topo */
+      top: 0;                      /* Alinhado ao topo */
+      left: 0;                     /* Alinhado à esquerda */
+      right: 0;                    /* Alinhado à direita */
+    }
+
+    /* ===== CABEÇALHO PRINCIPAL ===== */
+    .header{
+      padding: 0;                  /* Remove padding padrão */
+      position: fixed;             /* Posição fixa */
+      top: 44px;                   /* Posiciona abaixo da faixa superior */
+      left: 0;                     /* Alinhado à esquerda */
+      right: 0;                    /* Alinhado à direita */
+      z-index: 1000;               /* Z-index alto */
+      background: var(--white);    /* Fundo branco fixo */
+      transition: all 0.4s ease;   /* Transição suave para todas as propriedades */
+      border-bottom: 1px solid var(--gray-200); /* Borda inferior */
+      box-shadow: 0 2px 20px rgba(0,0,0,0.08); /* Sombra suave */
+    }
+
+    /* ===== LINKS DO CABEÇALHO ===== */
+    .nav__link {
+      color: var(--accent);        /* Cor do texto azul */
+    }
+
+    .nav__link:hover,
+    .nav__link:focus {
+      color: var(--accent);        /* Mantém cor azul no hover */
+      border-bottom-color: var(--accent); /* Borda inferior azul */
+    }
+
+    /* ===== HAMBÚRGUER ===== */
+    .hamburger span {
+      background: var(--accent);   /* Cor do ícone hambúrguer azul */
+    }
+
+    /* ===== CONTEÚDO INTERNO DO CABEÇALHO ===== */
+    .header__inner{
+      display:flex;                /* Layout flexbox */
+      align-items:center;          /* Alinha itens verticalmente ao centro */
+      gap: 40px;                   /* Espaço entre os itens */
+      position:relative;           /* Posição relativa */
+      height: 80px;                /* Altura fixa */
+    }
+
+    /* ===== LADO ESQUERDO DO CABEÇALHO ===== */
+    .header__left{display:flex; align-items:center} /* Alinha logo e outros itens */
+
+    /* ===== LOGO DO CABEÇALHO ===== */
+    .header__logo{
+      height: 70px;                /* Altura da logo */
+      transition: all 0.3s ease;   /* Transição suave */
+    }
+
+    /* ===== LISTA DE NAVEGAÇÃO ===== */
+    .nav__list{
+      display:flex;                /* Layout flexbox */
+      gap: 8px;                    /* Espaço entre os itens */
+      list-style:none;             /* Remove marcadores da lista */
+      padding:0;                   /* Remove padding padrão */
+      margin:0;                    /* Remove margem padrão */
+      align-items:center;          /* Alinha itens verticalmente */
+      height: 100%;                /* Altura total do container */
+    }
+
+    /* ===== ITEM DA NAVEGAÇÃO ===== */
+    .nav__item{
+      position:relative;           /* Posição relativa para dropdowns */
+      display:block;               /* Exibição em bloco */
+      height: 100%;                /* Altura total do container */
+    }
+
+    /* ===== LINK DA NAVEGAÇÃO ===== */
+    .nav__link{
+      color: var(--accent);        /* Cor do texto azul */
+      text-decoration:none;        /* Remove sublinhado */
+      font-weight:500;             /* Peso da fonte */
+      font-size:15px;              /* Tamanho da fonte */
+      padding: 0 20px;             /* Espaçamento interno horizontal */
+      display:flex;                /* Layout flexbox */
+      align-items:center;          /* Alinha itens verticalmente */
+      gap: 8px;                    /* Espaço entre texto e ícone */
+      height: 100%;                /* Altura total do container */
+      transition: all 0.2s ease;   /* Transição suave */
+      position: relative;          /* Posição relativa */
+      border-bottom: 3px solid transparent; /* Borda inferior transparente */
+      white-space: nowrap;         /* Impede quebra de linha */
+    }
+
+    /* ===== LINK DA NAVEGAÇÃO NO HOVER/FOCUS ===== */
+    .nav__link:hover,
+    .nav__link:focus{
+      color: var(--accent);        /* Mantém cor azul */
+      border-bottom-color: var(--accent); /* Borda inferior azul */
+    }
+
+    /* ===== SETA DO DROPDOWN ===== */
+    .nav__arrow{
+      transition: transform 0.2s ease; /* Transição suave para rotação */
+    }
+
+    /* ===== ROTAÇÃO DA SETA NO HOVER ===== */
+    .has-mega:hover .nav__arrow,
+    .has-dropdown:hover .nav__arrow{
+      transform: rotate(180deg);   /* Rotaciona 180 graus */
+    }
+
+    /* ===== CALL TO ACTION DO CABEÇALHO ===== */
+    .header__cta{margin-left:auto; display:flex; align-items:center; gap:16px}
+
+    /* ===== BOTÃO PRINCIPAL ===== */
+    .btn{
+      font-family:var(--ff);       /* Fonte padrão */
+      cursor:pointer;              /* Cursor de ponteiro */
+      border-radius:8px;           /* Bordas arredondadas */
+      padding:12px 24px;           /* Espaçamento interno */
+      border:0;                    /* Remove borda */
+      display:inline-block;        /* Exibição em linha-bloco */
+      text-decoration:none;        /* Remove sublinhado */
+      text-align:center;           /* Texto centralizado */
+      transition: all 0.3s ease;   /* Transição suave */
+      font-weight: 600;            /* Peso da fonte */
+      font-size: 14px;             /* Tamanho da fonte */
+      white-space: nowrap;         /* Impede quebra de linha */
+    }
+
+    /* ===== BOTÃO PRIMÁRIO ===== */
+    .btn--primary{
+      background: var(--accent);   /* Fundo azul */
+      color: var(--white);         /* Texto branco */
+    }
+
+    /* ===== BOTÃO PRIMÁRIO NO HOVER ===== */
+    .btn--primary:hover{
+      background: #0b2bff;         /* Fundo azul mais escuro */
+      transform: translateY(-2px); /* Move ligeiramente para cima */
+      box-shadow: 0 8px 20px rgba(11, 43, 255, 0.3); /* Sombra azul */
+    }
+
+    /* ===== ÍCONE HAMBÚRGUER (MOBILE) ===== */
+    .hamburger{
+      display:none;                /* Oculta por padrão (desktop) */
+      background:transparent;      /* Fundo transparente */
+      border:0;                    /* Remove borda */
+      padding:8px;                 /* Espaçamento interno */
+      cursor: pointer;             /* Cursor de ponteiro */
+      position: relative;          /* Posição relativa */
+      z-index: 1001;               /* Z-index alto */
+      flex-direction: column;      /* Direção coluna para as linhas */
+      gap: 4px;                    /* Espaço entre as linhas */
+    }
+
+    /* ===== LINHAS DO HAMBÚRGUER ===== */
+    .hamburger span{
+      display:block;               /* Exibição em bloco */
+      width:24px;                  /* Largura */
+      height:2px;                  /* Altura */
+      background:var(--accent);     /* Cor azul */
+      border-radius:2px;           /* Bordas levemente arredondadas */
+      transition: transform .3s ease, opacity .3s ease; /* Transições suaves */
+    }
+
+    /* ===== MEGA MENU ===== */
+    .mega-menu{
+      position: absolute;          /* Posição absoluta */
+      top: 100%;                   /* Posiciona abaixo do item pai */
+      left: 0;                     /* Alinhado à esquerda */
+      width: 1000px;               /* Largura mais horizontal */
+      max-height: 500px;           /* Altura máxima reduzida */
+      background: var(--dropdown-bg); /* Cor de fundo */
+      box-shadow: var(--shadow);   /* Sombra */
+      border-radius: 0 0 12px 12px; /* Bordas arredondadas apenas embaixo */
+      opacity: 0;                  /* Inicialmente invisível */
+      visibility: hidden;          /* Inicialmente oculto */
+      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1); /* Transição suave */
+      z-index: 999;                /* Z-index alto */
+      transform: translateY(-10px); /* Posicionado ligeiramente acima */
+      border: 1px solid var(--gray-200); /* Borda cinza */
+      border-top: none;            /* Remove borda superior */
+      padding: 0;                  /* Remove padding padrão */
+      display: flex;               /* Layout flexbox */
+      overflow-y: auto;            /* Permite rolagem se necessário */
+    }
+
+    /* ===== MEGA MENU NO HOVER ===== */
+    .nav__item.has-mega:hover .mega-menu{
+      opacity:1;                   /* Torna visível */
+      visibility:visible;          /* Torna visível */
+      transform: translateY(0);    /* Posiciona corretamente */
+    }
+
+    /* ===== CONTEÚDO DO MEGA MENU ===== */
+    .mega-menu__content{
+      padding: 30px;               /* Espaçamento interno reduzido */
+      flex: 1;                     /* Ocupa espaço disponível */
+      display: flex;               /* Layout flexbox */
+      flex-direction: column;      /* Direção coluna */
+    }
+
+    /* ===== GRADE DO MEGA MENU ===== */
+    .mega-menu__grid{
+      display: grid;               /* Layout grid */
+      grid-template-columns: repeat(4, 1fr); /* Quatro colunas para acomodar a terceirização */
+      gap: 30px;                   /* Espaço entre colunas */
+      flex: 1;                     /* Ocupa espaço disponível */
+    }
+
+    /* ===== COLUNA DO MEGA MENU ===== */
+    .mega-menu__col{
+      display: flex;               /* Layout flexbox */
+      flex-direction: column;      /* Direção coluna */
+    }
+
+    /* ===== SEÇÃO DO MEGA MENU ===== */
+    .mega-menu__section{
+      flex: 1;                     /* Ocupa espaço disponível */
+    }
+
+    /* ===== TÍTULO DA SEÇÃO DO MEGA MENU ===== */
+    .mega-menu__section-title {
+      font-size: 18px;             /* Tamanho da fonte */
+      font-weight: 600;            /* Peso da fonte */
+      color: var(--gray-900);      /* Cor do texto */
+      margin: 0 0 16px;            /* Margem */
+      padding-bottom: 8px;         /* Espaçamento abaixo */
+      border-bottom: 1px solid var(--gray-200); /* Linha divisória */
+    }
+
+    /* ===== LISTA DO MEGA MENU ===== */
+    .mega-menu__list{
+      list-style: none;            /* Remove marcadores */
+      padding: 0;                  /* Remove padding */
+      margin: 0;                   /* Remove margem */
+      display: flex;               /* Layout flexbox */
+      flex-direction: column;      /* Direção coluna */
+      gap: 10px;                   /* Espaço entre itens reduzido */
+    }
+
+    /* ===== LINK DO MEGA MENU ===== */
+    .mega-menu__link{
+      color: var(--gray-800);      /* Cor do texto */
+      text-decoration: none;       /* Remove sublinhado */
+      font-size: 14px;             /* Tamanho da fonte */
+      font-weight: 500;            /* Peso da fonte */
+      padding: 6px 0;              /* Espaçamento vertical reduzido */
+      display: block;              /* Exibição em bloco */
+      transition: all 0.2s ease;   /* Transição suave */
+      border-left: 2px solid transparent; /* Borda esquerda transparente */
+      padding-left: 12px;          /* Espaçamento à esquerda */
+    }
+
+    /* ===== LINK DO MEGA MENU NO HOVER ===== */
+    .mega-menu__link:hover{
+      color: var(--accent);        /* Cor azul */
+      border-left-color: var(--accent); /* Borda esquerda azul */
+      padding-left: 16px;          /* Aumenta espaçamento à esquerda */
+    }
+
+    /* ===== SUBLISTA DO MEGA MENU ===== */
+    .mega-menu__sublist{
+      list-style: none;            /* Remove marcadores */
+      padding: 0;                  /* Remove padding */
+      margin: 8px 0 12px 0;        /* Margem reduzida */
+      display: flex;               /* Layout flexbox */
+      flex-direction: column;      /* Direção coluna */
+      gap: 4px;                    /* Espaço entre itens reduzido */
+    }
+
+    /* ===== LINK FILHO DO MEGA MENU ===== */
+    .mega-menu__link--child{
+      font-weight: 400;            /* Peso da fonte normal */
+      color: var(--gray-600);      /* Cor do texto mais clara */
+      font-size: 13px;             /* Tamanho da fonte menor */
+      padding-left: 20px;          /* Menor espaçamento à esquerda */
+    }
+
+    /* ===== LINK FILHO DO MEGA MENU NO HOVER ===== */
+    .mega-menu__link--child:hover{
+      color: var(--accent);        /* Cor azul */
+      padding-left: 24px;          /* Aumenta espaçamento à esquerda */
+    }
+
+    /* ===== DROPDOWN SIMPLES ===== */
+    .dropdown{
+      position:absolute;           /* Posição absoluta */
+      top: 100%;                   /* Posiciona abaixo do item pai */
+      left: 50%;                   /* Centraliza horizontalmente */
+      transform: translateX(-50%) translateY(-10px); /* Centraliza e posiciona ligeiramente acima */
+      min-width: 220px;            /* Largura mínima */
+      background: var(--dropdown-bg); /* Cor de fundo */
+      box-shadow: var(--shadow);   /* Sombra */
+      border-radius: 0 0 12px 12px; /* Bordas arredondadas apenas embaixo */
+      opacity:0;                   /* Inicialmente invisível */
+      visibility:hidden;           /* Inicialmente oculto */
+      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1); /* Transição suave */
+      z-index:999;                 /* Z-index alto */
+      border: 1px solid var(--gray-200); /* Borda cinza */
+      border-top: none;            /* Remove borda superior */
+    }
+
+    /* ===== DROPDOWN NO HOVER ===== */
+    .nav__item.has-dropdown:hover .dropdown{
+      opacity:1;                   /* Torna visível */
+      visibility:visible;          /* Torna visível */
+      transform: translateX(-50%) translateY(0); /* Posiciona corretamente */
+    }
+
+    /* ===== LISTA DO DROPDOWN ===== */
+    .dropdown__list{
+      list-style:none;             /* Remove marcadores */
+      padding: 16px 0;             /* Espaçamento vertical reduzido */
+      margin:0;                    /* Remove margem */
+      display: flex;               /* Layout flexbox */
+      flex-direction: column;      /* Direção coluna */
+      gap: 4px;                    /* Espaço entre itens */
+    }
+
+    /* ===== LINK DO DROPDOWN ===== */
+    .dropdown__link{
+      color: var(--gray-800);      /* Cor do texto */
+      text-decoration:none;        /* Remove sublinhado */
+      display:block;               /* Exibição em bloco */
+      font-size:14px;              /* Tamanho da fonte */
+      padding: 8px 20px;           /* Espaçamento interno reduzido */
+      transition: all 0.2s ease;   /* Transição suave */
+      font-weight: 500;            /* Peso da fonte */
+    }
+
+    /* ===== LINK DO DROPDOWN NO HOVER ===== */
+    .dropdown__link:hover{
+      color: var(--accent);        /* Cor azul */
+      background: var(--gray-100); /* Fundo cinza claro */
+      padding-left: 24px;          /* Aumenta espaçamento à esquerda */
+    }
+
+    /* ===== SEÇÃO HERO (BANNER PRINCIPAL) ===== */
+    .hero{
+      padding: 180px 0 80px;       /* Espaçamento interno (topo aumentado para cabeçalho fixo) */
+      position:relative;           /* Posição relativa */
+      overflow:hidden;             /* Esconde overflow */
+      background: linear-gradient(135deg, var(--bg-dark) 0%, var(--blue-900) 100%); /* Gradiente de fundo */
+    }
+
+    /* ===== CONTEÚDO INTERNO DO HERO ===== */
+    .hero__inner{
+      display:flex;                /* Layout flexbox */
+      align-items:center;          /* Alinha itens verticalmente */
+      justify-content:space-between; /* Espaço entre os elementos */
+      gap:60px;                    /* Espaço entre conteúdo e imagem */
+      min-height:500px;            /* Altura mínima */
+    }
+
+    /* ===== CONTEÚDO DO HERO ===== */
+    .hero__content{
+      max-width:800px;             /* Largura máxima aumentada */
+      display: flex;               /* Layout flexbox */
+      flex-direction: column;      /* Direção coluna */
+      align-items: flex-start;     /* Alinha itens à esquerda */
+    }
+
+    /* ===== LOGO DO HERO ===== */
+    .hero__logo{
+      height: 120px;               /* Altura da logo reduzida */
+      margin: 0 0 30px;            /* Margem apenas abaixo */
+      display: block;              /* Exibição em bloco */
+    }
+
+    /* ===== TÍTULO DO HERO ===== */
+    .hero__title{
+      font-size: 48px;             /* Tamanho da fonte */
+      margin: 0 0 20px 0;          /* Margem */
+      font-weight: 700;            /* Peso da fonte */
+      color: var(--white);         /* Cor do texto branca */
+      line-height: 1.2;            /* Altura da linha */
+      text-align: left;            /* Texto alinhado à esquerda */
+      width: 100%;                 /* Largura total */
+    }
+
+    /* ===== SUBTÍTULO DO HERO ===== */
+    .hero__subtitle{
+      color: rgba(255,255,255,0.9); /* Cor do texto com menos transparência */
+      font-weight: 400;            /* Peso da fonte */
+      font-size: 20px;             /* Tamanho da fonte aumentado */
+      margin-bottom: 30px;         /* Espaço abaixo */
+      text-align: left;            /* Texto alinhado à esquerda */
+      max-width: 700px;            /* Largura máxima aumentada */
+      line-height: 1.6;            /* Altura da linha */
+    }
+
+    /* ===== SEÇÃO DE METODOLOGIA ===== */
+    .method{
+      background: var(--gray-100); /* Fundo cinza claro */
+      padding:80px 0;              /* Espaçamento interno */
+    }
+
+    /* ===== TÍTULO DA SEÇÃO DE METODOLOGIA ===== */
+    .methodology-title-section {
+      text-align: center;          /* Texto centralizado */
+      margin-bottom: 50px;         /* Espaço abaixo */
+    }
+
+    .methodology-title-section h2 {
+      font-size: 32px;             /* Tamanho da fonte */
+      font-weight: 700;            /* Peso da fonte */
+      color: var(--gray-900);      /* Cor do texto */
+      margin: 0 0 10px;            /* Margem */
+    }
+
+    .methodology-title-section p {
+      font-size: 18px;             /* Tamanho da fonte */
+      color: var(--gray-600);      /* Cor do texto */
+      margin: 0;                   /* Remove margem */
+    }
+
+    /* ===== CARDS DE METODOLOGIA ===== */
+    .methodology-cards {
+      display: grid;               /* Layout grid */
+      grid-template-columns: repeat(2, 1fr); /* 2 colunas para melhor responsividade */
+      gap: 30px;                   /* Espaço entre cards */
+    }
+
+    /* ===== CARD INDIVIDUAL DE METODOLOGIA ===== */
+    .methodology-card {
+      background: var(--white);    /* Fundo branco */
+      border-radius: 12px;         /* Bordas arredondadas */
+      padding: 30px;               /* Espaçamento interno */
+      box-shadow: var(--shadow);   /* Sombra */
+      transition: all 0.3s ease;   /* Transição suave */
+      border: 1px solid var(--gray-200); /* Borda cinza */
+      display: flex;               /* Layout flexbox */
+      flex-direction: column;      /* Direção coluna */
+    }
+
+    /* ===== CARD DE METODOLOGIA NO HOVER ===== */
+    .methodology-card:hover {
+      transform: translateY(-5px); /* Move ligeiramente para cima */
+      box-shadow: 0 15px 30px rgba(0,0,0,0.15); /* Aumenta sombra */
+    }
+
+    /* ===== ÍCONE DA METODOLOGIA ===== */
+    .methodology-icon {
+      width: 50px;                 /* Largura reduzida */
+      height: 50px;                /* Altura reduzida */
+      margin: 0 0 20px;            /* Margem apenas abaixo */
+      background: var(--accent);   /* Fundo azul */
+      border-radius: 50%;          /* Forma circular */
+      display: flex;               /* Layout flexbox */
+      align-items: center;         /* Centraliza verticalmente */
+      justify-content: center;     /* Centraliza horizontalmente */
+      color: var(--white);         /* Cor do texto branca */
+      font-size: 20px;             /* Tamanho da fonte reduzido */
+      font-weight: 700;            /* Peso da fonte */
+    }
+
+    /* ===== TÍTULO DA METODOLOGIA ===== */
+    .methodology-title {
+      font-size: 20px;             /* Tamanho da fonte */
+      font-weight: 600;            /* Peso da fonte */
+      margin: 0 0 15px;            /* Margem */
+      color: var(--gray-900);      /* Cor do texto */
+    }
+
+    /* ===== DESCRIÇÃO DA METODOLOGIA ===== */
+    .methodology-description {
+      color: var(--gray-600);      /* Cor do texto */
+      font-size: 16px;             /* Tamanho da fonte */
+      line-height: 1.6;            /* Altura da linha */
+      margin: 0;                   /* Remove margem */
+    }
+
+    /* ===== SEÇÃO DE CONTEÚDOS EM DESTAQUE ===== */
+    .featured{
+      background: var(--white);    /* Fundo branco */
+      padding:80px 0;              /* Espaçamento interno */
+    }
+
+    /* ===== TÍTULO DA SEÇÃO DE CONTEÚDOS ===== */
+    .featured .section-title{
+      text-align:center;           /* Texto centralizado */
+      margin-bottom: 20px;         /* Espaço abaixo */
+    }
+
+    /* ===== DESCRIÇÃO DA SEÇÃO DE CONTEÚDOS ===== */
+    .featured__lead{
+      text-align:center;           /* Texto centralizado */
+      margin:0 auto 40px;          /* Centraliza e adiciona espaço abaixo */
+      max-width:600px;             /* Largura máxima */
+      color: var(--gray-600);      /* Cor do texto */
+      font-size: 18px;             /* Tamanho da fonte */
+    }
+
+    /* ===== GRADE DE CARDS ===== */
+    .cards{
+      display:grid;                /* Layout grid */
+      grid-template-columns: repeat(3,1fr); /* 3 colunas de tamanho igual */
+      gap:30px;                    /* Espaço entre cards */
+      margin-top:40px;             /* Espaço acima */
+    }
+
+    /* ===== CARD INDIVIDUAL ===== */
+    .card{
+      background:var(--card-bg);   /* Cor de fundo */
+      border-radius:12px;          /* Bordas arredondadas */
+      overflow:hidden;             /* Esconde overflow */
+      box-shadow: 0 4px 20px rgba(0,0,0,0.08); /* Sombra suave */
+      display:flex;                /* Layout flexbox */
+      flex-direction:column;       /* Direção coluna */
+      transition: all 0.3s ease;   /* Transição suave */
+      border: 1px solid var(--gray-200); /* Borda cinza */
+    }
+
+    /* ===== CARD NO HOVER ===== */
+    .card:hover{
+      transform: translateY(-8px); /* Move para cima */
+      box-shadow: 0 20px 40px rgba(0,0,0,0.12); /* Aumenta sombra */
+    }
+
+    /* ===== MÍDIA DO CARD (IMAGEM) ===== */
+    .card__media img{
+      width:100%;                  /* Largura total */
+      display:block;               /* Exibição em bloco */
+      height:200px;                /* Altura fixa */
+      object-fit:cover;            /* Ajusta imagem para preencher o container */
+    }
+
+    /* ===== CORPO DO CARD ===== */
+    .card__body{
+      padding:24px;                /* Espaçamento interno */
+      flex:1;                      /* Ocupa espaço disponível */
+      display:flex;                /* Layout flexbox */
+      flex-direction:column;       /* Direção coluna */
+    }
+
+    /* ===== CATEGORIA DO CARD ===== */
+    .card__kicker{
+      font-weight:600;             /* Peso da fonte */
+      margin:0 0 8px 0;            /* Margem */
+      color:var(--accent);         /* Cor azul */
+      font-size: 14px;             /* Tamanho da fonte */
+      text-transform: uppercase;   /* Texto em maiúsculas */
+      letter-spacing: 0.5px;       /* Espaçamento entre letras */
+    }
+
+    /* ===== TÍTULO DO CARD ===== */
+    .card__title{
+      margin:0 0 12px;             /* Margem */
+      font-weight:600;             /* Peso da fonte */
+      font-size: 18px;             /* Tamanho da fonte */
+      color: var(--gray-900);      /* Cor do texto */
+    }
+
+    /* ===== RESUMO DO CARD ===== */
+    .card__excerpt{
+      flex:1;                      /* Ocupa espaço disponível */
+      color:var(--gray-600);       /* Cor do texto */
+      margin-bottom:20px;          /* Espaço abaixo */
+      line-height: 1.6;            /* Altura da linha */
+    }
+
+    /* ===== BOTÃO PEQUENO ===== */
+    .btn--small{
+      background:var(--accent);    /* Fundo azul */
+      color:var(--white);          /* Texto branco */
+      padding:10px 20px;           /* Espaçamento interno */
+      border-radius:6px;           /* Bordas arredondadas */
+      font-weight:500;             /* Peso da fonte */
+      font-size: 14px;             /* Tamanho da fonte */
+      align-self: flex-start;      /* Alinha à esquerda */
+    }
+
+    /* ===== BOTÃO PEQUENO NO HOVER ===== */
+    .btn--small:hover{
+      background: #0b2bff;         /* Fundo azul mais escuro */
+      transform: translateY(-2px); /* Move ligeiramente para cima */
+    }
+
+    /* ===== BOTÃO "VER MAIS" ===== */
+    .featured__more{
+      display:flex;                /* Layout flexbox */
+      justify-content:center;      /* Centraliza horizontalmente */
+      margin-top:50px;             /* Espaço acima */
+    }
+
+    /* ===== BOTÃO EM FORMATO DE PÍLULA ===== */
+    .btn--pill{
+      background:var(--accent);    /* Fundo azul */
+      color:var(--white);          /* Texto branco */
+      padding:14px 32px;           /* Espaçamento interno */
+      border-radius:25px;          /* Bordas muito arredondadas */
+      font-weight:600;             /* Peso da fonte */
+    }
+
+    /* ===== BOTÃO EM FORMATO DE PÍLULA NO HOVER ===== */
+    .btn--pill:hover{
+      background: #0b2bff;         /* Fundo azul mais escuro */
+      transform: translateY(-2px); /* Move ligeiramente para cima */
+    }
+
+    /* ===== RODAPÉ ===== */
+    .footer{
+      background-color: #000000;   /* Fundo preto */
+      color:rgba(255,255,255,0.8); /* Cor do texto com transparência */
+      padding:60px 0 0;            /* Espaçamento interno (sem padding inferior) */
+    }
+
+    /* ===== CONTEÚDO INTERNO DO RODAPÉ ===== */
+    .footer__inner{
+      display:flex;                /* Layout flexbox */
+      gap:40px;                    /* Espaço entre elementos */
+      align-items:flex-start;      /* Alinha itens ao topo */
+      flex-wrap:wrap;              /* Permite quebra de linha */
+      padding-bottom: 40px;        /* Espaçamento inferior */
+    }
+
+    /* ===== MARCA NO RODAPÉ ===== */
+    .footer__brand img{height: 120px; margin-bottom: 20px;}
+
+    /* ===== COLUNAS DO RODAPÉ ===== */
+    .footer__cols{
+      display:flex;                /* Layout flexbox */
+      gap:60px;                    /* Espaço entre colunas */
+      margin-left:auto;            /* Empurra para a direita */
+      flex-wrap:wrap;              /* Permite quebra de linha */
+    }
+
+    /* ===== TÍTULO DAS COLUNAS DO RODAPÉ ===== */
+    .footer__col h4{
+      margin:0 0 20px 0;           /* Margem */
+      font-size:16px;              /* Tamanho da fonte */
+      color: var(--white);         /* Cor do texto branca */
+      font-weight: 600;            /* Peso da fonte */
+    }
+
+    /* ===== LISTA DAS COLUNAS DO RODAPÉ ===== */
+    .footer__col ul{list-style:none; padding:0; margin:0} /* Remove estilos padrão */
+
+    /* ===== ITENS DA LISTA DO RODAPÉ ===== */
+    .footer__col li{margin-bottom: 12px;} /* Espaço entre itens */
+
+    /* ===== LINKS DO RODAPÉ ===== */
+    .footer__col li a{
+      color: rgba(255,255,255,0.7); /* Cor do texto com transparência */
+      text-decoration: none;       /* Remove sublinhado */
+      transition: color 0.2s ease; /* Transição suave para cor */
+      font-size: 14px;             /* Tamanho da fonte */
+    }
+
+    /* ===== LINKS DO RODAPÉ NO HOVER ===== */
+    .footer__col li a:hover{color: var(--white);} /* Cor branca no hover */
+
+    /* ===== PARTE INFERIOR DO RODAPÉ ===== */
+    .footer__bottom{
+      background: rgba(0,0,0,0.8); /* Fundo preto com transparência */
+      padding: 20px 0;             /* Espaçamento interno */
+      border-top: 1px solid rgba(255,255,255,0.1); /* Linha divisória superior */
+    }
+
+    /* ===== DIREITOS AUTORAIS ===== */
+    .footer__copyright{
+      text-align: center;          /* Texto centralizado */
+      color: rgba(255,255,255,0.6); /* Cor do texto com transparência */
+      font-size: 14px;             /* Tamanho da fonte */
+    }
+
+    /* ===== RESPONSIVIDADE - TABLET GRANDE (ATÉ 1100px) ===== */
+    @media (max-width:1100px){
+      .methodology-cards {
+        grid-template-columns: repeat(2, 1fr); /* Mantém 2 colunas */
+      }
+      
+      .hero__logo {
+        height: 100px;             /* Reduz altura da logo */
+      }
+      
+      .footer__brand img {
+        height: 100px;             /* Reduz altura da logo no rodapé */
+      }
+      
+      .footer__cols {
+        gap: 40px;                 /* Reduz espaço entre colunas */
+      }
+      
+      .nav__list {
+        gap: 4px;                  /* Reduz espaço entre itens do menu */
+      }
+      
+      .nav__link {
+        padding: 0 15px;           /* Reduz espaçamento interno dos links */
+      }
+      
+      .mega-menu {
+        width: 900px;              /* Reduz largura do mega menu */
+      }
+      
+      .mega-menu__grid {
+        grid-template-columns: repeat(3, 1fr); /* 3 colunas em tablets */
+      }
+      
+      .hero__title {
+        font-size: 42px;           /* Reduz tamanho do título */
+      }
+      
+      .hero__subtitle {
+        font-size: 18px;           /* Reduz tamanho do subtítulo */
+      }
+    }
+
+    /* ===== RESPONSIVIDADE - TABLET (ATÉ 900px) ===== */
+    @media (max-width:900px){
+      .header__inner{
+        height: 70px;              /* Reduz altura do cabeçalho */
+        gap: 20px;                 /* Reduz espaço entre elementos */
+      }
+      
+      .header__logo{
+        height: 60px;              /* Reduz altura da logo */
+      }
+      
+      /* ===== MENU HAMBÚRGUER ATIVADO ===== */
+      .nav__list{
+        display:none;              /* Oculta menu padrão */
+        position: fixed;           /* Posição fixa na tela */
+        top: 0;                    /* Alinhado ao topo */
+        left: 0;                   /* Alinhado à esquerda */
+        right: 0;                  /* Alinhado à direita */
+        bottom: 0;                 /* Alinhado à base */
+        background: var(--accent); /* Fundo azul */
+        padding: 100px 20px 20px;  /* Espaçamento interno */
+        margin: 0;                 /* Remove margem */
+        flex-direction: column;    /* Direção coluna */
+        z-index: 998;              /* Z-index alto */
+        overflow-y: auto;          /* Permite rolagem se necessário */
+        box-shadow: 0 4px 20px rgba(0,0,0,0.1); /* Sombra */
+        gap: 0;                    /* Remove espaço entre itens */
+        opacity: 0;                /* Inicialmente transparente */
+        visibility: hidden;        /* Inicialmente invisível */
+        transition: all 0.3s ease; /* Transição suave */
+      }
+      
+      /* ===== MENU ABERTO ===== */
+      .nav__list.nav__list--open{
+        display:flex !important;   /* Exibe menu quando aberto */
+        opacity: 1;                /* Torna visível */
+        visibility: visible;       /* Torna visível */
+      }
+
+      /* ===== EXIBE HAMBÚRGUER ===== */
+      .hamburger{
+        display:flex;              /* Exibe ícone hambúrguer */
+      }
+      
+      /* ===== ANIMAÇÃO DO HAMBÚRGUER - LINHA 1 ===== */
+      .hamburger.active span:nth-child(1){
+        transform: rotate(45deg) translate(6px, 6px); /* Rotaciona e move */
+      }
+      
+      /* ===== ANIMAÇÃO DO HAMBÚRGUER - LINHA 2 ===== */
+      .hamburger.active span:nth-child(2){
+        opacity: 0;                /* Torna invisível */
+      }
+      
+      /* ===== ANIMAÇÃO DO HAMBÚRGUER - LINHA 3 ===== */
+      .hamburger.active span:nth-child(3){
+        transform: rotate(-45deg) translate(6px, -6px); /* Rotaciona e move */
+      }
+
+      /* ===== AJUSTES PARA DROPDOWNS NO MOBILE ===== */
+      .mega-menu, .dropdown{
+        display: none !important;  /* Oculta dropdowns padrão */
+        position: static !important; /* Remove posicionamento absoluto */
+        transform: none !important; /* Remove transformações */
+        width: 100% !important;    /* Largura total */
+        background: rgba(255,255,255,0.1) !important; /* Fundo semi-transparente */
+        box-shadow: none !important; /* Remove sombra */
+        border: none !important;   /* Remove borda */
+        margin: 8px 0;             /* Adiciona margem */
+        opacity: 1 !important;     /* Torna visível */
+        visibility: visible !important; /* Torna visível */
+      }
+      
+      /* ===== DROPDOWNS ABERTOS NO MOBILE ===== */
+      .nav__item.open .mega-menu,
+      .nav__item.open .dropdown{
+        display: block !important; /* Exibe quando aberto */
+      }
+      
+      /* ===== CONTEÚDO DO MEGA MENU NO MOBILE ===== */
+      .mega-menu__content{
+        padding: 20px;             /* Reduz espaçamento interno */
+      }
+      
+      /* ===== GRADE DO MEGA MENU NO MOBILE ===== */
+      .mega-menu__grid{
+        grid-template-columns: 1fr; /* Apenas uma coluna */
+        gap: 0;                    /* Remove espaço entre colunas */
+      }
+      
+      /* ===== ITENS DO MENU NO MOBILE ===== */
+      .nav__list .nav__item{
+        width: 100%;               /* Largura total */
+        margin-bottom: 4px;        /* Espaço entre itens */
+      }
+      
+      /* ===== LINKS DO MENU NO MOBILE ===== */
+      .nav__list .nav__link{
+        width: 100%;               /* Largura total */
+        padding: 16px;             /* Aumenta espaçamento interno */
+        border-bottom: 1px solid rgba(255,255,255,0.2); /* Linha divisória */
+        justify-content: space-between; /* Espaço entre texto e ícone */
+        color: var(--white);       /* Cor do texto branca */
+      }
+      
+      /* ===== SETA DOS LINKS NO MOBILE ===== */
+      .nav__list .nav__link::after{
+        content: "›";              /* Adiciona seta */
+        font-size: 18px;           /* Tamanho da fonte */
+        transition: transform 0.3s ease; /* Transição suave */
+      }
+      
+      /* ===== ROTAÇÃO DA SETA QUANDO ABERTO ===== */
+      .nav__item.open .nav__link::after{
+        transform: rotate(90deg);  /* Rotaciona 90 graus */
+      }
+      
+      .header__cta{
+        margin-left: auto;         /* Mantém CTA à direita */
+      }
+
+      /* ===== HERO NO MOBILE ===== */
+      .hero__inner{
+        flex-direction: column;    /* Direção coluna */
+        gap: 40px;                 /* Espaço entre elementos */
+        text-align: center;        /* Texto centralizado */
+      }
+      
+      .hero__content{
+        margin-top: 0;             /* Remove margem superior */
+        align-items: center;       /* Centraliza itens */
+      }
+      
+      .hero__logo{
+        height: 80px;              /* Reduz altura da logo */
+      }
+      
+      .hero__title {
+        text-align: center;        /* Centraliza título */
+        font-size: 36px;           /* Reduz tamanho do título */
+      }
+      
+      .hero__subtitle {
+        text-align: center;        /* Texto centralizado */
+        font-size: 16px;           /* Reduz tamanho do subtítulo */
+      }
+      
+      .methodology-cards {
+        grid-template-columns: 1fr; /* Apenas uma coluna */
+        gap: 20px;                 /* Espaço entre cards */
+      }
+      
+      .cards{
+        grid-template-columns: 1fr; /* Apenas uma coluna */
+        gap: 24px;                 /* Espaço entre cards */
+      }
+      
+      .footer__brand img{
+        height: 80px;              /* Reduz altura da logo no rodapé */
+      }
+      
+      .footer__cols{
+        gap: 30px;                 /* Reduz espaço entre colunas */
+        margin-left: 0;            /* Remove margem esquerda */
+        width: 100%;               /* Largura total */
+      }
+      
+      .footer__inner {
+        flex-direction: column;    /* Direção coluna */
+        gap: 30px;                 /* Espaço entre elementos */
+      }
+      
+      .methodology-title-section h2 {
+        font-size: 28px;           /* Reduz tamanho do título da metodologia */
+      }
+    }
+
+    /* ===== RESPONSIVIDADE - MOBILE (ATÉ 480px) ===== */
+    @media (max-width:480px){
+      /* ===== AJUSTES DE TIPOGRAFIA ===== */
+      :root{
+        --h1: 36px;                /* Reduz tamanho do H1 */
+        --h2: 28px;                /* Reduz tamanho do H2 */
+      }
+      
+      .hero{
+        padding: 160px 0 60px;     /* Ajusta espaçamento interno */
+      }
+      
+      .hero__title{
+        font-size: 32px;           /* Reduz tamanho do título */
+      }
+      
+      .header__inner{
+        gap: 12px;                 /* Reduz espaço entre elementos */
+      }
+      
+      .footer__cols{
+        flex-direction: column;    /* Direção coluna para colunas do rodapé */
+        gap: 30px;                 /* Espaço entre colunas */
+      }
+      
+      .methodology-card {
+        padding: 24px 16px;        /* Reduz espaçamento interno dos cards */
+      }
+      
+      .hero__subtitle {
+        font-size: 16px;           /* Reduz tamanho do subtítulo */
+      }
+      
+      .hero__logo {
+        height: 70px;              /* Reduz altura da logo */
+      }
+      
+      .methodology-title-section h2 {
+        font-size: 24px;           /* Reduz tamanho do título da metodologia */
+      }
+      
+      .methodology-title {
+        font-size: 18px;           /* Reduz tamanho do título da metodologia */
+      }
+      
+      .methodology-description {
+        font-size: 14px;           /* Reduz tamanho da descrição da metodologia */
+      }
+    }
+  </style>
+</head>
+<body>
+  <!-- ===== FAIXA SUPERIOR ===== -->
+  <div class="topstrip" role="region" aria-label="Promoção">
+    Agende uma reunião diagnóstica gratuitamente
+  </div>
+
+  <!-- ===== CABEÇALHO PRINCIPAL ===== -->
+  <header class="header" role="banner">
+    <div class="container header__inner">
+      <!-- ===== LOGO ===== -->
+      <div class="header__left">
+        <a href="#" class="brand" aria-label="BX - Home">
+          <img src="assets/ibx.png" alt="BX - Consultoria em Marketing Digital" class="header__logo" />
+        </a>
+      </div>
+
+      <!-- ===== BOTÃO HAMBÚRGUER (MOBILE) ===== -->
+      <button class="hamburger" aria-label="Abrir menu" id="hamburger" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+
+      <!-- ===== NAVEGAÇÃO PRINCIPAL ===== -->
+      <nav class="nav header__nav" aria-label="Main Navigation">
+        <ul class="nav__list" id="navList">
+          <!-- ===== ITEM HOME ===== -->
+          <li class="nav__item">
+            <a href="#" class="nav__link">Home</a>
+          </li>
+
+          <!-- ===== ITEM NOSSA ASSESSORIA 360º (COM MEGA MENU) ===== -->
+          <li class="nav__item has-mega" data-key="assessoria">
+            <a href="#" class="nav__link" aria-haspopup="true" aria-expanded="false">
+              Nossa Assessoria 360º
+              <svg class="nav__arrow" width="12" height="12" viewBox="0 0 12 12" fill="none">
+                <path d="M3 4.5L6 7.5L9 4.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+            </a>
+
+            <!-- ===== MEGA MENU NOSSA ASSESSORIA 360º ===== -->
+            <div class="mega-menu" role="menu" aria-hidden="true">
+              <div class="mega-menu__content">
+                <div class="mega-menu__grid">
+                  <!-- ===== COLUNA 1 - PARA EVOLUIR SEU NEGÓCIO ===== -->
+                  <div class="mega-menu__col">
+                    <div class="mega-menu__section">
+                      <h4 class="mega-menu__section-title">Para evoluir seu negócio</h4>
+                      <p class="mega-menu__feature-description">Estratégia, conhecimento e visão para acelerar o crescimento do negócio.</p>
+                      <ul class="mega-menu__list">
+                        <li><a href="#" class="mega-menu__link">Diagnóstico Comercial</a></li>
+                        <li><a href="#" class="mega-menu__link">Consultoria para PMEs</a></li>
+                        <li><a href="#" class="mega-menu__link">Treinamentos Corporativos</a></li>
+                      </ul>
+                    </div>
+                  </div>
+                  
+                  <!-- ===== COLUNA 2 - MAIS EFICIÊNCIA ===== -->
+                  <div class="mega-menu__col">
+                    <div class="mega-menu__section">
+                      <h4 class="mega-menu__section-title">Mais eficiência</h4>
+                      <p class="mega-menu__feature-description">Infraestrutura e ativos essenciais para o negócio funcionar com eficiência e profissionalismo.</p>
+                      <ul class="mega-menu__list">
+                        <li><a href="#" class="mega-menu__link">Sistema de Gestão</a></li>
+                        <li><a href="#" class="mega-menu__link">Implementação de CRM</a></li>
+                        <li><a href="#" class="mega-menu__link">Criação de Sites Corporativos</a></li>
+                        <li><a href="#" class="mega-menu__link">Criação de E-commerces</a></li>
+                        <li><a href="#" class="mega-menu__link">Gravação de Vídeos Profissionais</a></li>
+                        <li><a href="#" class="mega-menu__link">Cobertura de Eventos</a></li>
+                        <li><a href="#" class="mega-menu__link">Dashboards de Performance</a></li>
+                        <li><a href="#" class="mega-menu__link">Automações</a></li>
+                      </ul>
+                    </div>
+                  </div>
+                  
+                  <!-- ===== COLUNA 3 - EXECUÇÃO E ACOMPANHAMENTO ===== -->
+                  <div class="mega-menu__col">
+                    <div class="mega-menu__section">
+                      <h4 class="mega-menu__section-title">Execução e Acompanhamento</h4>
+                      <p class="mega-menu__feature-description">Operação contínua para manter o crescimento ativo todos os meses.</p>
+                      <ul class="mega-menu__list">
+                        <li><a href="#" class="mega-menu__link">Social Media</a></li>
+                        <li>
+                          <a href="#" class="mega-menu__link">Tráfego Pago</a>
+                          <ul class="mega-menu__sublist">
+                            <li><a href="#" class="mega-menu__link mega-menu__link--child">Google Ads</a></li>
+                            <li><a href="#" class="mega-menu__link mega-menu__link--child">Meta Ads</a></li>
+                            <li><a href="#" class="mega-menu__link mega-menu__link--child">TikTok Ads</a></li>
+                          </ul>
+                        </li>
+                        <li><a href="#" class="mega-menu__link">Edição Profissional de Vídeo</a></li>
+                      </ul>
+                    </div>
+                  </div>
+                  
+                  <!-- ===== COLUNA 4 - TERCEIRIZAÇÃO COMERCIAL ===== -->
+                  <div class="mega-menu__col">
+                    <div class="mega-menu__section">
+                      <h4 class="mega-menu__section-title">Terceirização Comercial</h4>
+                      <p class="mega-menu__feature-description">Equipes especializadas para impulsionar seus resultados comerciais.</p>
+                      <ul class="mega-menu__list">
+                        <li><a href="#" class="mega-menu__link">Time de Pré-vendas (SDRs)</a></li>
+                        <li><a href="#" class="mega-menu__link">Time de Fechamento de Vendas (Closers)</a></li>
+                        <li><a href="#" class="mega-menu__link">Time de Sucesso do Cliente (CS)</a></li>
+                        <li><a href="#" class="mega-menu__link">Time de Contas a Receber (AR)</a></li>
+                      </ul>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </li>
+
+          <!-- ===== ITEM NOSSO TRABALHO (COM DROPDOWN) ===== -->
+          <li class="nav__item has-dropdown" data-key="nosso-trabalho">
+            <a href="#" class="nav__link" aria-haspopup="true" aria-expanded="false">
+              Nosso Trabalho
+              <svg class="nav__arrow" width="12" height="12" viewBox="0 0 12 12" fill="none">
+                <path d="M3 4.5L6 7.5L9 4.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+            </a>
+            <div class="dropdown" role="menu" aria-hidden="true">
+              <ul class="dropdown__list">
+                <li><a href="#" class="dropdown__link">Sobre nós</a></li>
+                <li><a href="#" class="dropdown__link">Equipe BX</a></li>
+                <li><a href="#" class="dropdown__link">Missão, Visão e Valores</a></li>
+              </ul>
+            </div>
+          </li>
+
+          <!-- ===== ITEM SISTEMAS (COM DROPDOWN) ===== -->
+          <li class="nav__item has-dropdown" data-key="sistemas">
+            <a href="#" class="nav__link" aria-haspopup="true" aria-expanded="false">
+              Sistemas
+              <svg class="nav__arrow" width="12" height="12" viewBox="0 0 12 12" fill="none">
+                <path d="M3 4.5L6 7.5L9 4.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+            </a>
+            <div class="dropdown" role="menu" aria-hidden="true">
+              <ul class="dropdown__list">
+                <li><a href="#" class="dropdown__link">Nour Clínicas</a></li>
+              </ul>
+            </div>
+          </li>
+
+          <!-- ===== ITEM CONTATOS (COM DROPDOWN) ===== -->
+          <li class="nav__item has-dropdown" data-key="contatos">
+            <a href="#" class="nav__link" aria-haspopup="true" aria-expanded="false">
+              Contatos
+              <svg class="nav__arrow" width="12" height="12" viewBox="0 0 12 12" fill="none">
+                <path d="M3 4.5L6 7.5L9 4.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+            </a>
+            <div class="dropdown" role="menu" aria-hidden="true">
+              <ul class="dropdown__list">
+                <li><a href="#" class="dropdown__link">WhatsApp</a></li>
+                <li><a href="#" class="dropdown__link">E-mail</a></li>
+                <li><a href="#" class="dropdown__link">Canal do YouTube</a></li>
+                <li><a href="#" class="dropdown__link">Instagram</a></li>
+              </ul>
+            </div>
+          </li>
+        </ul>
+      </nav>
+
+      <!-- ===== CALL TO ACTION DO CABEÇALHO ===== -->
+      <div class="header__cta">
+        <a class="btn btn--primary" href="#">Agende já</a>
+      </div>
+    </div>
+  </header>
+
+  <!-- ===== SEÇÃO HERO (BANNER PRINCIPAL) ===== -->
+  <section class="hero">
+    <div class="container hero__inner">
+      <!-- ===== CONTEÚDO DO HERO ===== -->
+      <div class="hero__content">
+        <img src="assets/ibx.png" alt="BX - Transformação Digital" class="hero__logo" />
+        <h1 class="hero__title">Seu Negócio Pronto Para Escalar: Estratégia, Estrutura e Performance em Um Só Lugar.</h1>
+        <p class="hero__subtitle">Criamos a estrutura que transforma negócios em máquinas de crescimento. Estratégia, tecnologia, operações e performance trabalhando juntas para fazer a sua empresa escalar de forma sustentável desde o primeiro passo.</p>
+        <a class="btn btn--primary" href="#">Saiba Mais</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== SEÇÃO DE METODOLOGIA ===== -->
+  <section class="method">
+    <div class="container">
+      <div class="methodology-title-section">
+        <h2>METODOLOGIA BX</h2>
+        <p>Conheça nossa abordagem estruturada para o crescimento do seu negócio</p>
+      </div>
+      
+      <div class="methodology-cards">
+        <!-- ===== CARD 1 ===== -->
+        <div class="methodology-card">
+          <div class="methodology-icon">1</div>
+          <h3 class="methodology-title">Estruturação Estratégica</h3>
+          <p class="methodology-description">
+            Construímos toda a base de marketing digital do seu negócio, garantindo uma estrutura sólida para que cada ação seja pensada para gerar previsibilidade de crescimento.
+          </p>
+        </div>
+        
+        <!-- ===== CARD 2 ===== -->
+        <div class="methodology-card">
+          <div class="methodology-icon">2</div>
+          <h3 class="methodology-title">Abertura de Novos Canais</h3>
+          <p class="methodology-description">
+            Identificamos e criamos os canais ideais para atrair novos clientes, ampliando sua presença e expandindo suas oportunidades de negócio com estratégia e previsibilidade.
+          </p>
+        </div>
+        
+        <!-- ===== CARD 3 ===== -->
+        <div class="methodology-card">
+          <div class="methodology-icon">3</div>
+          <h3 class="methodology-title">Validação de Processos e Escala</h3>
+          <p class="methodology-description">
+            Testamos, medimos e otimizamos cada etapa da operação para validar o que funciona. Só então escalamos com segurança, mantendo eficiência e alta performance.
+          </p>
+        </div>
+        
+        <!-- ===== CARD 4 ===== -->
+        <div class="methodology-card">
+          <div class="methodology-icon">4</div>
+          <h3 class="methodology-title">Crescimento Sustentável e Exponencial</h3>
+          <p class="methodology-description">
+            Com a estrutura validada, aceleramos o crescimento da sua empresa de forma estratégica, contínua e escalável, garantindo longevidade e previsibilidade nos resultados.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== SEÇÃO DE CONTEÚDOS EM DESTAQUE ===== -->
+  <section class="featured">
+    <div class="container">
+      <h2 class="section-title">CONTEÚDOS EM DESTAQUE</h2>
+      <p class="featured__lead">Acompanhe o que acontece no ecossistema da BX.</p>
+
+      <div class="cards">
+        <!-- ===== CARD 1 ===== -->
+        <article class="card">
+          <div class="card__media">
+            <img src="assets/excesso.png" alt="Blog BX - Dicas de Marketing" />
+          </div>
+          <div class="card__body">
+            <h3 class="card__kicker">Blog BX</h3>
+            <h4 class="card__title">O excesso de conteúdo e a escassez de mensagem</h4>
+            <p class="card__excerpt">Frase curta referente a matéria do blog, usada como teste</p>
+            <a class="btn btn--small" href="#">Clique e descubra!</a>
+          </div>
+        </article>
+
+        <!-- ===== CARD 2 ===== -->
+        <article class="card">
+          <div class="card__media">
+            <img src="assets/custo.png" alt="Blog BX - Estratégias Digitais" />
+          </div>
+          <div class="card__body">
+            <h3 class="card__kicker">Blog BX</h3>
+            <h4 class="card__title">O custo oculto de operar clínica no modo "improviso"</h4>
+            <p class="card__excerpt">Frase curta referente a matéria do blog, usada como teste</p>
+            <a class="btn btn--small" href="#">Clique e descubra!</a>
+          </div>
+        </article>
+
+        <!-- ===== CARD 3 ===== -->
+        <article class="card">
+          <div class="card__media">
+            <img src="assets/markenting.png" alt="Blog BX - Cases de Sucesso" />
+          </div>
+          <div class="card__body">
+            <h3 class="card__kicker">Blog BX</h3>
+            <h4 class="card__title">Marketing não cria reputação — amplifica o que já existe</h4>
+            <p class="card__excerpt">Frase curta referente a matéria do blog, usada como teste</p>
+            <a class="btn btn--small" href="#">Clique e descubra!</a>
+          </div>
+        </article>
+      </div>
+
+      <!-- ===== BOTÃO "VER MAIS" ===== -->
+      <div class="featured__more">
+        <a class="btn btn--pill" href="#">Veja mais conteúdos aqui</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== RODAPÉ ===== -->
+  <footer class="footer" role="contentinfo">
+    <div class="container footer__inner">
+      <!-- ===== MARCA DO RODAPÉ ===== -->
+      <div class="footer__brand">
+        <img src="assets/ibx.png" alt="BX - Consultoria em Marketing Digital" />
+      </div>
+
+      <!-- ===== COLUNAS DO RODAPÉ ===== -->
+      <div class="footer__cols">
+        <!-- ===== COLUNA 1 - INSTITUCIONAL ===== -->
+        <div class="footer__col">
+          <h4>INSTITUCIONAL</h4>
+          <ul>
+            <li><a href="#">Home</a></li>
+            <li><a href="#">Nosso Trabalho</a></li>
+            <li><a href="#">Sobre Nós</a></li>
+            <li><a href="#">Equipe BX</a></li>
+            <li><a href="#">Missão, Visão e Valores</a></li>
+          </ul>
+        </div>
+        
+        <!-- ===== COLUNA 2 - SERVIÇOS ===== -->
+        <div class="footer__col">
+          <h4>SERVIÇOS</h4>
+          <ul>
+            <li><a href="#">Implementação de CRM</a></li>
+            <li><a href="#">Criação de Sites</a></li>
+            <li><a href="#">Landing Pages</a></li>
+            <li><a href="#">Tráfego Pago</a></li>
+            <li><a href="#">Automação com IA</a></li>
+          </ul>
+        </div>
+        
+        <!-- ===== COLUNA 3 - SOLUÇÕES ===== -->
+        <div class="footer__col">
+          <h4>SOLUÇÕES</h4>
+          <ul>
+            <li><a href="#">Sistema Nour Clínicas</a></li>
+            <li><a href="#">Consultoria de Marketing</a></li>
+            <li><a href="#">Treinamentos</a></li>
+            <li><a href="#">Materiais Gratuitos</a></li>
+          </ul>
+        </div>
+        
+        <!-- ===== COLUNA 4 - CONTATO ===== -->
+        <div class="footer__col">
+          <h4>CONTATO</h4>
+          <ul>
+            <li><a href="#">Email</a></li>
+            <li><a href="#">Telefone</a></li>
+            <li><a href="#">Endereço</a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    
+    <!-- ===== PARTE INFERIOR DO RODAPÉ ===== -->
+    <div class="footer__bottom">
+      <div class="container">
+        <div class="footer__copyright">
+          &copy; 2025 BX Assessoria. Todos os direitos reservados.
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- ===== JAVASCRIPT ===== -->
+  <script>
+    // ===== INICIALIZAÇÃO QUANDO O DOCUMENTO É CARREGADO =====
+    document.addEventListener('DOMContentLoaded', function(){
+      // ===== ELEMENTOS DO DOM =====
+      const hamburger = document.getElementById('hamburger');
+      const navList = document.getElementById('navList');
+      const navItems = document.querySelectorAll('.nav__item');
+      const header = document.querySelector('.header');
+      const breakpointMobile = 900;
+      let isMobile = window.innerWidth <= breakpointMobile;
+
+      // ===== FUNÇÃO PARA FECHAR TODOS OS DROPDOWNS =====
+      function closeAllDropdowns() {
+        navItems.forEach(item => {
+          item.classList.remove('open');
+          const link = item.querySelector('.nav__link');
+          if (link) {
+            link.setAttribute('aria-expanded', 'false');
+          }
+        });
+        
+        document.querySelectorAll('.dropdown, .mega-menu').forEach(dropdown => {
+          dropdown.setAttribute('aria-hidden', 'true');
+        });
+      }
+
+      // ===== FUNÇÃO PARA FECHAR MENU MOBILE =====
+      function closeMobileMenu() {
+        navList.classList.remove('nav__list--open');
+        hamburger.classList.remove('active');
+        hamburger.setAttribute('aria-expanded', 'false');
+        closeAllDropdowns();
+      }
+
+      // ===== EVENT LISTENER PARA O BOTÃO HAMBÚRGUER =====
+      if (hamburger) {
+        hamburger.addEventListener('click', (e) => {
+          e.stopPropagation();
+          const isOpen = navList.classList.toggle('nav__list--open');
+          hamburger.classList.toggle('active');
+          hamburger.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
+          
+          if (!isOpen) {
+            closeAllDropdowns();
+          }
+        });
+      }
+
+      // ===== EVENT LISTENER PARA CLIQUE FORA DO MENU =====
+      document.addEventListener('click', (e) => {
+        if (!e.target.closest('.header__inner')) {
+          closeMobileMenu();
+        }
+      });
+
+      // ===== EVENT LISTENERS PARA OS ITENS DO MENU =====
+      navItems.forEach(item => {
+        const link = item.querySelector('.nav__link');
+        const dropdown = item.querySelector('.dropdown');
+        const mega = item.querySelector('.mega-menu');
+
+        // ===== COMPORTAMENTO NO DESKTOP =====
+        if (!isMobile) {
+          item.addEventListener('mouseenter', () => {
+            closeAllDropdowns();
+            item.classList.add('open');
+            link.setAttribute('aria-expanded', 'true');
+            if (dropdown) dropdown.setAttribute('aria-hidden', 'false');
+            if (mega) mega.setAttribute('aria-hidden', 'false');
+          });
+
+          item.addEventListener('mouseleave', () => {
+            item.classList.remove('open');
+            link.setAttribute('aria-expanded', 'false');
+            if (dropdown) dropdown.setAttribute('aria-hidden', 'true');
+            if (mega) mega.setAttribute('aria-hidden', 'true');
+          });
+        }
+
+        // ===== COMPORTAMENTO NO MOBILE =====
+        if (link) {
+          link.addEventListener('click', (e) => {
+            if (isMobile) {
+              if (dropdown || mega) {
+                e.preventDefault();
+                e.stopPropagation();
+                
+                const isOpen = item.classList.contains('open');
+                
+                // Fecha outros dropdowns abertos
+                navItems.forEach(otherItem => {
+                  if (otherItem !== item) {
+                    otherItem.classList.remove('open');
+                    const otherLink = otherItem.querySelector('.nav__link');
+                    if (otherLink) otherLink.setAttribute('aria-expanded', 'false');
+                    const otherDropdown = otherItem.querySelector('.dropdown');
+                    const otherMega = otherItem.querySelector('.mega-menu');
+                    if (otherDropdown) otherDropdown.setAttribute('aria-hidden', 'true');
+                    if (otherMega) otherMega.setAttribute('aria-hidden', 'true');
+                  }
+                });
+                
+                // Abre/fecha o dropdown atual
+                if (!isOpen) {
+                  item.classList.add('open');
+                  link.setAttribute('aria-expanded', 'true');
+                  if (dropdown) dropdown.setAttribute('aria-hidden', 'false');
+                  if (mega) mega.setAttribute('aria-hidden', 'false');
+                } else {
+                  item.classList.remove('open');
+                  link.setAttribute('aria-expanded', 'false');
+                  if (dropdown) dropdown.setAttribute('aria-hidden', 'true');
+                  if (mega) mega.setAttribute('aria-hidden', 'true');
+                }
+              } else {
+                // Se não tem dropdown, fecha o menu
+                closeMobileMenu();
+              }
+            }
+          });
+        }
+
+        // ===== COMPORTAMENTO DE TECLADO =====
+        if (link) {
+          link.addEventListener('keydown', (e) => {
+            if (e.key === 'Enter' || e.key === ' ') {
+              if (isMobile && (dropdown || mega)) {
+                e.preventDefault();
+                link.click();
+              }
+            }
+            
+            if (e.key === 'Escape') {
+              closeAllDropdowns();
+              if (isMobile) {
+                closeMobileMenu();
+              }
+            }
+          });
+
+          link.addEventListener('focus', () => {
+            if (!isMobile) {
+              closeAllDropdowns();
+              item.classList.add('open');
+              link.setAttribute('aria-expanded', 'true');
+              if (dropdown) dropdown.setAttribute('aria-hidden', 'false');
+              if (mega) mega.setAttribute('aria-hidden', 'false');
+            }
+          });
+        }
+      });
+
+      // ===== EVENT LISTENER PARA TECLA ESC =====
+      document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape') {
+          closeAllDropdowns();
+          closeMobileMenu();
+          
+          if (hamburger && hamburger.getAttribute('aria-expanded') === 'true') {
+            hamburger.focus();
+          }
+        }
+      });
+
+      // ===== EVENT LISTENER PARA TAB =====
+      document.addEventListener('keydown', (e) => {
+        if (e.key === 'Tab') {
+          setTimeout(() => {
+            const focused = document.activeElement;
+            if (!focused.closest('.nav__item') && !focused.closest('.header__inner')) {
+              closeAllDropdowns();
+            }
+          }, 10);
+        }
+      });
+
+      // ===== EVENT LISTENER PARA RESIZE =====
+      window.addEventListener('resize', () => {
+        isMobile = window.innerWidth <= breakpointMobile;
+        
+        if (!isMobile) {
+          closeMobileMenu();
+        }
+      });
+
+      // ===== INICIALIZAÇÃO =====
+      isMobile = window.innerWidth <= breakpointMobile;
+    });
+  </script>
+</body>
+</html>
