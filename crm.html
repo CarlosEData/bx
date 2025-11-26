@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>BX - Contatos</title>
+    <title>BX - Implementação de CRM</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
@@ -226,8 +226,8 @@
             transition: transform .3s ease, opacity .3s ease; /* Transições suaves */
         }
 
-        /* ===== SEÇÃO CONTATOS ===== */
-        .contacts {
+        /* ===== SEÇÃO PRINCIPAL ===== */
+        .main-content {
             padding: 180px 0 80px;       /* Espaçamento interno (topo aumentado para cabeçalho fixo) */
             background: linear-gradient(135deg, var(--bg-dark) 0%, var(--blue-900) 100%); /* Gradiente de fundo azul */
             color: var(--white);         /* Texto branco */
@@ -242,131 +242,84 @@
             text-align: center;          /* Texto centralizado */
         }
 
-        /* ===== CARDS DE CONTATO ===== */
-        .contact-cards {
+        .section-content {
+            max-width: 900px;            /* Largura máxima */
+            margin: 0 auto;              /* Centraliza o conteúdo */
+        }
+
+        .section-content p {
+            margin-bottom: 30px;         /* Espaço entre parágrafos */
+            font-size: 18px;             /* Tamanho da fonte */
+            line-height: 1.7;            /* Altura da linha */
+            text-align: justify;         /* Texto justificado */
+        }
+
+        /* ===== SEÇÃO DE SOLUÇÕES ===== */
+        .solutions {
+            padding: 80px 0;
+            background-color: var(--white);
+        }
+
+        .solutions-grid {
             display: grid;
-            grid-template-columns: repeat(3, 1fr);
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
             gap: 30px;
             margin-top: 50px;
         }
 
-        .contact-card {
-            background: rgba(255, 255, 255, 0.1);
-            border-radius: 16px;
+        .solution-card {
+            background-color: white;
             padding: 30px;
-            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.2);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            display: flex;
-            flex-direction: column;
-            height: 100%;
+            border-radius: 8px;
+            box-shadow: var(--shadow);
+            transition: all 0.3s ease;
+            border: 1px solid var(--gray-200);
         }
 
-        .contact-card h3 {
+        .solution-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+        }
+
+        .solution-card h3 {
             font-size: 24px;
             margin-bottom: 15px;
-            color: var(--white);
+            color: var(--accent);
         }
 
-        .contact-card p {
-            color: rgba(255, 255, 255, 0.8);
-            margin-bottom: 20px;
+        .solution-card p {
+            color: var(--gray-600);
             line-height: 1.6;
-            flex-grow: 1;
         }
 
-        .contact-email {
-            display: inline-block;
-            background: linear-gradient(135deg, var(--accent), #0b2bff);
-            color: var(--white);
-            padding: 12px 20px;
-            border-radius: 10px;
-            text-decoration: none;
-            font-weight: 600;
-            text-align: center;
-            transition: all 0.3s ease;
+        /* ===== SEÇÃO INSTITUCIONAL ===== */
+        .institutional {
+            padding: 80px 0;
+            background-color: var(--gray-100);
         }
 
-        .contact-email:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 8px 20px rgba(11, 43, 255, 0.3);
+        .institutional-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 40px;
+            margin-top: 40px;
         }
 
-        /* ===== FORMULÁRIO ===== */
-        .contact-form {
-            display: flex;
-            flex-direction: column;
-            gap: 15px;
+        .institutional-column h3 {
+            font-size: 20px;
+            margin-bottom: 20px;
+            color: var(--accent);
         }
 
-        .form-group {
-            display: flex;
-            flex-direction: column;
-        }
-
-        .form-group label {
-            color: rgba(255, 255, 255, 0.8);
-            font-size: 14px;
-            margin-bottom: 5px;
-        }
-
-        .form-group input {
-            background: rgba(255, 255, 255, 0.1);
-            border: 1px solid rgba(255, 255, 255, 0.2);
-            border-radius: 8px;
-            padding: 12px 15px;
-            color: var(--white);
-            font-size: 16px;
-            transition: all 0.3s ease;
-        }
-
-        .form-group input:focus {
-            outline: none;
-            border-color: var(--accent);
-            box-shadow: 0 0 0 2px rgba(11, 43, 255, 0.2);
-        }
-
-        .form-group input::placeholder {
-            color: rgba(255, 255, 255, 0.5);
-        }
-
-        .form-footer {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-top: 10px;
-        }
-
-        .checkbox-group {
-            display: flex;
-            align-items: center;
-            gap: 8px;
-        }
-
-        .checkbox-group input[type="checkbox"] {
-            width: 16px;
-            height: 16px;
-        }
-
-        .checkbox-group label {
-            color: rgba(255, 255, 255, 0.8);
-            font-size: 12px;
+        .institutional-column ul {
+            list-style: none;
+            padding: 0;
             margin: 0;
         }
 
-        .btn-submit {
-            background: linear-gradient(135deg, var(--accent), #0b2bff);
-            color: var(--white);
-            border: none;
-            border-radius: 8px;
-            padding: 12px 24px;
-            font-weight: 600;
-            cursor: pointer;
-            transition: all 0.3s ease;
-        }
-
-        .btn-submit:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 8px 20px rgba(11, 43, 255, 0.3);
+        .institutional-column li {
+            margin-bottom: 10px;
+            color: var(--gray-600);
         }
 
         /* ===== RODAPÉ ===== */
@@ -441,9 +394,8 @@
                 font-size: 36px;         /* Reduz tamanho do título em tablets */
             }
             
-            .contact-cards {
-                grid-template-columns: 1fr; /* Uma coluna em tablets */
-                gap: 20px;
+            .section-content p {
+                font-size: 16px;         /* Reduz tamanho do texto em tablets */
             }
         }
 
@@ -499,7 +451,7 @@
                 display: none;           /* Oculta CTA no mobile */
             }
             
-            .contacts {
+            .main-content {
                 padding: 160px 0 60px;   /* Ajusta espaçamento no mobile */
             }
             
@@ -507,10 +459,14 @@
                 font-size: 32px;         /* Reduz tamanho do título no mobile */
             }
             
-            .form-footer {
-                flex-direction: column;
-                gap: 15px;
-                align-items: flex-start;
+            .solutions-grid {
+                grid-template-columns: 1fr; /* Apenas uma coluna */
+                gap: 20px;
+            }
+            
+            .institutional-grid {
+                grid-template-columns: 1fr; /* Apenas uma coluna */
+                gap: 30px;
             }
             
             .footer__brand img{
@@ -534,7 +490,11 @@
                 font-size: 28px;         /* Reduz ainda mais o título em telas pequenas */
             }
             
-            .contact-card {
+            .section-content p {
+                font-size: 16px;         /* Reduz tamanho do texto em telas pequenas */
+            }
+            
+            .solution-card {
                 padding: 20px;           /* Reduz padding dos cards */
             }
             
@@ -548,7 +508,7 @@
 <body>
     <!-- ===== FAIXA SUPERIOR ===== -->
     <div class="topstrip" role="region" aria-label="Promoção">
-        Agende uma reunião diagnostica gratuitamente
+        Agende uma reunião diagnóstica gratuitamente
     </div>
 
     <!-- ===== CABEÇALHO PRINCIPAL ===== -->
@@ -616,62 +576,98 @@
         </div>
     </header>
 
-    <!-- ===== SEÇÃO CONTATOS ===== -->
-    <section class="contacts" id="contatos">
+    <!-- ===== SEÇÃO PRINCIPAL ===== -->
+    <section class="main-content" id="crm-implementacao">
         <div class="container">
-            <h1 class="section-title">Entre em Contato</h1>
+            <h1 class="section-title">Implementação de CRM</h1>
+            <div class="section-content">
+                <p>A organização da sua operação comercial começa aqui. A implementação de CRM é o primeiro passo para transformar seu funil em um fluxo previsível, eficiente e capaz de gerar resultados consistentes todos os meses. Com o CRM certo, sua equipe trabalha com mais clareza, sua empresa sabe exatamente onde está perdendo oportunidades e você ganha controle total sobre o desempenho do seu processo de vendas.</p>
+                
+                <h2 style="color: var(--white); margin-top: 40px; margin-bottom: 20px;">Por que o CRM é indispensável para qualquer empresa que quer crescer?</h2>
+                <p>Uma operação comercial só se torna realmente escalável quando deixa de depender da memória do time e passa a funcionar com processos claros, informações centralizadas e acompanhamento constante da jornada do cliente. Um CRM bem implementado vai muito além do cadastro de contatos: ele organiza seu funil, cria previsibilidade, reduz perdas por falta de follow-up e aumenta suas taxas de conversão sem exigir mais investimentos em marketing. Empresas que não usam CRM perdem tempo, dinheiro e oportunidades todos os dias muitas vezes sem perceber. Já quem utiliza a ferramenta de forma estratégica, conquista eficiência, clareza e a segurança de saber exatamente o que está acontecendo em cada etapa da venda.</p>
+                
+                <h2 style="color: var(--white); margin-top: 40px; margin-bottom: 20px;">Como funciona a nossa implementação?</h2>
+                <p>Transformar seu CRM em uma máquina de vendas exige método de isso que fazemos aqui. Começamos analisando a forma como sua empresa vende hoje. Mapeamos etapas, identificamos gargalos, estudamos o comportamento do seu cliente e estruturamos um funil claro e funcional. A partir disso, configuramos o CRM com pipelines personalizados, campos essenciais, regras automáticas, tarefas de follow-up, integrações com WhatsApp, site, formulários e anúncios, além de automações que eliminam erros humanos e mantêm o ritmo comercial. Tudo é implementado pensando na sua rotina real. E para garantir adesão total, treinamos sua equipe para usar o CRM de forma prática, rápida e inteligente. No final, você ganha uma operação organizada, previsível e com muito mais capacidade de converter oportunidades.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== SEÇÃO DE SOLUÇÕES ===== -->
+    <section class="solutions">
+        <div class="container">
+            <h2 class="section-title" style="color: var(--accent);">Outras Soluções</h2>
+            <p style="text-align: center; color: var(--gray-600); max-width: 700px; margin: 0 auto 30px;">Desenvolvemos soluções recorrentes que fortalecem sua presença digital e mantêm seu fluxo de oportunidades sempre ativo.</p>
+
+            <div class="solutions-grid">
+                <!-- ===== CARD SOCIAL MEDIA ===== -->
+                <div class="solution-card">
+                    <h3>Social Media</h3>
+                    <p>Conteúdos estratégicos para reforçar autoridade e gerar demanda qualificada diretamente.</p>
+                </div>
+                
+                <!-- ===== CARD TRÁFEGO PAGO ===== -->
+                <div class="solution-card">
+                    <h3>Tráfego Pago</h3>
+                    <p>Campanhas constantes no Google Ads, Meta Ads e TikTok Ads para atrair leads prontos para comprar.</p>
+                </div>
+                
+                <!-- ===== CARD EDIÇÃO DE VÍDEOS ===== -->
+                <div class="solution-card">
+                    <h3>Edição Profissional de Vídeos</h3>
+                    <p>Vídeos que aumentam sua credibilidade e aceleram a tomada de decisão do cliente.</p>
+                </div>
+                
+                <!-- ===== CARD TERCEIRIZAÇÃO COMERCIAL ===== -->
+                <div class="solution-card">
+                    <h3>Terceirização Comercial</h3>
+                    <p>Equipes especializadas em prospecção, fechamento e relacionamento para escalar suas vendas.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== SEÇÃO INSTITUCIONAL ===== -->
+    <section class="institutional">
+        <div class="container">
+            <h2 class="section-title" style="color: var(--accent);">INSTITUCIONAL</h2>
             
-            <div class="contact-cards">
-                <!-- ===== CARD 1 - FAÇA PARTE DA BX ===== -->
-                <article class="contact-card">
-                    <div>
-                        <h3>Faça parte da BX</h3>
-                        <p>Gostaria de fazer parte da nossa equipe?<br>Entre em contato em nosso e-mail:</p>
-                    </div>
-                    <a href="mailto:rh@bxassessoria.com.br" class="contact-email">rh@bxassessoria.com.br</a>
-                </article>
-
-                <!-- ===== CARD 2 - TIME COMERCIAL ===== -->
-                <article class="contact-card">
-                    <div>
-                        <h3>Time comercial</h3>
-                        <p class="muted-small">Prefere entrar em contato com o nosso time comercial?</p>
-                        
-                        <form class="contact-form">
-                            <div class="form-group">
-                                <label for="nome">Seu nome</label>
-                                <input type="text" id="nome" placeholder="Seu nome" aria-label="nome" />
-                            </div>
-                            
-                            <div class="form-group">
-                                <label for="email">Seu e-mail</label>
-                                <input type="email" id="email" placeholder="Seu e-mail" aria-label="email" />
-                            </div>
-                            
-                            <div class="form-group">
-                                <label for="telefone">Seu Telefone</label>
-                                <input type="tel" id="telefone" placeholder="Seu Telefone" aria-label="telefone" />
-                            </div>
-                            
-                            <div class="form-footer">
-                                <div class="checkbox-group">
-                                    <input type="checkbox" id="notificacoes" />
-                                    <label for="notificacoes">Aceito que concordo em receber notificações</label>
-                                </div>
-                                <button type="submit" class="btn-submit">Para mais detalhes!</button>
-                            </div>
-                        </form>
-                    </div>
-                </article>
-
-                <!-- ===== CARD 3 - SAC ===== -->
-                <article class="contact-card">
-                    <div>
-                        <h3>SAC</h3>
-                        <p>Nos envie uma mensagem no WhatsApp. Nossa equipe responderá o mais rápido possível e ajudará você a escolher a melhor solução para sua clínica.</p>
-                    </div>
-                    <a href="https://wa.me/55199922153954" target="_blank" class="contact-email">(19) 99215-3954</a>
-                </article>
+            <div class="institutional-grid">
+                <div class="institutional-column">
+                    <h3>INSTITUCIONAL</h3>
+                    <ul>
+                        <li>Home</li>
+                        <li>Nosso Trabalho</li>
+                        <li>Sobre Nós</li>
+                        <li>Equipe BX</li>
+                        <li>Missão, Visão e Valores</li>
+                    </ul>
+                </div>
+                
+                <div class="institutional-column">
+                    <h3>SERVIÇOS</h3>
+                    <ul>
+                        <li>Implementação de CRM</li>
+                        <li>Criação de Sites e Landing Pages</li>
+                        <li>Criação de E-commerce</li>
+                        <li>Social Media</li>
+                        <li>Tráfego Pago</li>
+                    </ul>
+                </div>
+                
+                <div class="institutional-column">
+                    <h3>SOLUÇÕES</h3>
+                    <ul>
+                        <li>Sistema Nour Clínicas</li>
+                        <li>Consultoria de Marketing</li>
+                        <li>Treinamentos Corporativos</li>
+                        <li>Materiais Gratuitos</li>
+                    </ul>
+                </div>
+                
+                <div class="institutional-column">
+                    <h3>CONTATO</h3>
+                    <p>Entre em contato conosco para mais informações.</p>
+                </div>
             </div>
         </div>
     </section>
@@ -930,32 +926,6 @@
                     closeMobileMenu();
                 }
             });
-
-            // ===== VALIDAÇÃO DO FORMULÁRIO =====
-            const form = document.querySelector('.contact-form');
-            if (form) {
-                form.addEventListener('submit', function(e) {
-                    e.preventDefault();
-                    
-                    const nome = document.getElementById('nome').value.trim();
-                    const email = document.getElementById('email').value.trim();
-                    const telefone = document.getElementById('telefone').value.trim();
-                    const checkbox = document.getElementById('notificacoes').checked;
-                    
-                    if (!nome || !email || !telefone) {
-                        alert('Por favor, preencha todos os campos obrigatórios.');
-                        return;
-                    }
-                    
-                    if (!checkbox) {
-                        alert('Por favor, aceite receber notificações para continuar.');
-                        return;
-                    }
-                    
-                    alert('Formulário enviado com sucesso! Entraremos em contato em breve.');
-                    form.reset();
-                });
-            }
 
             // ===== INICIALIZAÇÃO =====
             isMobile = window.innerWidth <= breakpointMobile;

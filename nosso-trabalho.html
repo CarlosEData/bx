@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>BX - Contatos</title>
+    <title>BX - Nosso Trabalho</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
@@ -226,8 +226,8 @@
             transition: transform .3s ease, opacity .3s ease; /* Transições suaves */
         }
 
-        /* ===== SEÇÃO CONTATOS ===== */
-        .contacts {
+        /* ===== SEÇÃO NOSSO TRABALHO ===== */
+        .our-work {
             padding: 180px 0 80px;       /* Espaçamento interno (topo aumentado para cabeçalho fixo) */
             background: linear-gradient(135deg, var(--bg-dark) 0%, var(--blue-900) 100%); /* Gradiente de fundo azul */
             color: var(--white);         /* Texto branco */
@@ -242,131 +242,121 @@
             text-align: center;          /* Texto centralizado */
         }
 
-        /* ===== CARDS DE CONTATO ===== */
-        .contact-cards {
+        .section-content {
+            max-width: 900px;            /* Largura máxima */
+            margin: 0 auto;              /* Centraliza o conteúdo */
+        }
+
+        .section-content p {
+            margin-bottom: 30px;         /* Espaço entre parágrafos */
+            font-size: 18px;             /* Tamanho da fonte */
+            line-height: 1.7;            /* Altura da linha */
+            text-align: justify;         /* Texto justificado */
+        }
+
+        /* ===== SEÇÃO NOSSA ESSÊNCIA ===== */
+        .our-essence {
+            padding: 80px 0;
+            background-color: var(--white);
+        }
+
+        .essence-grid {
             display: grid;
-            grid-template-columns: repeat(3, 1fr);
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
             gap: 30px;
             margin-top: 50px;
         }
 
-        .contact-card {
-            background: rgba(255, 255, 255, 0.1);
-            border-radius: 16px;
+        .essence-card {
+            background-color: white;
             padding: 30px;
-            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.2);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            display: flex;
-            flex-direction: column;
-            height: 100%;
+            border-radius: 8px;
+            box-shadow: var(--shadow);
+            transition: all 0.3s ease;
+            border: 1px solid var(--gray-200);
         }
 
-        .contact-card h3 {
+        .essence-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+        }
+
+        .essence-card h3 {
             font-size: 24px;
             margin-bottom: 15px;
-            color: var(--white);
+            color: var(--accent);
         }
 
-        .contact-card p {
-            color: rgba(255, 255, 255, 0.8);
-            margin-bottom: 20px;
-            line-height: 1.6;
-            flex-grow: 1;
+        .pillars {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            margin-top: 40px;
         }
 
-        .contact-email {
-            display: inline-block;
-            background: linear-gradient(135deg, var(--accent), #0b2bff);
-            color: var(--white);
-            padding: 12px 20px;
-            border-radius: 10px;
-            text-decoration: none;
-            font-weight: 600;
+        .pillar {
+            background-color: white;
+            padding: 25px;
+            border-radius: 8px;
+            box-shadow: var(--shadow);
+            border-top: 4px solid var(--accent);
+        }
+
+        .pillar h4 {
+            font-size: 20px;
+            margin-bottom: 15px;
+            color: var(--accent);
+        }
+
+        /* ===== SEÇÃO DIFERENCIAL ===== */
+        .differential {
+            padding: 80px 0;
+            background-color: var(--gray-100);
+        }
+
+        .differential-list {
+            list-style: none;
+            margin-top: 30px;
+        }
+
+        .differential-list li {
+            margin-bottom: 15px;
+            padding-left: 25px;
+            position: relative;
+        }
+
+        .differential-list li::before {
+            content: '✓';
+            position: absolute;
+            left: 0;
+            color: var(--accent);
+            font-weight: bold;
+        }
+
+        /* ===== SEÇÃO MISSÃO, VISÃO E VALORES ===== */
+        .mission-vision-values {
+            padding: 80px 0;
+            background-color: white;
+        }
+
+        .values-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            margin-top: 40px;
+        }
+
+        .value-card {
+            background-color: var(--gray-100);
+            padding: 25px;
+            border-radius: 8px;
             text-align: center;
-            transition: all 0.3s ease;
         }
 
-        .contact-email:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 8px 20px rgba(11, 43, 255, 0.3);
-        }
-
-        /* ===== FORMULÁRIO ===== */
-        .contact-form {
-            display: flex;
-            flex-direction: column;
-            gap: 15px;
-        }
-
-        .form-group {
-            display: flex;
-            flex-direction: column;
-        }
-
-        .form-group label {
-            color: rgba(255, 255, 255, 0.8);
-            font-size: 14px;
-            margin-bottom: 5px;
-        }
-
-        .form-group input {
-            background: rgba(255, 255, 255, 0.1);
-            border: 1px solid rgba(255, 255, 255, 0.2);
-            border-radius: 8px;
-            padding: 12px 15px;
-            color: var(--white);
-            font-size: 16px;
-            transition: all 0.3s ease;
-        }
-
-        .form-group input:focus {
-            outline: none;
-            border-color: var(--accent);
-            box-shadow: 0 0 0 2px rgba(11, 43, 255, 0.2);
-        }
-
-        .form-group input::placeholder {
-            color: rgba(255, 255, 255, 0.5);
-        }
-
-        .form-footer {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-top: 10px;
-        }
-
-        .checkbox-group {
-            display: flex;
-            align-items: center;
-            gap: 8px;
-        }
-
-        .checkbox-group input[type="checkbox"] {
-            width: 16px;
-            height: 16px;
-        }
-
-        .checkbox-group label {
-            color: rgba(255, 255, 255, 0.8);
-            font-size: 12px;
-            margin: 0;
-        }
-
-        .btn-submit {
-            background: linear-gradient(135deg, var(--accent), #0b2bff);
-            color: var(--white);
-            border: none;
-            border-radius: 8px;
-            padding: 12px 24px;
-            font-weight: 600;
-            cursor: pointer;
-            transition: all 0.3s ease;
-        }
-
-        .btn-submit:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 8px 20px rgba(11, 43, 255, 0.3);
+        .value-card h4 {
+            font-size: 20px;
+            margin-bottom: 15px;
+            color: var(--accent);
         }
 
         /* ===== RODAPÉ ===== */
@@ -441,9 +431,8 @@
                 font-size: 36px;         /* Reduz tamanho do título em tablets */
             }
             
-            .contact-cards {
-                grid-template-columns: 1fr; /* Uma coluna em tablets */
-                gap: 20px;
+            .section-content p {
+                font-size: 16px;         /* Reduz tamanho do texto em tablets */
             }
         }
 
@@ -499,18 +488,12 @@
                 display: none;           /* Oculta CTA no mobile */
             }
             
-            .contacts {
+            .our-work {
                 padding: 160px 0 60px;   /* Ajusta espaçamento no mobile */
             }
             
             .section-title {
                 font-size: 32px;         /* Reduz tamanho do título no mobile */
-            }
-            
-            .form-footer {
-                flex-direction: column;
-                gap: 15px;
-                align-items: flex-start;
             }
             
             .footer__brand img{
@@ -534,8 +517,8 @@
                 font-size: 28px;         /* Reduz ainda mais o título em telas pequenas */
             }
             
-            .contact-card {
-                padding: 20px;           /* Reduz padding dos cards */
+            .section-content p {
+                font-size: 16px;         /* Reduz tamanho do texto em telas pequenas */
             }
             
             .footer__cols{
@@ -548,7 +531,7 @@
 <body>
     <!-- ===== FAIXA SUPERIOR ===== -->
     <div class="topstrip" role="region" aria-label="Promoção">
-        Agende uma reunião diagnostica gratuitamente
+        Agende uma reunião diagnóstica gratuitamente
     </div>
 
     <!-- ===== CABEÇALHO PRINCIPAL ===== -->
@@ -616,62 +599,133 @@
         </div>
     </header>
 
-    <!-- ===== SEÇÃO CONTATOS ===== -->
-    <section class="contacts" id="contatos">
+    <!-- ===== SEÇÃO NOSSO TRABALHO ===== -->
+    <section class="our-work" id="nosso-trabalho">
         <div class="container">
-            <h1 class="section-title">Entre em Contato</h1>
-            
-            <div class="contact-cards">
-                <!-- ===== CARD 1 - FAÇA PARTE DA BX ===== -->
-                <article class="contact-card">
-                    <div>
-                        <h3>Faça parte da BX</h3>
-                        <p>Gostaria de fazer parte da nossa equipe?<br>Entre em contato em nosso e-mail:</p>
-                    </div>
-                    <a href="mailto:rh@bxassessoria.com.br" class="contact-email">rh@bxassessoria.com.br</a>
-                </article>
+            <h1 class="section-title">Nosso Trabalho</h1>
+            <div class="section-content">
+                <p>A BX nasceu com um propósito claro: transformar empresas que dependem de tentativas em negócios que crescem com estratégia, previsibilidade e estrutura. Enquanto a maioria das agências foca apenas em operar ferramentas, nós focamos em construir a base que sustenta o crescimento real. Acreditamos que nenhuma operação escala sem método, sem processo e sem uma visão clara de como gerar demanda, converter clientes e expandir resultados de forma sustentável.</p>
+                
+                <p>Somos uma empresa de Growth e Estruturação de Negócios que une estratégia, operação e tecnologia para desenvolver negócios preparados para o agora e para o que vem depois. Nossa missão é tirar empreendedores da improvisação e colocá-los em um modelo organizado, mensurável e escalável.</p>
+            </div>
+        </div>
+    </section>
 
-                <!-- ===== CARD 2 - TIME COMERCIAL ===== -->
-                <article class="contact-card">
-                    <div>
-                        <h3>Time comercial</h3>
-                        <p class="muted-small">Prefere entrar em contato com o nosso time comercial?</p>
-                        
-                        <form class="contact-form">
-                            <div class="form-group">
-                                <label for="nome">Seu nome</label>
-                                <input type="text" id="nome" placeholder="Seu nome" aria-label="nome" />
-                            </div>
-                            
-                            <div class="form-group">
-                                <label for="email">Seu e-mail</label>
-                                <input type="email" id="email" placeholder="Seu e-mail" aria-label="email" />
-                            </div>
-                            
-                            <div class="form-group">
-                                <label for="telefone">Seu Telefone</label>
-                                <input type="tel" id="telefone" placeholder="Seu Telefone" aria-label="telefone" />
-                            </div>
-                            
-                            <div class="form-footer">
-                                <div class="checkbox-group">
-                                    <input type="checkbox" id="notificacoes" />
-                                    <label for="notificacoes">Aceito que concordo em receber notificações</label>
-                                </div>
-                                <button type="submit" class="btn-submit">Para mais detalhes!</button>
-                            </div>
-                        </form>
+    <!-- ===== SEÇÃO NOSSA ESSÊNCIA ===== -->
+    <section class="our-essence" id="sobre-nos">
+        <div class="container">
+            <h2 class="section-title" style="color: var(--accent);">Nossa essência</h2>
+            <div class="section-content" style="color: var(--gray-900);">
+                <p>A BX não é uma agência de marketing. Nós vamos além.<br>
+                Antes de falar em campanhas, tráfego ou redes sociais, olhamos para o coração do negócio: estrutura comercial, comportamento do cliente, oportunidades de melhoria e gargalos que impedem o crescimento.<br>
+                Nossa essência está em criar uma visão completa da operação e construir soluções sob medida. Cada estratégia é desenhada com base no momento da empresa, no seu mercado e no seu potencial de escala.<br>
+                Trabalhamos com profundidade, método e análise contínua para que cada ação faça sentido no presente e construindo o futuro da marca.</p>
+                
+                <div class="essence-grid">
+                    <div class="essence-card">
+                        <h3>Como pensamos crescimento</h3>
+                        <p>Para nós, crescer não é apenas vender mais.<br>
+                        Crescer é criar um modelo previsível onde:<br>
+                        • Você sabe de onde vêm os seus clientes<br>
+                        • Você entende porque eles compram<br>
+                        • Você tem controle do seu funil<br>
+                        • Sua operação entrega o que promete<br>
+                        • Seus resultados melhoram continuamente</p>
                     </div>
-                </article>
+                </div>
+                
+                <h3 style="margin-top: 50px; margin-bottom: 20px; color: var(--accent);">A BX estrutura empresas em quatro pilares essenciais:</h3>
+                
+                <div class="pillars">
+                    <div class="pillar">
+                        <h4>Atrair</h4>
+                        <p>Geramos fluxo diário de potenciais clientes com estratégias de performance, conteúdo e posicionamento.</p>
+                    </div>
+                    <div class="pillar">
+                        <h4>Converter</h4>
+                        <p>Desenhamos processos comerciais, treinamentos, scripts, automações e fluxos inteligentes que aumentam conversão em cada etapa.</p>
+                    </div>
+                    <div class="pillar">
+                        <h4>Entregar</h4>
+                        <p>Ajudamos a construir operações que funcionam rápido, com clareza e sem desperdícios, reduzindo retrabalho e elevando a experiência do cliente.</p>
+                    </div>
+                    <div class="pillar">
+                        <h4>Escalar</h4>
+                        <p>Criamos modelos que crescem de forma sustentável, usando tecnologia, inteligência de dados e otimizações contínuas.<br>
+                        É esse ciclo que torna o crescimento exponencial possível e replicável.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
 
-                <!-- ===== CARD 3 - SAC ===== -->
-                <article class="contact-card">
-                    <div>
-                        <h3>SAC</h3>
-                        <p>Nos envie uma mensagem no WhatsApp. Nossa equipe responderá o mais rápido possível e ajudará você a escolher a melhor solução para sua clínica.</p>
+    <!-- ===== SEÇÃO DIFERENCIAL ===== -->
+    <section class="differential">
+        <div class="container">
+            <h2 class="section-title" style="color: var(--accent);">Nosso diferencial</h2>
+            <div class="section-content" style="color: var(--gray-900);">
+                <p>Empresas crescem quando estratégia, operação e tecnologia trabalham juntas. Por isso, nosso maior diferencial é integrar todas as peças da máquina de crescimento em um único lugar.</p>
+                
+                <ul class="differential-list">
+                    <li>Estratégia baseada em diagnóstico real</li>
+                    <li>Estruturação completa da jornada do cliente</li>
+                    <li>Execução com tecnologia e inteligência de dados</li>
+                    <li>Equipes especializadas em cada etapa do funil</li>
+                    <li>Processos validados para escalar negócios de saúde, estética e serviços</li>
+                </ul>
+                
+                <p style="margin-top: 30px; font-weight: bold;">Não entregamos serviços soltos. Entregamos estrutura.</p>
+                
+                <h3 style="margin-top: 50px; margin-bottom: 20px; color: var(--accent);">Por que a BX existe</h3>
+                <p>Existimos porque acreditamos que todo negócio pode crescer rápido, mas poucos crescem certo.<br>
+                A maioria das empresas tem potencial, mas falta direcionamento, método e clareza. Falta alguém que olhe para o todo e conecte todas as partes do crescimento em uma operação única, simples e eficiente.<br>
+                A BX nasceu para ser essa parceria. Para ajudar empresas a destravar seus resultados, acelerar sua evolução e construir marcas fortes e lucrativas. Somos especialistas em fazer negócios funcionarem melhor, venderem mais e crescerem com consistência.</p>
+                
+                <h3 style="margin-top: 50px; margin-bottom: 20px; color: var(--accent);">Nosso compromisso</h3>
+                <p>O nosso compromisso é com o crescimento do cliente. Não com métricas vazias, não com entregas genéricas, não com fórmulas prontas. Trabalhamos com profundidade, personalização e foco total em resultado real.<br>
+                Quando uma empresa entra para a BX, ela recebe não só um serviço, mas uma nova forma de pensar, operar e crescer.<br>
+                Somos o parceiro que constrói, organiza, executa e acompanha cada etapa. Somos quem torna seu crescimento inevitável.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== SEÇÃO MISSÃO, VISÃO E VALORES ===== -->
+    <section class="mission-vision-values" id="missao">
+        <div class="container">
+            <h2 class="section-title" style="color: var(--accent);">Missão, Visão e Valores</h2>
+            <div class="section-content" style="color: var(--gray-900);">
+                <p style="text-align: center; margin-bottom: 40px; font-style: italic;">Sua equipe mais qualificada com nossos treinamentos corporativos.</p>
+                
+                <h3 style="margin-top: 40px; margin-bottom: 20px; color: var(--accent);">Missão</h3>
+                <p>Construir o futuro da gestão empresarial, aumentando a eficiência operacional, gerando mais oportunidades de vendas e acelerando o crescimento dessas empresas.<br>
+                Fazemos isso unindo educação, estratégia, execução e inovação ajudando nossos clientes e parceiros comerciais a crescerem de maneira sustentável e organizada.</p>
+                
+                <h3 style="margin-top: 40px; margin-bottom: 20px; color: var(--accent);">Visão</h3>
+                <p>Ser a referência em soluções integradas para negócios no Brasil, transformando milhares de empresas em organizações sólidas, inovadoras e exponenciais até 2030, impactando diretamente mais de 50 mil líderes e milhões de pessoas de forma indireta.</p>
+                
+                <h3 style="margin-top: 40px; margin-bottom: 20px; color: var(--accent);">Valores</h3>
+                
+                <div class="values-grid">
+                    <div class="value-card">
+                        <h4>Foco Obsessivo no Cliente</h4>
                     </div>
-                    <a href="https://wa.me/55199922153954" target="_blank" class="contact-email">(19) 99215-3954</a>
-                </article>
+                    <div class="value-card">
+                        <h4>Alta Performance e Intensidade</h4>
+                    </div>
+                    <div class="value-card">
+                        <h4>Inovação e Exponencialidade</h4>
+                    </div>
+                    <div class="value-card">
+                        <h4>Coragem e Antifragilidade</h4>
+                    </div>
+                    <div class="value-card">
+                        <h4>Aprendizado e Crescimento Contínuo</h4>
+                    </div>
+                </div>
+                
+                <div style="text-align: center; margin-top: 50px;">
+                    <a href="#contato" class="btn btn--primary">Saiba Mais</a>
+                </div>
             </div>
         </div>
     </section>
@@ -681,6 +735,7 @@
         <div class="container footer__inner">
             <!-- ===== MARCA DO RODAPÉ ===== -->
             <div class="footer__brand">
+                <!-- Logo placeholder - substitua pelo logo real -->
             </div>
 
             <!-- ===== COLUNAS DO RODAPÉ ===== -->
@@ -690,7 +745,7 @@
                     <h4>INSTITUCIONAL</h4>
                     <ul>
                         <li><a href="#">Home</a></li>
-                        <li><a href="nosso-trabalho.html">Nosso Trabalho</a></li>
+                        <li><a href="#">Nosso Trabalho</a></li>
                         <li><a href="#">Sobre Nós</a></li>
                         <li><a href="#">Equipe BX</a></li>
                         <li><a href="#">Missão, Visão e Valores</a></li>
@@ -702,7 +757,7 @@
                     <h4>SERVIÇOS</h4>
                     <ul>
                         <li><a href="#">Implementação de CRM</a></li>
-                        <li><a href="#">Criação de Sites e Landing Pages</a></li>
+                        <li><a href="#">Criação de Sites e Lending Page</a></li>
                         <li><a href="#">Criação de E-commerce</a></li>
                         <li><a href="#">Social Media</a></li>
                         <li><a href="#">Tráfego Pago</a></li>
@@ -728,8 +783,8 @@
                 <div class="footer__col">
                     <h4>CONTATO</h4>
                     <ul>
-                        <li><a href="mailto:contato@bxassessoria.com.br">Email</a></li>
-                        <li><a href="tel:+55199922153954">Telefone</a></li>
+                        <li><a href="#">Email</a></li>
+                        <li><a href="#">Telefone</a></li>
                         <li><a href="#">Endereço</a></li>
                     </ul>
                 </div>
@@ -930,32 +985,6 @@
                     closeMobileMenu();
                 }
             });
-
-            // ===== VALIDAÇÃO DO FORMULÁRIO =====
-            const form = document.querySelector('.contact-form');
-            if (form) {
-                form.addEventListener('submit', function(e) {
-                    e.preventDefault();
-                    
-                    const nome = document.getElementById('nome').value.trim();
-                    const email = document.getElementById('email').value.trim();
-                    const telefone = document.getElementById('telefone').value.trim();
-                    const checkbox = document.getElementById('notificacoes').checked;
-                    
-                    if (!nome || !email || !telefone) {
-                        alert('Por favor, preencha todos os campos obrigatórios.');
-                        return;
-                    }
-                    
-                    if (!checkbox) {
-                        alert('Por favor, aceite receber notificações para continuar.');
-                        return;
-                    }
-                    
-                    alert('Formulário enviado com sucesso! Entraremos em contato em breve.');
-                    form.reset();
-                });
-            }
 
             // ===== INICIALIZAÇÃO =====
             isMobile = window.innerWidth <= breakpointMobile;
