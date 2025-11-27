@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>BX - Contatos</title>
+    <link rel="shortcut icon" href="assets/ibx.png">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
@@ -369,64 +370,81 @@
             box-shadow: 0 8px 20px rgba(11, 43, 255, 0.3);
         }
 
-        /* ===== RODAPÉ ===== */
-        .footer{
-            background-color: #000000;   /* Fundo preto */
-            color:rgba(255,255,255,0.8); /* Cor do texto com transparência */
-            padding:60px 0 0;            /* Espaçamento interno (sem padding inferior) */
-        }
+  /* ===== RODAPÉ ===== */
+.footer{
+  background-color: #000000;   /* Fundo preto */
+  color:rgba(255,255,255,0.8); /* Cor do texto com transparência */
+  padding:60px 0 0;            /* Espaçamento interno (sem padding inferior) */
+}
 
-        /* ===== CONTEÚDO INTERNO DO RODAPÉ ===== */
-        .footer__inner{
-            display:flex;                /* Layout flexbox */
-            gap:40px;                    /* Espaço entre elementos */
-            align-items:flex-start;      /* Alinha itens ao topo */
-            flex-wrap:wrap;              /* Permite quebra de linha */
-            padding-bottom: 40px;        /* Espaçamento inferior */
-        }
+/* ===== CONTEÚDO INTERNO DO RODAPÉ ===== */
+.footer__inner{
+  display: flex;                /* Layout flexbox */
+  gap: 60px;                    /* Aumentei o espaço entre logo e colunas */
+  align-items: flex-start;      /* Alinha itens ao topo */
+  flex-wrap: wrap;              /* Permite quebra de linha */
+  padding-bottom: 40px;         /* Espaçamento inferior */
+}
 
-        /* ===== MARCA NO RODAPÉ ===== */
-        .footer__brand img{height: 120px; margin-bottom: 20px;}
+/* ===== MARCA NO RODAPÉ ===== */
+.footer__brand {
+  flex-shrink: 0;               /* Impede que a logo encolha */
+}
 
-        /* ===== COLUNAS DO RODAPÉ ===== */
-        .footer__cols{
-            display:flex;                /* Layout flexbox */
-            gap:60px;                    /* Espaço entre colunas */
-            margin-left:auto;            /* Empurra para a direita */
-            flex-wrap:wrap;              /* Permite quebra de linha */
-        }
+.footer__brand img {
+  height: 200px;                /* Altura reduzida para melhor proporção */
+  width: auto;                  /* Mantém proporção original */
+  display: block;               /* Remove espaços indesejados */
+}
 
-        /* ===== TÍTULO DAS COLUNAS DO RODAPÉ ===== */
-        .footer__col h4{
-            margin:0 0 20px 0;           /* Margem */
-            font-size:16px;              /* Tamanho da fonte */
-            color: var(--white);         /* Cor do texto branca */
-            font-weight: 600;            /* Peso da fonte */
-        }
+/* ===== COLUNAS DO RODAPÉ ===== */
+.footer__cols{
+  display: flex;                /* Layout flexbox */
+  gap: 60px;                    /* Espaço entre colunas */
+  flex: 1;                      /* Ocupa o espaço restante */
+  flex-wrap: wrap;              /* Permite quebra de linha */
+  justify-content: flex-end;    /* Alinha colunas à direita */
+}
 
-        /* ===== LISTA DAS COLUNAS DO RODAPÉ ===== */
-        .footer__col ul{list-style:none; padding:0; margin:0} /* Remove estilos padrão */
+/* ===== TÍTULO DAS COLUNAS DO RODAPÉ ===== */
+.footer__col h4{
+  margin:0 0 20px 0;           /* Margem */
+  font-size:16px;              /* Tamanho da fonte */
+  color: var(--white);         /* Cor do texto branca */
+  font-weight: 600;            /* Peso da fonte */
+}
 
-        /* ===== ITENS DA LISTA DO RODAPÉ ===== */
-        .footer__col li{margin-bottom: 12px;} /* Espaço entre itens */
+/* ===== LISTA DAS COLUNAS DO RODAPÉ ===== */
+.footer__col ul{
+  list-style:none; 
+  padding:0; 
+  margin:0;
+}
 
-        /* ===== LINKS DO RODAPÉ ===== */
-        .footer__col li a{
-            color: rgba(255,255,255,0.7); /* Cor do texto com transparência */
-            text-decoration: none;       /* Remove sublinhado */
-            transition: color 0.2s ease; /* Transição suave para cor */
-            font-size: 14px;             /* Tamanho da fonte */
-        }
+/* ===== ITENS DA LISTA DO RODAPÉ ===== */
+.footer__col li{
+  margin-bottom: 12px;         /* Espaço entre itens */
+}
 
-        /* ===== LINKS DO RODAPÉ NO HOVER ===== */
-        .footer__col li a:hover{color: var(--white);} /* Cor branca no hover */
+/* ===== LINKS DO RODAPÉ ===== */
+.footer__col li a{
+  color: rgba(255,255,255,0.7); /* Cor do texto com transparência */
+  text-decoration: none;       /* Remove sublinhado */
+  transition: color 0.2s ease; /* Transição suave para cor */
+  font-size: 14px;             /* Tamanho da fonte */
+}
 
-        /* ===== PARTE INFERIOR DO RODAPÉ ===== */
-        .footer__bottom{
-            background: rgba(0,0,0,0.8); /* Fundo preto com transparência */
-            padding: 20px 0;             /* Espaçamento interno */
-            border-top: 1px solid rgba(255,255,255,0.1); /* Linha divisória superior */
-        }
+/* ===== LINKS DO RODAPÉ NO HOVER ===== */
+.footer__col li a:hover{
+  color: var(--white);         /* Cor branca no hover */
+}
+
+/* ===== PARTE INFERIOR DO RODAPÉ ===== */
+.footer__bottom{
+  background: rgba(0,0,0,0.8); /* Fundo preto com transparência */
+  padding: 20px 0;             /* Espaçamento interno */
+  border-top: 1px solid rgba(255,255,255,0.1); /* Linha divisória superior */
+}
 
         /* ===== DIREITOS AUTORAIS ===== */
         .footer__copyright{
@@ -557,6 +575,7 @@
             <!-- ===== LOGO ===== -->
             <div class="header__left">
                 <a href="#" class="brand" aria-label="BX - Home">
+                    <img src="assets/3.png" alt="BX - Consultoria em Marketing Digital" class="header__logo" />
                 </a>
             </div>
 
@@ -570,7 +589,7 @@
                 <ul class="nav__list" id="navList">
                     <!-- ===== ITEM HOME ===== -->
                     <li class="nav__item">
-                        <a href="#" class="nav__link">Home</a>
+                        <a href="index.html" class="nav__link">Home</a>
                     </li>
 
                     <!-- ===== ITEM NOSSA ASSESSORIA 360º ===== -->
@@ -681,61 +700,58 @@
         <div class="container footer__inner">
             <!-- ===== MARCA DO RODAPÉ ===== -->
             <div class="footer__brand">
+                <img src="assets/ibx.png" alt="BX - Consultoria em Marketing Digital" />
             </div>
 
-            <!-- ===== COLUNAS DO RODAPÉ ===== -->
-            <div class="footer__cols">
-                <!-- ===== COLUNA 1 - INSTITUCIONAL ===== -->
-                <div class="footer__col">
-                    <h4>INSTITUCIONAL</h4>
-                    <ul>
-                        <li><a href="#">Home</a></li>
-                        <li><a href="nosso-trabalho.html">Nosso Trabalho</a></li>
-                        <li><a href="#">Sobre Nós</a></li>
-                        <li><a href="#">Equipe BX</a></li>
-                        <li><a href="#">Missão, Visão e Valores</a></li>
-                    </ul>
-                </div>
-                
-                <!-- ===== COLUNA 2 - SERVIÇOS ===== -->
-                <div class="footer__col">
-                    <h4>SERVIÇOS</h4>
-                    <ul>
-                        <li><a href="#">Implementação de CRM</a></li>
-                        <li><a href="#">Criação de Sites e Landing Pages</a></li>
-                        <li><a href="#">Criação de E-commerce</a></li>
-                        <li><a href="#">Social Media</a></li>
-                        <li><a href="#">Tráfego Pago</a></li>
-                        <li><a href="#">Automações com IA</a></li>
-                        <li><a href="#">Dashboards de Performance</a></li>
-                        <li><a href="#">Edição de Videos</a></li>
-                        <li><a href="#">SDR & Closers</a></li>
-                    </ul>
-                </div>
-                
-                <!-- ===== COLUNA 3 - SOLUÇÕES ===== -->
-                <div class="footer__col">
-                    <h4>SOLUÇÕES</h4>
-                    <ul>
-                        <li><a href="#">Sistema Nour Clínicas</a></li>
-                        <li><a href="#">Consultoria de Marketing</a></li>
-                        <li><a href="#">Treinamentos Corporativos</a></li>
-                        <li><a href="#">Materiais Gratuitos</a></li>
-                    </ul>
-                </div>
-                
-                <!-- ===== COLUNA 4 - CONTATO ===== -->
-                <div class="footer__col">
-                    <h4>CONTATO</h4>
-                    <ul>
-                        <li><a href="mailto:contato@bxassessoria.com.br">Email</a></li>
-                        <li><a href="tel:+55199922153954">Telefone</a></li>
-                        <li><a href="#">Endereço</a></li>
-                    </ul>
-                </div>
-            </div>
+      <!-- ===== COLUNAS DO RODAPÉ ===== -->
+      <div class="footer__cols">
+        <!-- ===== COLUNA 1 - INSTITUCIONAL ===== -->
+        <div class="footer__col">
+          <h4>INSTITUCIONAL</h4>
+          <ul>
+            <li><a href="#">Home</a></li>
+            <li><a href="#">Nosso Trabalho</a></li>
+            <li><a href="#">Sobre Nós</a></li>
+            <li><a href="#">Equipe BX</a></li>
+            <li><a href="#">Missão, Visão e Valores</a></li>
+          </ul>
         </div>
         
+        <!-- ===== COLUNA 2 - SERVIÇOS ===== -->
+        <div class="footer__col">
+          <h4>SERVIÇOS</h4>
+          <ul>
+            <li><a href="#">Implementação de CRM</a></li>
+            <li><a href="#">Criação de Sites</a></li>
+            <li><a href="#">Landing Pages</a></li>
+            <li><a href="#">Tráfego Pago</a></li>
+            <li><a href="#">Automação com IA</a></li>
+          </ul>
+        </div>
+        
+        <!-- ===== COLUNA 3 - SOLUÇÕES ===== -->
+        <div class="footer__col">
+          <h4>SOLUÇÕES</h4>
+          <ul>
+            <li><a href="#">Sistema Nour Clínicas</a></li>
+            <li><a href="#">Consultoria de Marketing</a></li>
+            <li><a href="#">Treinamentos</a></li>
+            <li><a href="#">Materiais Gratuitos</a></li>
+          </ul>
+        </div>
+        
+        <!-- ===== COLUNA 4 - CONTATO ===== -->
+        <div class="footer__col">
+          <h4>CONTATO</h4>
+          <ul>
+            <li><a href="#">Email</a></li>
+            <li><a href="#">Telefone</a></li>
+            <li><a href="#">Endereço</a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
         <!-- ===== PARTE INFERIOR DO RODAPÉ ===== -->
         <div class="footer__bottom">
             <div class="container">
