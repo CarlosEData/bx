@@ -374,12 +374,21 @@
 
         /* ===== SEÇÃO PRINCIPAL ===== */
         .main-content {
-            padding: 180px 0 80px;
-            /* Espaçamento interno (topo aumentado para cabeçalho fixo) */
+            background: var(--white);
+            /* Fundo branco para o restante da página */
+            color: var(--gray-900);
+            padding: 0 0 80px;
+            /* Espaçamento inferior padrão */
+        }
+
+        /* ===== HERO (visual acima do conteúdo branco) ===== */
+        .hero {
+            padding: 180px 0 40px;
+            /* Espaçamento interno (topo aumentado para cabeçalho fixo)
+               e espaçamento inferior reduzido para que o branco comece logo abaixo do botão */
             background: linear-gradient(135deg, var(--bg-dark) 0%, var(--blue-900) 100%);
-            /* Gradiente de fundo azul */
+            /* Gradiente de fundo azul apenas no topo (hero) */
             color: var(--white);
-            /* Texto branco */
         }
 
         .section-title {
@@ -389,12 +398,17 @@
             /* Margem */
             font-weight: 700;
             /* Peso da fonte */
-            color: var(--white);
+            color: var(--gray-900);
             /* Cor do texto branca */
             line-height: 1.2;
             /* Altura da linha */
             text-align: center;
             /* Texto centralizado */
+        }
+
+        /* quando estiver no hero, o título fica branco */
+        .hero .section-title {
+            color: var(--white);
         }
 
         .section-content {
@@ -413,6 +427,11 @@
             /* Altura da linha */
             text-align: justify;
             /* Texto justificado */
+        }
+
+        /* garante que o texto do hero fique visível sobre o gradiente */
+        .hero .section-content p {
+            color: var(--white);
         }
 
         /* ===== SEÇÃO DE SOLUÇÕES ===== */
@@ -682,9 +701,9 @@
                 /* Oculta CTA no mobile */
             }
 
-            .main-content {
+            .hero {
                 padding: 160px 0 60px;
-                /* Ajusta espaçamento no mobile */
+                /* Ajusta espaçamento do hero no mobile */
             }
 
             .section-title {
@@ -778,7 +797,7 @@
                 <ul class="nav__list" id="navList">
                     <!-- ===== ITEM HOME ===== -->
                     <li class="nav__item">
-                        <a href="index.html" class="nav__link">Home</a>
+                        <a href="#" class="nav__link">Home</a>
                     </li>
 
                     <!-- ===== ITEM NOSSA ASSESSORIA 360º ===== -->
@@ -827,17 +846,19 @@
     </header>
 
     <!-- ===== SEÇÃO PRINCIPAL ===== -->
-    <section class="main-content" id="crm-implementacao">
-        <div class="container">
-            <h1 class="section-title">Implementação de CRM</h1>
+    <section class="main-content" id="automacoes-ia">
+        <div class="hero">
+            <div class="container">
+            <h1 class="section-title">Automações com Inteligência Artificial</h1>
             <div class="section-content">
-                <p>A organização da sua operação comercial começa aqui. A implementação de CRM é o primeiro passo para
-                    transformar seu funil em um fluxo previsível, eficiente e capaz de gerar resultados consistentes
-                    todos os meses. Com o CRM certo, sua equipe trabalha com mais clareza, sua empresa sabe exatamente
-                    onde está perdendo oportunidades e você ganha controle total sobre o desempenho do seu processo de
-                    vendas.</p>
+                <p>Crescer exige processos rápidos, inteligentes e consistentes e isso só é possível quando sua operação
+                    funciona além da capacidade humana. As Automações com Inteligência Artificial da BX elevam seu
+                    negócio para outro nível: reduzem tarefas manuais, aumentam produtividade e criam experiências
+                    altamente personalizadas para cada lead e cliente. Implementamos fluxos inteligentes que aprendem,
+                    respondem, classificam e executam ações automaticamente, garantindo velocidade, precisão e escala
+                    real.</p>
 
-                        <br>
+                <br>
 
                 <a href="index.html" class="btn-saiba">
                     Saiba Mais
@@ -866,28 +887,28 @@
 
                 <br>
 
-                <h2 style="color: var(--white); margin-top: 40px; margin-bottom: 20px;">Por que o CRM é indispensável
-                    para qualquer empresa que quer crescer?</h2>
-                <p>Uma operação comercial só se torna realmente escalável quando deixa de depender da memória do time e
-                    passa a funcionar com processos claros, informações centralizadas e acompanhamento constante da
-                    jornada do cliente. Um CRM bem implementado vai muito além do cadastro de contatos: ele organiza seu
-                    funil, cria previsibilidade, reduz perdas por falta de follow-up e aumenta suas taxas de conversão
-                    sem exigir mais investimentos em marketing. Empresas que não usam CRM perdem tempo, dinheiro e
-                    oportunidades todos os dias muitas vezes sem perceber. Já quem utiliza a ferramenta de forma
-                    estratégica, conquista eficiência, clareza e a segurança de saber exatamente o que está acontecendo
-                    em cada etapa da venda.</p>
+                <h2 style="color: var(--white); margin-top: 40px; margin-bottom: 20px;">Por que automações com IA são
+                    indispensáveis para escalar?</h2>
+                <p>Quando sua empresa depende apenas de ações manuais, você perde velocidade, oportunidades e
+                    previsibilidade. Leads ficam sem resposta, agendamentos se perdem, follow-ups atrasam e a operação
+                    trava conforme o volume cresce. Com IA, cada lead é atendido instantaneamente, cada cliente recebe o
+                    retorno ideal no momento certo, o time comercial ganha suporte automatizado e o gestor passa a ter
+                    uma operação que funciona 24/7 sem falhas e sem depender de pessoas para cada etapa. Automações com
+                    IA reduzem custos, aumentam conversão e criam uma jornada mais eficiente, personalizada e escalável.
+                    É a tecnologia que separa negócios comuns de empresas que crescem exponencialmente.</p>
 
-                <h2 style="color: var(--white); margin-top: 40px; margin-bottom: 20px;">Como funciona a nossa
-                    implementação?</h2>
-                <p>Transformar seu CRM em uma máquina de vendas exige método de isso que fazemos aqui. Começamos
-                    analisando a forma como sua empresa vende hoje. Mapeamos etapas, identificamos gargalos, estudamos o
-                    comportamento do seu cliente e estruturamos um funil claro e funcional. A partir disso, configuramos
-                    o CRM com pipelines personalizados, campos essenciais, regras automáticas, tarefas de follow-up,
-                    integrações com WhatsApp, site, formulários e anúncios, além de automações que eliminam erros
-                    humanos e mantêm o ritmo comercial. Tudo é implementado pensando na sua rotina real. E para garantir
-                    adesão total, treinamos sua equipe para usar o CRM de forma prática, rápida e inteligente. No final,
-                    você ganha uma operação organizada, previsível e com muito mais capacidade de converter
-                    oportunidades.</p>
+                <h2 style="color: var(--white); margin-top: 40px; margin-bottom: 20px;">Como funciona a implementação
+                    das nossas automações inteligentes?</h2>
+                <p>Primeiro, diagnosticamos toda a jornada do cliente e identificamos onde sua empresa perde tempo,
+                    dinheiro e oportunidades. Em seguida, desenhamos fluxos inteligentes integrados ao CRM, WhatsApp,
+                    e-mail, atendimento e sistemas internos, aplicando IA para interpretar comportamento, priorizar
+                    contatos, responder automaticamente e executar ações de forma estratégica. Criamos automações de
+                    atendimento, distribuição de leads, recuperação de agendamentos, nutrição ativa, follow-ups
+                    inteligentes, notificações internas e muito mais. Todas as automações são personalizadas e ajustadas
+                    com base no seu processo real, garantindo eficiência máxima e escalabilidade. Ao final, sua operação
+                    ganha velocidade, previsibilidade e uma performance que não depende mais de esforço manual, mas sim
+                    de inteligência.</p>
+            </div>
             </div>
         </div>
     </section>
@@ -928,7 +949,6 @@
             </div>
         </div>
     </section>
-
 
     <!-- ===== SEÇÃO INSTITUCIONAL ===== -->
     <section class="institutional">
@@ -977,12 +997,11 @@
     </section>
 
     <!-- ===== RODAPÉ ===== -->
-  <footer class="footer" role="contentinfo">
-    <div class="container footer__inner">
-      <!-- ===== MARCA DO RODAPÉ ===== -->
-      <div class="footer__brand">
-        <img src="assets/ibx.png" alt="BX - Consultoria em Marketing Digital" />
-      </div>
+    <footer class="footer" role="contentinfo">
+        <div class="container footer__inner">
+            <!-- ===== MARCA DO RODAPÉ ===== -->
+            <div class="footer__brand">
+            </div>
 
             <!-- ===== COLUNAS DO RODAPÉ ===== -->
             <div class="footer__cols">
