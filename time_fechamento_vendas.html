@@ -100,194 +100,350 @@
             /* Centraliza o container */
         }
 
-        /* ===== FAIXA SUPERIOR ===== */
-        .topstrip {
-            background: linear-gradient(90deg, var(--accent), #0b2bff);
-            /* Gradiente de fundo */
-            color: var(--white);
-            /* Texto branco */
-            text-align: center;
-            /* Texto centralizado */
-            padding: 12px;
-            /* Espaçamento interno */
-            font-size: 14px;
-            /* Tamanho da fonte */
-            font-weight: 500;
-            /* Peso da fonte */
-            z-index: 1001;
-            /* Z-index alto para ficar acima de outros elementos */
-            position: fixed;
-            /* Posição fixa no topo */
-            top: 0;
-            /* Alinhado ao topo */
-            left: 0;
-            /* Alinhado à esquerda */
-            right: 0;
-            /* Alinhado à direita */
-        }
+       /* ===== FAIXA SUPERIOR FIXA ===== */
+    .topstrip{
+      background: linear-gradient(90deg, var(--accent), #0b2bff); /* Gradiente de fundo */
+      color: var(--white);         /* Texto branco */
+      text-align:center;           /* Texto centralizado */
+      padding: 12px;               /* Espaçamento interno */
+      font-size:14px;              /* Tamanho da fonte */
+      font-weight: 500;            /* Peso da fonte */
+      z-index: 1001;               /* Z-index alto para ficar acima de outros elementos */
+      position: fixed;             /* Posição fixa no topo */
+      top: 0;                      /* Alinhado ao topo */
+      left: 0;                     /* Alinhado à esquerda */
+      right: 0;                    /* Alinhado à direita */
+    }
 
-        /* ===== CABEÇALHO PRINCIPAL ===== */
-        .header {
-            padding: 0;
-            /* Remove padding padrão */
-            position: fixed;
-            /* Posição fixa */
-            top: 44px;
-            /* Posiciona abaixo da faixa superior */
-            left: 0;
-            /* Alinhado à esquerda */
-            right: 0;
-            /* Alinhado à direita */
-            z-index: 1000;
-            /* Z-index alto */
-            background: var(--white);
-            /* Fundo branco fixo */
-            transition: all 0.4s ease;
-            /* Transição suave para todas as propriedades */
-            border-bottom: 1px solid var(--gray-200);
-            /* Borda inferior */
-            box-shadow: 0 2px 20px rgba(0, 0, 0, 0.08);
-            /* Sombra suave */
-        }
+    /* ===== CABEÇALHO PRINCIPAL ===== */
+    .header{
+      padding: 0;                  /* Remove padding padrão */
+      position: fixed;             /* Posição fixa */
+      top: 44px;                   /* Posiciona abaixo da faixa superior */
+      left: 0;                     /* Alinhado à esquerda */
+      right: 0;                    /* Alinhado à direita */
+      z-index: 1000;               /* Z-index alto */
+      background: var(--white);    /* Fundo branco fixo */
+      transition: all 0.4s ease;   /* Transição suave para todas as propriedades */
+      border-bottom: 1px solid var(--gray-200); /* Borda inferior */
+      box-shadow: 0 2px 20px rgba(0,0,0,0.08); /* Sombra suave */
+    }
 
-        /* ===== LINKS DO CABEÇALHO ===== */
-        .nav__link {
-            color: var(--accent);
-            /* Cor do texto azul */
-        }
+    /* ===== LINKS DO CABEÇALHO ===== */
+    .nav__link {
+      color: var(--accent);        /* Cor do texto azul */
+    }
 
-        .nav__link:hover,
-        .nav__link:focus {
-            color: var(--accent);
-            /* Mantém cor azul no hover */
-            border-bottom-color: var(--accent);
-            /* Borda inferior azul */
-        }
+    .nav__link:hover,
+    .nav__link:focus {
+      color: var(--accent);        /* Mantém cor azul no hover */
+      border-bottom-color: var(--accent); /* Borda inferior azul */
+    }
 
-        /* ===== HAMBÚRGUER ===== */
-        .hamburger span {
-            background: var(--accent);
-            /* Cor do ícone hambúrguer azul */
-        }
+    /* ===== HAMBÚRGUER ===== */
+    .hamburger span {
+      background: var(--accent);   /* Cor do ícone hambúrguer azul */
+    }
 
-        /* ===== CONTEÚDO INTERNO DO CABEÇALHO ===== */
-        .header__inner {
-            display: flex;
-            /* Layout flexbox */
-            align-items: center;
-            /* Alinha itens verticalmente ao centro */
-            gap: 40px;
-            /* Espaço entre os itens */
-            position: relative;
-            /* Posição relativa */
-            height: 80px;
-            /* Altura fixa */
-        }
+    /* ===== CONTEÚDO INTERNO DO CABEÇALHO ===== */
+    .header__inner{
+      display:flex;                /* Layout flexbox */
+      align-items:center;          /* Alinha itens verticalmente ao centro */
+      gap: 40px;                   /* Espaço entre os itens */
+      position:relative;           /* Posição relativa */
+      height: 80px;                /* Altura fixa */
+    }
 
-        /* ===== LADO ESQUERDO DO CABEÇALHO ===== */
-        .header__left {
-            display: flex;
-            align-items: center
-        }
+    /* ===== LADO ESQUERDO DO CABEÇALHO ===== */
+    .header__left{display:flex; align-items:center} /* Alinha logo e outros itens */
 
-        /* Alinha logo e outros itens */
+    /* ===== LOGO DO CABEÇALHO ===== */
+    .header__logo{
+      bottom: 10px;
+      height: 70px;                /* Altura da logo */
+      transition: all 0.3s ease;   /* Transição suave */
+    }
 
-        /* ===== LOGO DO CABEÇALHO ===== */
-        .header__logo {
-            height: 70px;
-            /* Altura da logo */
-            transition: all 0.3s ease;
-            /* Transição suave */
-        }
+    /* ===== LISTA DE NAVEGAÇÃO ===== */
+    .nav__list{
+      display:flex;                /* Layout flexbox */
+      gap: 8px;                    /* Espaço entre os itens */
+      list-style:none;             /* Remove marcadores da lista */
+      padding:0;                   /* Remove padding padrão */
+      margin:0;                    /* Remove margem padrão */
+      align-items:center;          /* Alinha itens verticalmente */
+      height: 100%;                /* Altura total do container */
+    }
 
-        /* ===== LISTA DE NAVEGAÇÃO ===== */
-        .nav__list {
-            display: flex;
-            /* Layout flexbox */
-            gap: 8px;
-            /* Espaço entre os itens */
-            list-style: none;
-            /* Remove marcadores da lista */
-            padding: 0;
-            /* Remove padding padrão */
-            margin: 0;
-            /* Remove margem padrão */
-            align-items: center;
-            /* Alinha itens verticalmente */
-            height: 100%;
-            /* Altura total do container */
-        }
+    /* ===== ITEM DA NAVEGAÇÃO ===== */
+    .nav__item{
+      position:relative;           /* Posição relativa para dropdowns */
+      display:block;               /* Exibição em bloco */
+      height: 100%;                /* Altura total do container */
+    }
 
-        /* ===== ITEM DA NAVEGAÇÃO ===== */
-        .nav__item {
-            position: relative;
-            /* Posição relativa para dropdowns */
-            display: block;
-            /* Exibição em bloco */
-            height: 100%;
-            /* Altura total do container */
-        }
+    /* ===== LINK DA NAVEGAÇÃO ===== */
+    .nav__link{
+      color: var(--accent);        /* Cor do texto azul */
+      text-decoration:none;        /* Remove sublinhado */
+      font-weight:500;             /* Peso da fonte */
+      font-size:15px;              /* Tamanho da fonte */
+      padding: 0 20px;             /* Espaçamento interno horizontal */
+      display:flex;                /* Layout flexbox */
+      align-items:center;          /* Alinha itens verticalmente */
+      gap: 8px;                    /* Espaço entre texto e ícone */
+      height: 100%;                /* Altura total do container */
+      transition: all 0.2s ease;   /* Transição suave */
+      position: relative;          /* Posição relativa */
+      border-bottom: 3px solid transparent; /* Borda inferior transparente */
+      white-space: nowrap;         /* Impede quebra de linha */
+    }
 
-        /* ===== LINK DA NAVEGAÇÃO ===== */
-        .nav__link {
-            color: var(--accent);
-            /* Cor do texto azul */
-            text-decoration: none;
-            /* Remove sublinhado */
-            font-weight: 500;
-            /* Peso da fonte */
-            font-size: 15px;
-            /* Tamanho da fonte */
-            padding: 0 20px;
-            /* Espaçamento interno horizontal */
-            display: flex;
-            /* Layout flexbox */
-            align-items: center;
-            /* Alinha itens verticalmente */
-            gap: 8px;
-            /* Espaço entre texto e ícone */
-            height: 100%;
-            /* Altura total do container */
-            transition: all 0.2s ease;
-            /* Transição suave */
-            position: relative;
-            /* Posição relativa */
-            border-bottom: 3px solid transparent;
-            /* Borda inferior transparente */
-            white-space: nowrap;
-            /* Impede quebra de linha */
-        }
+    /* ===== LINK DA NAVEGAÇÃO NO HOVER/FOCUS ===== */
+    .nav__link:hover,
+    .nav__link:focus{
+      color: var(--accent);        /* Mantém cor azul */
+      border-bottom-color: var(--accent); /* Borda inferior azul */
+    }
 
-        /* ===== LINK DA NAVEGAÇÃO NO HOVER/FOCUS ===== */
-        .nav__link:hover,
-        .nav__link:focus {
-            color: var(--accent);
-            /* Mantém cor azul */
-            border-bottom-color: var(--accent);
-            /* Borda inferior azul */
-        }
+    /* ===== SETA DO DROPDOWN ===== */
+    .nav__arrow{
+      transition: transform 0.2s ease; /* Transição suave para rotação */
+    }
 
-        /* ===== SETA DO DROPDOWN ===== */
-        .nav__arrow {
-            transition: transform 0.2s ease;
-            /* Transição suave para rotação */
-        }
+    /* ===== ROTAÇÃO DA SETA NO HOVER ===== */
+    .has-mega:hover .nav__arrow,
+    .has-dropdown:hover .nav__arrow{
+      transform: rotate(180deg);   /* Rotaciona 180 graus */
+    }
 
-        /* ===== ROTAÇÃO DA SETA NO HOVER ===== */
-        .has-mega:hover .nav__arrow,
-        .has-dropdown:hover .nav__arrow {
-            transform: rotate(180deg);
-            /* Rotaciona 180 graus */
-        }
+    /* ===== CALL TO ACTION DO CABEÇALHO ===== */
+    .header__cta{margin-left:auto; display:flex; align-items:center; gap:16px}
 
-        /* ===== CALL TO ACTION DO CABEÇALHO ===== */
-        .header__cta {
-            margin-left: auto;
-            display: flex;
-            align-items: center;
-            gap: 16px
-        }
+    /* ===== BOTÃO PRINCIPAL ===== */
+    .btn{
+      font-family:var(--ff);       /* Fonte padrão */
+      cursor:pointer;              /* Cursor de ponteiro */
+      border-radius:8px;           /* Bordas arredondadas */
+      padding:12px 24px;           /* Espaçamento interno */
+      border:0;                    /* Remove borda */
+      display:inline-block;        /* Exibição em linha-bloco */
+      text-decoration:none;        /* Remove sublinhado */
+      text-align:center;           /* Texto centralizado */
+      transition: all 0.3s ease;   /* Transição suave */
+      font-weight: 600;            /* Peso da fonte */
+      font-size: 14px;             /* Tamanho da fonte */
+      white-space: nowrap;         /* Impede quebra de linha */
+    }
 
+    /* ===== BOTÃO PRIMÁRIO ===== */
+    .btn--primary{
+      background-color: #061577;   /* Fundo azul */
+      color: var(--white);         /* Texto branco */
+    }
+
+    /* ===== BOTÃO PRIMÁRIO NO HOVER ===== */
+    .btn--primary:hover{
+      background: #0b2bff;         /* Fundo azul mais escuro */
+      transform: translateY(-2px); /* Move ligeiramente para cima */
+      box-shadow: 0 8px 20px rgba(11, 43, 255, 0.3); /* Sombra azul */
+    }
+
+    /* ===== ÍCONE HAMBÚRGUER (MOBILE) ===== */
+    .hamburger{
+      display:none;                /* Oculta por padrão (desktop) */
+      background:transparent;      /* Fundo transparente */
+      border:0;                    /* Remove borda */
+      padding:8px;                 /* Espaçamento interno */
+      cursor: pointer;             /* Cursor de ponteiro */
+      position: relative;          /* Posição relativa */
+      z-index: 1001;               /* Z-index alto */
+      flex-direction: column;      /* Direção coluna para as linhas */
+      gap: 4px;                    /* Espaço entre as linhas */
+    }
+
+    /* ===== LINHAS DO HAMBÚRGUER ===== */
+    .hamburger span{
+      display:block;               /* Exibição em bloco */
+      width:24px;                  /* Largura */
+      height:2px;                  /* Altura */
+      background:var(--accent);     /* Cor azul */
+      border-radius:2px;           /* Bordas levemente arredondadas */
+      transition: transform .3s ease, opacity .3s ease; /* Transições suaves */
+    }
+
+    /* ===== MEGA MENU ===== */
+    .mega-menu{
+      position: absolute;          /* Posição absoluta */
+      top: 100%;                   /* Posiciona abaixo do item pai */
+      left: 0;                     /* Alinhado à esquerda */
+      width: 1000px;               /* Largura mais horizontal */
+      max-height: 500px;           /* Altura máxima reduzida */
+      background: var(--dropdown-bg); /* Cor de fundo */
+      box-shadow: var(--shadow);   /* Sombra */
+      border-radius: 0 0 12px 12px; /* Bordas arredondadas apenas embaixo */
+      opacity: 0;                  /* Inicialmente invisível */
+      visibility: hidden;          /* Inicialmente oculto */
+      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1); /* Transição suave */
+      z-index: 999;                /* Z-index alto */
+      transform: translateY(-10px); /* Posicionado ligeiramente acima */
+      border: 1px solid var(--gray-200); /* Borda cinza */
+      border-top: none;            /* Remove borda superior */
+      padding: 0;                  /* Remove padding padrão */
+      display: flex;               /* Layout flexbox */
+      overflow-y: auto;            /* Permite rolagem se necessário */
+    }
+
+    /* ===== MEGA MENU NO HOVER ===== */
+    .nav__item.has-mega:hover .mega-menu{
+      opacity:1;                   /* Torna visível */
+      visibility:visible;          /* Torna visível */
+      transform: translateY(0);    /* Posiciona corretamente */
+    }
+
+    /* ===== CONTEÚDO DO MEGA MENU ===== */
+    .mega-menu__content{
+      padding: 30px;               /* Espaçamento interno reduzido */
+      flex: 1;                     /* Ocupa espaço disponível */
+      display: flex;               /* Layout flexbox */
+      flex-direction: column;      /* Direção coluna */
+    }
+
+    /* ===== GRADE DO MEGA MENU ===== */
+    .mega-menu__grid{
+      display: grid;               /* Layout grid */
+      grid-template-columns: repeat(4, 1fr); /* Quatro colunas para acomodar a terceirização */
+      gap: 30px;                   /* Espaço entre colunas */
+      flex: 1;                     /* Ocupa espaço disponível */
+    }
+
+    /* ===== COLUNA DO MEGA MENU ===== */
+    .mega-menu__col{
+      display: flex;               /* Layout flexbox */
+      flex-direction: column;      /* Direção coluna */
+    }
+
+    /* ===== SEÇÃO DO MEGA MENU ===== */
+    .mega-menu__section{
+      flex: 1;                     /* Ocupa espaço disponível */
+    }
+
+    /* ===== TÍTULO DA SEÇÃO DO MEGA MENU ===== */
+    .mega-menu__section-title {
+      font-size: 18px;             /* Tamanho da fonte */
+      font-weight: 600;            /* Peso da fonte */
+      color: var(--gray-900);      /* Cor do texto */
+      margin: 0 0 16px;            /* Margem */
+      padding-bottom: 8px;         /* Espaçamento abaixo */
+      border-bottom: 1px solid var(--gray-200); /* Linha divisória */
+    }
+
+    /* ===== LISTA DO MEGA MENU ===== */
+    .mega-menu__list{
+      list-style: none;            /* Remove marcadores */
+      padding: 0;                  /* Remove padding */
+      margin: 0;                   /* Remove margem */
+      display: flex;               /* Layout flexbox */
+      flex-direction: column;      /* Direção coluna */
+      gap: 10px;                   /* Espaço entre itens reduzido */
+    }
+
+    /* ===== LINK DO MEGA MENU ===== */
+    .mega-menu__link{
+      color: var(--gray-800);      /* Cor do texto */
+      text-decoration: none;       /* Remove sublinhado */
+      font-size: 14px;             /* Tamanho da fonte */
+      font-weight: 500;            /* Peso da fonte */
+      padding: 6px 0;              /* Espaçamento vertical reduzido */
+      display: block;              /* Exibição em bloco */
+      transition: all 0.2s ease;   /* Transição suave */
+      border-left: 2px solid transparent; /* Borda esquerda transparente */
+      padding-left: 12px;          /* Espaçamento à esquerda */
+    }
+
+    /* ===== LINK DO MEGA MENU NO HOVER ===== */
+    .mega-menu__link:hover{
+      color: var(--accent);        /* Cor azul */
+      border-left-color: var(--accent); /* Borda esquerda azul */
+      padding-left: 16px;          /* Aumenta espaçamento à esquerda */
+    }
+
+    /* ===== SUBLISTA DO MEGA MENU ===== */
+    .mega-menu__sublist{
+      list-style: none;            /* Remove marcadores */
+      padding: 0;                  /* Remove padding */
+      margin: 8px 0 12px 0;        /* Margem reduzida */
+      display: flex;               /* Layout flexbox */
+      flex-direction: column;      /* Direção coluna */
+      gap: 4px;                    /* Espaço entre itens reduzido */
+    }
+
+    /* ===== LINK FILHO DO MEGA MENU ===== */
+    .mega-menu__link--child{
+      font-weight: 400;            /* Peso da fonte normal */
+      color: var(--gray-600);      /* Cor do texto mais clara */
+      font-size: 13px;             /* Tamanho da fonte menor */
+      padding-left: 20px;          /* Menor espaçamento à esquerda */
+    }
+
+    /* ===== LINK FILHO DO MEGA MENU NO HOVER ===== */
+    .mega-menu__link--child:hover{
+      color: var(--accent);        /* Cor azul */
+      padding-left: 24px;          /* Aumenta espaçamento à esquerda */
+    }
+
+    /* ===== DROPDOWN SIMPLES ===== */
+    .dropdown{
+      position:absolute;           /* Posição absoluta */
+      top: 100%;                   /* Posiciona abaixo do item pai */
+      left: 50%;                   /* Centraliza horizontalmente */
+      transform: translateX(-50%) translateY(-10px); /* Centraliza e posiciona ligeiramente acima */
+      min-width: 220px;            /* Largura mínima */
+      background: var(--dropdown-bg); /* Cor de fundo */
+      box-shadow: var(--shadow);   /* Sombra */
+      border-radius: 0 0 12px 12px; /* Bordas arredondadas apenas embaixo */
+      opacity:0;                   /* Inicialmente invisível */
+      visibility:hidden;           /* Inicialmente oculto */
+      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1); /* Transição suave */
+      z-index:999;                 /* Z-index alto */
+      border: 1px solid var(--gray-200); /* Borda cinza */
+      border-top: none;            /* Remove borda superior */
+    }
+
+    /* ===== DROPDOWN NO HOVER ===== */
+    .nav__item.has-dropdown:hover .dropdown{
+      opacity:1;                   /* Torna visível */
+      visibility:visible;          /* Torna visível */
+      transform: translateX(-50%) translateY(0); /* Posiciona corretamente */
+    }
+
+    /* ===== LISTA DO DROPDOWN ===== */
+    .dropdown__list{
+      list-style:none;             /* Remove marcadores */
+      padding: 16px 0;             /* Espaçamento vertical reduzido */
+      margin:0;                    /* Remove margem */
+      display: flex;               /* Layout flexbox */
+      flex-direction: column;      /* Direção coluna */
+      gap: 4px;                    /* Espaço entre itens */
+    }
+
+    /* ===== LINK DO DROPDOWN ===== */
+    .dropdown__link{
+      color: var(--gray-800);      /* Cor do texto */
+      text-decoration:none;        /* Remove sublinhado */
+      display:block;               /* Exibição em bloco */
+      font-size:14px;              /* Tamanho da fonte */
+      padding: 8px 20px;           /* Espaçamento interno reduzido */
+      transition: all 0.2s ease;   /* Transição suave */
+      font-weight: 500;            /* Peso da fonte */
+    }
+
+    /* ===== LINK DO DROPDOWN NO HOVER ===== */
+    .dropdown__link:hover{
+      color: var(--accent);        /* Cor azul */
+      background: var(--gray-100); /* Fundo cinza claro */
+      padding-left: 24px;          /* Aumenta espaçamento à esquerda */
+    }
         /* ===== BOTÃO PRINCIPAL ===== */
         .btn {
             font-family: var(--ff);
@@ -753,78 +909,157 @@
 </head>
 
 <body>
-    <!-- ===== FAIXA SUPERIOR ===== -->
-    <div class="topstrip" role="region" aria-label="Promoção">
-        Agende uma reunião diagnóstica gratuitamente
+      <!-- ===== FAIXA SUPERIOR ===== -->
+  <div class="topstrip" role="region" aria-label="Promoção">
+    Agende uma reunião diagnóstica gratuitamente
+  </div>
+
+  <!-- ===== CABEÇALHO PRINCIPAL ===== -->
+  <header class="header" role="banner">
+    <div class="container header__inner">
+      <!-- ===== LOGO ===== -->
+      <div class="header__left">
+        <a href="index.html" class="brand" aria-label="BX - Home">
+          <img src="assets/3.png" alt="BX - Consultoria em Marketing Digital" class="header__logo" />
+        </a>
+      </div>
+
+      <!-- ===== BOTÃO HAMBÚRGUER (MOBILE) ===== -->
+      <button class="hamburger" aria-label="Abrir menu" id="hamburger" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+
+      <!-- ===== NAVEGAÇÃO PRINCIPAL ===== -->
+      <nav class="nav header__nav" aria-label="Main Navigation">
+        <ul class="nav__list" id="navList">
+          <!-- ===== ITEM HOME ===== -->
+          <li class="nav__item">
+            <a href="index.html" class="nav__link">Home</a>
+          </li>
+
+          <!-- ===== ITEM NOSSA ASSESSORIA 360º (COM MEGA MENU) ===== -->
+          <li class="nav__item has-mega" data-key="assessoria">
+            <a href="#" class="nav__link" aria-haspopup="true" aria-expanded="false">
+              Nossa Assessoria 360º
+              <svg class="nav__arrow" width="12" height="12" viewBox="0 0 12 12" fill="none">
+                <path d="M3 4.5L6 7.5L9 4.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+            </a>
+
+            <!-- ===== MEGA MENU NOSSA ASSESSORIA 360º ===== -->
+            <div class="mega-menu" role="menu" aria-hidden="true">
+              <div class="mega-menu__content">
+                <div class="mega-menu__grid">
+                  <!-- ===== COLUNA 1 - PARA EVOLUIR SEU NEGÓCIO ===== -->
+                  <div class="mega-menu__col">
+                    <div class="mega-menu__section">
+                      <h4 class="mega-menu__section-title">Para evoluir seu negócio</h4>
+                      <p class="mega-menu__feature-description">Estratégia, conhecimento e visão para acelerar o crescimento do negócio.</p>
+                      <ul class="mega-menu__list">
+                        <li><a href="diagnostico_comercial.html" class="mega-menu__link">Diagnóstico Comercial</a></li>
+                        <li><a href="consultoria_PME.html" class="mega-menu__link">Consultoria para PMEs</a></li>
+                        <li><a href="treinamento_corporativo.html" class="mega-menu__link">Treinamentos Corporativos</a></li>
+                      </ul>
+                    </div>
+                  </div>
+                  
+                  <!-- ===== COLUNA 2 - MAIS EFICIÊNCIA ===== -->
+                  <div class="mega-menu__col">
+                    <div class="mega-menu__section">
+                      <h4 class="mega-menu__section-title">Mais eficiência</h4>
+                      <p class="mega-menu__feature-description">Infraestrutura e ativos essenciais para o negócio funcionar com eficiência e profissionalismo.</p>
+                      <ul class="mega-menu__list">
+                        <li><a href="sistema_gestao.html" class="mega-menu__link">Sistema de Gestão</a></li>
+                        <li><a href="crm.html" class="mega-menu__link">Implementação de CRM</a></li>
+                        <li><a href="sites-corporativos.html" class="mega-menu__link">Criação de Sites Corporativos</a></li>
+                        <li><a href="e-commerce.html" class="mega-menu__link">Criação de E-commerces</a></li>
+                        <li><a href="gravacao-video.html" class="mega-menu__link">Gravação de Vídeos Profissionais</a></li>
+                        <li><a href="cobertura-eventos.html" class="mega-menu__link">Cobertura de Eventos</a></li>
+                        <li><a href="dashboard_performance.html" class="mega-menu__link">Dashboards de Performance</a></li>
+                        <li><a href="automacoes_ia.html" class="mega-menu__link">Automações</a></li>
+                      </ul>
+                    </div>
+                  </div>
+                  
+                  <!-- ===== COLUNA 3 - EXECUÇÃO E ACOMPANHAMENTO ===== -->
+                  <div class="mega-menu__col">
+                    <div class="mega-menu__section">
+                      <h4 class="mega-menu__section-title">Execução e Acompanhamento</h4>
+                      <p class="mega-menu__feature-description">Operação contínua para manter o crescimento ativo todos os meses.</p>
+                      <ul class="mega-menu__list">
+                        <li><a href="social_media.html" class="mega-menu__link">Social Media</a></li>
+                        <li>
+                          <a href="trafego_pago.html" class="mega-menu__link">Tráfego Pago</a>
+                          <ul class="mega-menu__sublist">
+                            <li><a href="#" class="mega-menu__link mega-menu__link--child">Google Ads</a></li>
+                            <li><a href="#" class="mega-menu__link mega-menu__link--child">Meta Ads</a></li>
+                            <li><a href="#" class="mega-menu__link mega-menu__link--child">TikTok Ads</a></li>
+                          </ul>
+                        </li>
+                        <li><a href="edicao_profissional.html" class="mega-menu__link">Edição Profissional de Vídeo</a></li>
+                      </ul>
+                    </div>
+                  </div>
+                  
+                  <!-- ===== COLUNA 4 - TERCEIRIZAÇÃO COMERCIAL ===== -->
+                  <div class="mega-menu__col">
+                    <div class="mega-menu__section">
+                      <h4 class="mega-menu__section-title">Terceirização Comercial</h4>
+                      <p class="mega-menu__feature-description">Equipes especializadas para impulsionar seus resultados comerciais.</p>
+                      <ul class="mega-menu__list">
+                        <li><a href="time_pre_vendas.html" class="mega-menu__link">Time de Pré-vendas (SDRs)</a></li>
+                        <li><a href="time_fechamento_vendas.html" class="mega-menu__link">Time de Fechamento de Vendas (Closers)</a></li>
+                        <li><a href="costumer_sucess.html" class="mega-menu__link">Time de Sucesso do Cliente (CS)</a></li>
+                        <li><a href="contas_a_receber.html" class="mega-menu__link">Time de Contas a Receber (AR)</a></li>
+                      </ul>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </li>
+
+          <!-- ===== ITEM NOSSO TRABALHO (COM DROPDOWN) ===== -->
+          <li class="nav__item has-dropdown" data-key="nosso-trabalho">
+            <a href="nosso-trabalho.html" class="nav__link" aria-haspopup="true" aria-expanded="false">
+              Nosso Trabalho
+                <path d="M3 4.5L6 7.5L9 4.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+            </a>
+          </li>
+
+          <!-- ===== ITEM SISTEMAS (COM DROPDOWN) ===== -->
+          <li class="nav__item has-dropdown" data-key="sistemas">
+            <a href="#" class="nav__link" aria-haspopup="true" aria-expanded="false">
+              Sistemas
+              <svg class="nav__arrow" width="12" height="12" viewBox="0 0 12 12" fill="none">
+                <path d="M3 4.5L6 7.5L9 4.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+            </a>
+            <div class="dropdown" role="menu" aria-hidden="true">
+              <ul class="dropdown__list">
+                <li><a href="nour_clinicas.html" class="dropdown__link">Nour Clínicas</a></li>
+              </ul>
+            </div>
+          </li>
+
+          <!-- ===== ITEM CONTATOS (COM DROPDOWN) ===== -->
+          <li class="nav__item has-dropdown" data-key="contatos">
+            <a href="contatos.html" class="nav__link" aria-haspopup="true" aria-expanded="false">
+              Contatos
+                <path d="M3 4.5L6 7.5L9 4.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+            </a>
+          </li>
+        </ul>
+      </nav>
+
+      <!-- ===== CALL TO ACTION DO CABEÇALHO ===== -->
+      <div class="header__cta">
+        <a class="btn btn--primary" href="contatos.html">Agende já</a>
+      </div>
     </div>
+  </header>
 
-    <!-- ===== CABEÇALHO PRINCIPAL ===== -->
-    <header class="header" role="banner">
-        <div class="container header__inner">
-            <!-- ===== LOGO ===== -->
-            <div class="header__left">
-                <a href="index.html" class="brand" aria-label="BX - Home">
-                    <img src="assets/3.png" alt="BX - Consultoria em Marketing Digital" class="header__logo" />
-                </a>
-            </div>
-
-            <!-- ===== BOTÃO HAMBÚRGUER (MOBILE) ===== -->
-            <button class="hamburger" aria-label="Abrir menu" id="hamburger" aria-expanded="false">
-                <span></span><span></span><span></span>
-            </button>
-
-            <!-- ===== NAVEGAÇÃO PRINCIPAL ===== -->
-            <nav class="nav header__nav" aria-label="Main Navigation">
-                <ul class="nav__list" id="navList">
-                    <!-- ===== ITEM HOME ===== -->
-                    <li class="nav__item">
-                        <a href="index.html" class="nav__link">Home</a>
-                    </li>
-
-                    <!-- ===== ITEM NOSSA ASSESSORIA 360º ===== -->
-                    <li class="nav__item has-mega" data-key="assessoria">
-                        <a href="#" class="nav__link" aria-haspopup="true" aria-expanded="false">
-                            Nossa Assessoria 360º
-                            <svg class="nav__arrow" width="12" height="12" viewBox="0 0 12 12" fill="none">
-                                <path d="M3 4.5L6 7.5L9 4.5" stroke="currentColor" stroke-width="1.5"
-                                    stroke-linecap="round" stroke-linejoin="round" />
-                            </svg>
-                        </a>
-                    </li>
-
-                    <!-- ===== ITEM NOSSO TRABALHO ===== -->
-                    <li class="nav__item has-dropdown" data-key="nosso-trabalho">
-                        <a href="nosso-trabalho.html" class="nav__link" aria-haspopup="true" aria-expanded="false">
-                            Nosso Trabalho
-                        </a>
-                    </li>
-
-                    <!-- ===== ITEM SISTEMAS ===== -->
-                    <li class="nav__item has-dropdown" data-key="sistemas">
-                        <a href="#" class="nav__link" aria-haspopup="true" aria-expanded="false">
-                            Sistemas
-                            <svg class="nav__arrow" width="12" height="12" viewBox="0 0 12 12" fill="none">
-                                <path d="M3 4.5L6 7.5L9 4.5" stroke="currentColor" stroke-width="1.5"
-                                    stroke-linecap="round" stroke-linejoin="round" />
-                            </svg>
-                        </a>
-                    </li>
-
-                    <!-- ===== ITEM CONTATOS ===== -->
-                    <li class="nav__item has-dropdown" data-key="contatos">
-                        <a href="contatos.html" class="nav__link" aria-haspopup="true" aria-expanded="false">
-                            Contatos
-                        </a>
-                    </li>
-                </ul>
-            </nav>
-
-            <!-- ===== CALL TO ACTION DO CABEÇALHO ===== -->
-            <div class="header__cta">
-                <a class="btn btn--primary" href="contatos.html">Agende já</a>
-            </div>
-        </div>
-    </header>
 
     <!-- ===== SEÇÃO PRINCIPAL ===== -->
     <section class="main-content" id="fechamento-vendas">
@@ -987,11 +1222,11 @@
                 <div class="footer__col">
                     <h4>INSTITUCIONAL</h4>
                     <ul>
-                        <li><a href="#">Home</a></li>
+                        <li><a href="index.html">Home</a></li>
                         <li><a href="nosso-trabalho.html">Nosso Trabalho</a></li>
-                        <li><a href="#">Sobre Nós</a></li>
-                        <li><a href="#">Equipe BX</a></li>
-                        <li><a href="#">Missão, Visão e Valores</a></li>
+                        <li><a href="nosso-trabalho.html">Sobre Nós</a></li>
+                        <li><a href="nosso-trabalho.html">Equipe BX</a></li>
+                        <li><a href="nosso-trabalho.html">Missão, Visão e Valores</a></li>
                     </ul>
                 </div>
 
@@ -999,15 +1234,14 @@
                 <div class="footer__col">
                     <h4>SERVIÇOS</h4>
                     <ul>
-                        <li><a href="#">Implementação de CRM</a></li>
-                        <li><a href="#">Criação de Sites e Landing Pages</a></li>
-                        <li><a href="#">Criação de E-commerce</a></li>
-                        <li><a href="#">Social Media</a></li>
-                        <li><a href="#">Tráfego Pago</a></li>
-                        <li><a href="#">Automações com IA</a></li>
-                        <li><a href="#">Dashboards de Performance</a></li>
-                        <li><a href="#">Edição de Videos</a></li>
-                        <li><a href="#">SDR & Closers</a></li>
+                        <li><a href="crm.html">Implementação de CRM</a></li>
+                        <li><a href="sites-corporativos.html">Criação de Sites e Landing Pages</a></li>
+                        <li><a href="e-commerce.html">Criação de E-commerce</a></li>
+                        <li><a href="social_media.html">Social Media</a></li>
+                        <li><a href="trafego_pago.html">Tráfego Pago</a></li>
+                        <li><a href="automacoes_ia.html">Automações com IA</a></li>
+                        <li><a href="dashboard_performance.html">Dashboards de Performance</a></li>
+                        <li><a href="edicao_profissional.html">Edição de Videos</a></li>
                     </ul>
                 </div>
 
@@ -1015,7 +1249,7 @@
                 <div class="footer__col">
                     <h4>SOLUÇÕES</h4>
                     <ul>
-                        <li><a href="#">Sistema Nour Clínicas</a></li>
+                        <li><a href="nour_clinicas.html">Sistema Nour Clínicas</a></li>
                         <li><a href="#">Consultoria de Marketing</a></li>
                         <li><a href="#">Treinamentos Corporativos</a></li>
                         <li><a href="#">Materiais Gratuitos</a></li>
