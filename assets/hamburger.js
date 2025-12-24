@@ -1,27 +1,27 @@
 // ============================================
-// HAMBURGUER JS - CORREÇÃO DE SOBREPOSIÇÃO
-// Garante que menu não bloqueie conteúdo quando fechado
+// HAMBURGUER JS - SISTEMA DE CONTROLE DE ESTADO
+// Processo documentado, sem retrabalho
 // ============================================
 
 (function () {
   'use strict';
 
+  // ==================== CONFIGURAÇÃO ====================
   const CONFIG = {
     breakpoint: 900,
     animationDuration: 400
   };
 
+  // ==================== SISTEMA DE ELEMENTOS ====================
   const elements = {
     hamburger: null,
     navList: null,
-    navItems: [],
     navOverlay: null,
     navClose: null,
-    body: document.body,
-    header: document.querySelector('.header'), // Adiciona referência ao header
-    mainContent: document.querySelector('.main-content, .hero, section:first-of-type') // Conteúdo principal
+    body: document.body
   };
 
+  // ==================== SISTEMA DE ESTADO ====================
   const state = {
     isMobile: false,
     isMenuOpen: false,
@@ -29,10 +29,122 @@
     scrollPosition: 0
   };
 
-  // ==================== FUNÇÕES CRÍTICAS PARA O PROBLEMA ====================
-  
+  // ==================== PROCESSO: INICIALIZAÇÃO ====================
+  function initialize() {
+    console.log('🔧 [PROCESSO] Inicializando sistema de menu...');
+    
+    // PASSO 1: Cache de elementos
+    cacheElements();
+    
+    // PASSO 2: Verificação crítica
+    if (!validateElements()) return;
+    
+    // PASSO 3: Estado inicial
+    setInitialState();
+    
+    // PASSO 4: Configuração
+    setupEventListeners();
+    
+    // PASSO 5: Criação de elementos dinâmicos
+    createOverlay();
+    
+    console.log('✅ [PROCESSO] Sistema inicializado com sucesso');
+    logState();
+  }
+
+  // ==================== SUBPROCESSO 1: CACHE DE ELEMENTOS ====================
+  function cacheElements() {
+    console.log('📦 [SUBPROCESSO] Fazendo cache de elementos...');
+    
+    elements.hamburger = document.getElementById('hamburger');
+    elements.navList = document.getElementById('navList');
+    elements.navClose = document.querySelector('.nav__close');
+    elements.body = document.body;
+    
+    console.log('   ✅ Hamburguer:', elements.hamburger ? 'OK' : 'NÃO ENCONTRADO');
+    console.log('   ✅ NavList:', elements.navList ? 'OK' : 'NÃO ENCONTRADO');
+    console.log('   ✅ Botão Fechar:', elements.navClose ? 'OK' : 'NÃO ENCONTRADO');
+  }
+
+  // ==================== SUBPROCESSO 2: VALIDAÇÃO ====================
+  function validateElements() {
+    console.log('🔍 [SUBPROCESSO] Validando elementos...');
+    
+    if (!elements.hamburger) {
+      console.error('❌ [ERRO] Elemento #hamburger não encontrado');
+      console.error('   Solução: Adicione <button id="hamburger"> ao seu HTML');
+      return false;
+    }
+    
+    if (!elements.navList) {
+      console.error('❌ [ERRO] Elemento #navList não encontrado');
+      console.error('   Solução: Adicione <ul id="navList"> ao seu HTML');
+      return false;
+    }
+    
+    console.log('   ✅ Todos os elementos essenciais encontrados');
+    return true;
+  }
+
+  // ==================== SUBPROCESSO 3: ESTADO INICIAL ====================
+  function setInitialState() {
+    console.log('⚙️ [SUBPROCESSO] Definindo estado inicial...');
+    
+    // 1. Verifica se está no modo mobile
+    state.isMobile = window.innerWidth <= CONFIG.breakpoint;
+    
+    // 2. Menu começa FECHADO
+    state.isMenuOpen = false;
+    state.isTransitioning = false;
+    
+    // 3. Remove qualquer classe residual que possa estar abrindo o menu
+    if (elements.navList) {
+      elements.navList.classList.remove('nav__list--open');
+    }
+    
+    if (elements.hamburger) {
+      elements.hamburger.classList.remove('active');
+      elements.hamburger.setAttribute('aria-expanded', 'false');
+    }
+    
+    console.log('   ✅ Estado inicial definido:', {
+      isMobile: state.isMobile,
+      isMenuOpen: state.isMenuOpen,
+      width: window.innerWidth + 'px'
+    });
+  }
+
+  // ==================== SUBPROCESSO 4: CONFIGURAÇÃO DE EVENTOS ====================
+  function setupEventListeners() {
+    console.log('🎯 [SUBPROCESSO] Configurando event listeners...');
+    
+    // 1. Hamburguer
+    elements.hamburger.addEventListener('click', handleHamburgerClick);
+    elements.hamburger.addEventListener('keydown', handleHamburgerKeydown);
+    
+    // 2. Botão fechar
+    if (elements.navClose) {
+      elements.navClose.addEventListener('click', handleCloseClick);
+    }
+    
+    // 3. Eventos globais
+    document.addEventListener('click', handleOutsideClick);
+    document.addEventListener('keydown', handleEscapeKey);
+    window.addEventListener('resize', debounce(handleResize, 150));
+    
+    console.log('   ✅ Event listeners configurados');
+  }
+
+  // ==================== SUBPROCESSO 5: CRIAÇÃO DE OVERLAY ====================
   function createOverlay() {
-    if (elements.navOverlay) return;
+    console.log('🎨 [SUBPROCESSO] Criando overlay...');
+    
+    // Só cria se não existir
+    if (document.querySelector('.nav-overlay')) {
+      console.log('   ⚠️ Overlay já existe, reutilizando');
+      elements.navOverlay = document.querySelector('.nav-overlay');
+      return;
+    }
     
     const overlay = document.createElement('div');
     overlay.className = 'nav-overlay';
@@ -51,87 +163,85 @@
       pointer-events: none;
     `;
     
-    overlay.addEventListener('click', closeMobileMenu);
+    overlay.addEventListener('click', closeMenu);
     document.body.appendChild(overlay);
     elements.navOverlay = overlay;
-  }
-
-  function manageBodyScroll(lock) {
-    if (lock) {
-      // Salva posição do scroll
-      state.scrollPosition = window.scrollY;
-      
-      // Aplica bloqueio com requestAnimationFrame para performance
-      requestAnimationFrame(() => {
-        elements.body.style.position = 'fixed';
-        elements.body.style.top = `-${state.scrollPosition}px`;
-        elements.body.style.width = '100%';
-        elements.body.style.overflow = 'hidden';
-        elements.body.classList.add('menu-open');
-        elements.body.dataset.scrollPosition = state.scrollPosition;
-        
-        // Desativa interação com conteúdo principal
-        if (elements.mainContent) {
-          elements.mainContent.style.pointerEvents = 'none';
-          elements.mainContent.style.userSelect = 'none';
-        }
-        
-        // Header fica atrás
-        if (elements.header) {
-          elements.header.style.zIndex = '1';
-        }
-      });
-    } else {
-      // Remove bloqueio
-      requestAnimationFrame(() => {
-        elements.body.style.position = '';
-        elements.body.style.top = '';
-        elements.body.style.width = '';
-        elements.body.style.overflow = '';
-        elements.body.classList.remove('menu-open');
-        
-        // Reativa interação com conteúdo principal
-        if (elements.mainContent) {
-          elements.mainContent.style.pointerEvents = '';
-          elements.mainContent.style.userSelect = '';
-        }
-        
-        // Restaura z-index do header
-        if (elements.header) {
-          elements.header.style.zIndex = '';
-        }
-        
-        // Restaura posição do scroll
-        const savedPosition = elements.body.dataset.scrollPosition;
-        if (savedPosition) {
-          window.scrollTo(0, parseInt(savedPosition));
-        }
-        delete elements.body.dataset.scrollPosition;
-      });
-    }
-  }
-
-  // ==================== CONTROLE DO MENU ====================
-  
-  function closeMobileMenu() {
-    if (!state.isMenuOpen || state.isTransitioning) return;
     
-    console.log('[Menu] Fechando menu (sobreposição corrigida)');
+    console.log('   ✅ Overlay criado e configurado');
+  }
+
+  // ==================== PROCESSO: ABRIR MENU ====================
+  function openMenu() {
+    console.log('🚪 [PROCESSO] Abrindo menu...');
+    
+    // Verificação de estado
+    if (state.isMenuOpen || state.isTransitioning || !state.isMobile) {
+      console.log('   ⚠️ Abortando: estado inválido', {
+        isMenuOpen: state.isMenuOpen,
+        isTransitioning: state.isTransitioning,
+        isMobile: state.isMobile
+      });
+      return;
+    }
+    
     state.isTransitioning = true;
     
-    // Fecha visualmente
-    if (elements.navList) {
-      elements.navList.classList.remove('nav__list--open');
+    // PASSO 1: Mostrar overlay
+    if (elements.navOverlay) {
+      elements.navOverlay.style.display = 'block';
+      elements.navOverlay.setAttribute('aria-hidden', 'false');
+      elements.navOverlay.style.pointerEvents = 'auto';
+      
+      // Pequeno delay para acionar animação CSS
+      requestAnimationFrame(() => {
+        elements.navOverlay.classList.add('active');
+      });
     }
     
-    if (elements.hamburger) {
-      elements.hamburger.classList.remove('active');
-      elements.hamburger.setAttribute('aria-expanded', 'false');
+    // PASSO 2: Abrir menu
+    elements.navList.classList.add('nav__list--open');
+    elements.hamburger.classList.add('active');
+    elements.hamburger.setAttribute('aria-expanded', 'true');
+    
+    // PASSO 3: Bloquear scroll
+    blockBodyScroll(true);
+    
+    // PASSO 4: Atualizar estado
+    setTimeout(() => {
+      state.isMenuOpen = true;
+      state.isTransitioning = false;
+      
+      // Foco no botão fechar para acessibilidade
+      if (elements.navClose) {
+        elements.navClose.focus();
+      }
+      
+      console.log('   ✅ Menu aberto com sucesso');
+      logState();
+    }, CONFIG.animationDuration);
+  }
+
+  // ==================== PROCESSO: FECHAR MENU ====================
+  function closeMenu() {
+    console.log('🚪 [PROCESSO] Fechando menu...');
+    
+    // Verificação de estado
+    if (!state.isMenuOpen || state.isTransitioning) {
+      console.log('   ⚠️ Abortando: menu já fechado ou em transição');
+      return;
     }
     
-    // Fecha overlay
+    state.isTransitioning = true;
+    
+    // PASSO 1: Fechar menu visualmente
+    elements.navList.classList.remove('nav__list--open');
+    elements.hamburger.classList.remove('active');
+    elements.hamburger.setAttribute('aria-expanded', 'false');
+    
+    // PASSO 2: Fechar overlay
     if (elements.navOverlay) {
       elements.navOverlay.classList.remove('active');
+      
       setTimeout(() => {
         elements.navOverlay.style.display = 'none';
         elements.navOverlay.setAttribute('aria-hidden', 'true');
@@ -139,223 +249,108 @@
       }, 300);
     }
     
-    // Libera scroll e interação
-    manageBodyScroll(false);
+    // PASSO 3: Liberar scroll
+    blockBodyScroll(false);
     
-    // Foca no hamburguer para acessibilidade
+    // PASSO 4: Atualizar estado
     setTimeout(() => {
-      if (elements.hamburger) {
-        elements.hamburger.focus();
-      }
       state.isMenuOpen = false;
       state.isTransitioning = false;
-      console.log('[Menu] Menu fechado - conteúdo agora clicável');
+      
+      // Retornar foco para hamburguer
+      elements.hamburger.focus();
+      
+      console.log('   ✅ Menu fechado com sucesso');
+      logState();
     }, CONFIG.animationDuration);
   }
 
-  function openMobileMenu() {
-    if (state.isMenuOpen || state.isTransitioning) return;
-    
-    console.log('[Menu] Abrindo menu (corrigindo sobreposição)');
-    state.isTransitioning = true;
-    
-    // Cria overlay se necessário
-    createOverlay();
-    
-    // Mostra overlay
-    if (elements.navOverlay) {
-      elements.navOverlay.style.display = 'block';
-      elements.navOverlay.setAttribute('aria-hidden', 'false');
-      elements.navOverlay.style.pointerEvents = 'auto';
-      
-      setTimeout(() => {
-        elements.navOverlay.classList.add('active');
-      }, 10);
-    }
-    
-    // Abre menu
-    if (elements.navList) {
-      elements.navList.classList.add('nav__list--open');
-    }
-    
-    if (elements.hamburger) {
-      elements.hamburger.classList.add('active');
-      elements.hamburger.setAttribute('aria-expanded', 'true');
-    }
-    
-    // Bloqueia scroll e interação com conteúdo
-    manageBodyScroll(true);
-    
-    // Foca no botão fechar
-    setTimeout(() => {
-      state.isMenuOpen = true;
-      state.isTransitioning = false;
-      
-      if (elements.navClose) {
-        elements.navClose.focus();
-      }
-      console.log('[Menu] Menu aberto - overlay bloqueando conteúdo de fundo');
-    }, CONFIG.animationDuration);
-  }
-
-  function toggleMobileMenu() {
-    if (state.isTransitioning) return;
-    
-    if (state.isMenuOpen) {
-      closeMobileMenu();
+  // ==================== FUNÇÕES AUXILIARES ====================
+  function blockBodyScroll(shouldBlock) {
+    if (shouldBlock) {
+      state.scrollPosition = window.scrollY;
+      elements.body.style.position = 'fixed';
+      elements.body.style.top = `-${state.scrollPosition}px`;
+      elements.body.style.width = '100%';
+      elements.body.style.overflow = 'hidden';
+      elements.body.classList.add('menu-open');
     } else {
-      openMobileMenu();
+      elements.body.style.position = '';
+      elements.body.style.top = '';
+      elements.body.style.width = '';
+      elements.body.style.overflow = '';
+      elements.body.classList.remove('menu-open');
+      
+      // Restaurar posição do scroll
+      window.scrollTo(0, state.scrollPosition);
     }
   }
 
-  // ==================== EVENT HANDLERS ====================
-  
+  function toggleMenu() {
+    console.log('🔄 [AÇÃO] Alternando menu...');
+    if (state.isMenuOpen) {
+      closeMenu();
+    } else {
+      openMenu();
+    }
+  }
+
+  // ==================== HANDLERS DE EVENTOS ====================
+  function handleHamburgerClick(e) {
+    e.stopPropagation();
+    toggleMenu();
+  }
+
+  function handleHamburgerKeydown(e) {
+    if (e.key === 'Enter' || e.key === ' ') {
+      e.preventDefault();
+      toggleMenu();
+    }
+    if (e.key === 'Escape' && state.isMenuOpen) {
+      closeMenu();
+    }
+  }
+
+  function handleCloseClick(e) {
+    e.stopPropagation();
+    closeMenu();
+  }
+
   function handleOutsideClick(e) {
-    const clickedInsideMenu = e.target.closest('.nav__list') || 
-                             e.target.closest('.nav__mobile-header');
-    const clickedHamburger = e.target.closest('#hamburger');
-    const clickedCloseButton = e.target.closest('.nav__close');
-    
-    // Se clicou no overlay ou fora do menu quando aberto, fecha
-    if (state.isMobile && state.isMenuOpen && !clickedInsideMenu && !clickedHamburger && !clickedCloseButton) {
-      // Verifica se foi clique no overlay
-      if (e.target === elements.navOverlay || e.target.classList.contains('nav-overlay')) {
-        closeMobileMenu();
-      }
+    // Se clicou fora do menu quando ele está aberto
+    if (state.isMenuOpen && 
+        !e.target.closest('.nav__list') && 
+        !e.target.closest('#hamburger') &&
+        !e.target.closest('.nav__close')) {
+      closeMenu();
     }
   }
 
   function handleEscapeKey(e) {
-    if (e.key !== 'Escape') return;
-    
-    if (state.isMobile && state.isMenuOpen) {
-      closeMobileMenu();
-      if (elements.hamburger) elements.hamburger.focus();
+    if (e.key === 'Escape' && state.isMenuOpen) {
+      closeMenu();
     }
   }
 
-  // ==================== SETUP ====================
-  
-  function setupHamburger() {
-    if (!elements.hamburger) {
-      console.error('[Menu] ERRO: Botão hamburger não encontrado (#hamburger)');
-      return;
-    }
-    
-    elements.hamburger.addEventListener('click', (e) => {
-      e.stopPropagation();
-      toggleMobileMenu();
-    });
-    
-    elements.hamburger.addEventListener('keydown', (e) => {
-      if (e.key === 'Enter' || e.key === ' ') {
-        e.preventDefault();
-        toggleMobileMenu();
-      }
-      if (e.key === 'Escape' && state.isMenuOpen) {
-        closeMobileMenu();
-      }
-    });
-  }
-
-  function setupCloseButton() {
-    const closeBtn = document.querySelector('.nav__close');
-    if (!closeBtn) {
-      console.warn('[Menu] Botão fechar (.nav__close) não encontrado, criando...');
-      return;
-    }
-    
-    elements.navClose = closeBtn;
-    closeBtn.addEventListener('click', (e) => {
-      e.stopPropagation();
-      closeMobileMenu();
-    });
-    
-    closeBtn.addEventListener('keydown', (e) => {
-      if (e.key === 'Enter' || e.key === ' ') {
-        e.preventDefault();
-        closeMobileMenu();
-      }
-    });
-  }
-
-  function setupGlobalListeners() {
-    // Clique fora do menu
-    document.addEventListener('click', handleOutsideClick);
-    
-    // Tecla Escape
-    document.addEventListener('keydown', handleEscapeKey);
-    
-    // Redimensionamento
-    window.addEventListener('resize', debounce(() => {
-      const wasMobile = state.isMobile;
-      state.isMobile = window.innerWidth <= CONFIG.breakpoint;
-      
-      if (wasMobile !== state.isMobile) {
-        console.log(`[Menu] Modo alterado: ${state.isMobile ? 'Mobile' : 'Desktop'}`);
-        closeMobileMenu();
-      }
-    }, 150));
-  }
-
-  function initializeARIA() {
-    if (elements.hamburger) {
-      elements.hamburger.setAttribute('aria-label', 'Abrir menu de navegação');
-      elements.hamburger.setAttribute('aria-expanded', 'false');
-      elements.hamburger.setAttribute('aria-controls', 'navList');
-    }
-    
-    const closeBtn = document.querySelector('.nav__close');
-    if (closeBtn) {
-      closeBtn.setAttribute('aria-label', 'Fechar menu');
-    }
-  }
-
-  // ==================== INICIALIZAÇÃO ====================
-  
-  function init() {
-    console.log('🔧 [Menu] Inicializando com correção de sobreposição...');
-    
-    // Cache elementos
-    elements.hamburger = document.getElementById('hamburger');
-    elements.navList = document.getElementById('navList');
-    elements.navItems = Array.from(document.querySelectorAll('.nav__item'));
-    elements.body = document.body;
-    elements.header = document.querySelector('.header');
-    elements.mainContent = document.querySelector('.main-content, .hero, section:first-of-type');
-    
-    // Verificação crítica
-    if (!elements.hamburger) {
-      console.error('❌ [Menu] Elemento #hamburger não encontrado no HTML');
-      return;
-    }
-    
-    if (!elements.navList) {
-      console.error('❌ [Menu] Elemento #navList não encontrado no HTML');
-      return;
-    }
-    
-    // Estado inicial
+  function handleResize() {
+    const wasMobile = state.isMobile;
     state.isMobile = window.innerWidth <= CONFIG.breakpoint;
     
-    // Inicialização
-    initializeARIA();
-    setupHamburger();
-    setupCloseButton();
-    setupGlobalListeners();
-    
-    // Garante que menu comece fechado e não bloqueie
-    if (elements.navList) {
-      elements.navList.style.pointerEvents = 'none';
+    if (wasMobile !== state.isMobile) {
+      console.log('📱 [SISTEMA] Modo alterado:', 
+        wasMobile ? 'Mobile' : 'Desktop', 
+        '→', 
+        state.isMobile ? 'Mobile' : 'Desktop'
+      );
+      
+      // Fecha menu se mudou de modo
+      if (state.isMenuOpen) {
+        closeMenu();
+      }
     }
-    
-    console.log('✅ [Menu] Inicializado - Sobreposição corrigida');
-    console.log(`   Modo: ${state.isMobile ? 'Mobile' : 'Desktop'}`);
-    console.log(`   Header encontrado: ${!!elements.header}`);
-    console.log(`   Conteúdo principal: ${elements.mainContent ? 'Sim' : 'Não'}`);
   }
 
-  // Função debounce helper
+  // ==================== UTILITÁRIOS ====================
   function debounce(func, wait) {
     let timeout;
     return function executedFunction(...args) {
@@ -368,10 +363,24 @@
     };
   }
 
-  // Inicia quando DOM estiver pronto
+  function logState() {
+    console.log('📊 [ESTADO ATUAL]', {
+      isMobile: state.isMobile,
+      isMenuOpen: state.isMenuOpen,
+      isTransitioning: state.isTransitioning,
+      width: window.innerWidth + 'px'
+    });
+  }
+
+  // ==================== INICIALIZAÇÃO CONTROLADA ====================
+  console.log('========================================');
+  console.log('🚀 SISTEMA DE MENU HAMBURGUER - INICIANDO');
+  console.log('========================================');
+  
   if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', init);
+    document.addEventListener('DOMContentLoaded', initialize);
   } else {
-    init();
+    // Pequeno delay para garantir que todos os elementos estejam renderizados
+    setTimeout(initialize, 50);
   }
 })();
