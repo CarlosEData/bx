@@ -1,5 +1,7 @@
-// ==================== HAMBURGER MENU - VERSÃO FINAL ====================
-// Arquivo: hamburger.js
+// ============================================
+// HAMBURGUER JS - VERSÃO PROFISSIONAL
+// Navegação fluida para sites institucionais
+// ============================================
 
 (function () {
   'use strict';
@@ -8,72 +10,45 @@
   const CONFIG = {
     breakpoint: 900,
     hoverDelay: 200,
-    closeDelay: 150,
-    transitionDuration: 300
+    closeDelay: 300,
+    animationDuration: 300,
+    enableSmoothAnimations: true
   };
 
-  // ==================== SELETORES ====================
-  const DOM = {
+  // ==================== CACHE DE ELEMENTOS ====================
+  const elements = {
     hamburger: null,
     navList: null,
     navItems: [],
-    body: document.body
+    body: document.body,
+    navOverlay: null
   };
 
   // ==================== ESTADO GLOBAL ====================
-  const STATE = {
+  const state = {
     isMobile: false,
     isMenuOpen: false,
-    isTransitioning: false,
     activeDropdown: null,
+    isTransitioning: false,
+    resizeTimeout: null,
     hoverTimeouts: new Map()
   };
 
   // ==================== FUNÇÕES UTILITÁRIAS ====================
-
+  
   /**
-   * Debounce - limita execução de função
+   * Debounce para otimizar eventos de resize
    */
   function debounce(func, wait) {
     let timeout;
     return function executedFunction(...args) {
+      const later = () => {
+        clearTimeout(timeout);
+        func(...args);
+      };
       clearTimeout(timeout);
-      timeout = setTimeout(() => func(...args), wait);
+      timeout = setTimeout(later, wait);
     };
-  }
-
-  /**
-   * Limpa todos os timeouts de hover
-   */
-  function clearAllTimeouts() {
-    STATE.hoverTimeouts.forEach(timeout => clearTimeout(timeout));
-    STATE.hoverTimeouts.clear();
-  }
-
-  /**
-   * Bloqueia/desbloqueia scroll do body
-   */
-  function toggleBodyScroll(lock) {
-    if (lock) {
-      // Salva posição atual do scroll
-      const scrollY = window.scrollY;
-      DOM.body.style.position = 'fixed';
-      DOM.body.style.top = `-${scrollY}px`;
-      DOM.body.style.width = '100%';
-      DOM.body.style.overflow = 'hidden';
-      DOM.body.setAttribute('data-scroll-position', scrollY);
-    } else {
-      // Restaura posição do scroll
-      const scrollY = DOM.body.getAttribute('data-scroll-position');
-      DOM.body.style.position = '';
-      DOM.body.style.top = '';
-      DOM.body.style.width = '';
-      DOM.body.style.overflow = '';
-      DOM.body.removeAttribute('data-scroll-position');
-      if (scrollY) {
-        window.scrollTo(0, parseInt(scrollY));
-      }
-    }
   }
 
   /**
@@ -83,15 +58,56 @@
     return window.innerWidth <= CONFIG.breakpoint;
   }
 
-  // ==================== FUNÇÕES DE DROPDOWN ====================
+  /**
+   * Cria overlay para o menu mobile
+   */
+  function createOverlay() {
+    if (elements.navOverlay) return;
+    
+    const overlay = document.createElement('div');
+    overlay.className = 'nav-overlay';
+    overlay.setAttribute('role', 'presentation');
+    overlay.setAttribute('aria-hidden', 'true');
+    overlay.style.display = 'none';
+    
+    overlay.addEventListener('click', closeMobileMenu);
+    document.body.appendChild(overlay);
+    elements.navOverlay = overlay;
+  }
 
+  /**
+   * Gerencia o scroll do body
+   */
+  function manageBodyScroll(lock) {
+    if (lock) {
+      const scrollY = window.scrollY;
+      elements.body.style.position = 'fixed';
+      elements.body.style.top = `-${scrollY}px`;
+      elements.body.style.width = '100%';
+      elements.body.style.overflow = 'hidden';
+      elements.body.setAttribute('data-scroll-position', scrollY);
+      elements.body.classList.add('menu-open');
+    } else {
+      const scrollY = elements.body.getAttribute('data-scroll-position');
+      elements.body.style.position = '';
+      elements.body.style.top = '';
+      elements.body.style.width = '';
+      elements.body.style.overflow = '';
+      elements.body.classList.remove('menu-open');
+      
+      if (scrollY) {
+        window.scrollTo(0, parseInt(scrollY));
+      }
+    }
+  }
+
+  // ==================== CONTROLE DE DROPDOWNS ====================
+  
   /**
    * Fecha todos os dropdowns
    */
   function closeAllDropdowns() {
-    console.log('Fechando todos os dropdowns');
-    
-    DOM.navItems.forEach(item => {
+    elements.navItems.forEach(item => {
       const link = item.querySelector('.nav__link');
       const dropdown = item.querySelector('.dropdown, .mega-menu');
       
@@ -100,7 +116,7 @@
       if (dropdown) dropdown.setAttribute('aria-hidden', 'true');
     });
     
-    STATE.activeDropdown = null;
+    state.activeDropdown = null;
     clearAllTimeouts();
   }
 
@@ -108,28 +124,36 @@
    * Abre um dropdown específico
    */
   function openDropdown(item) {
-    console.log('Abrindo dropdown');
+    if (state.isTransitioning) return;
     
     const link = item.querySelector('.nav__link');
     const dropdown = item.querySelector('.dropdown, .mega-menu');
     
-    // Fecha outros dropdowns no mobile
-    if (STATE.isMobile) {
-      closeAllDropdowns();
+    // No mobile, fecha outros dropdowns antes de abrir
+    if (state.isMobile) {
+      elements.navItems.forEach(other => {
+        if (other !== item && other.classList.contains('open')) {
+          const otherLink = other.querySelector('.nav__link');
+          const otherDropdown = other.querySelector('.dropdown, .mega-menu');
+          other.classList.remove('open');
+          if (otherLink) otherLink.setAttribute('aria-expanded', 'false');
+          if (otherDropdown) otherDropdown.setAttribute('aria-hidden', 'true');
+        }
+      });
     }
     
     item.classList.add('open');
     if (link) link.setAttribute('aria-expanded', 'true');
     if (dropdown) dropdown.setAttribute('aria-hidden', 'false');
     
-    STATE.activeDropdown = item;
+    state.activeDropdown = item;
   }
 
   /**
    * Fecha um dropdown específico
    */
   function closeDropdown(item) {
-    console.log('Fechando dropdown');
+    if (state.isTransitioning) return;
     
     const link = item.querySelector('.nav__link');
     const dropdown = item.querySelector('.dropdown, .mega-menu');
@@ -138,13 +162,13 @@
     if (link) link.setAttribute('aria-expanded', 'false');
     if (dropdown) dropdown.setAttribute('aria-hidden', 'true');
     
-    if (STATE.activeDropdown === item) {
-      STATE.activeDropdown = null;
+    if (state.activeDropdown === item) {
+      state.activeDropdown = null;
     }
   }
 
   /**
-   * Toggle dropdown (abre se fechado, fecha se aberto)
+   * Alterna dropdown (abre/fecha)
    */
   function toggleDropdown(item) {
     if (item.classList.contains('open')) {
@@ -154,177 +178,165 @@
     }
   }
 
-  // ==================== FUNÇÕES DO MENU MOBILE ====================
+  /**
+   * Limpa todos os timeouts
+   */
+  function clearAllTimeouts() {
+    state.hoverTimeouts.forEach(timeout => clearTimeout(timeout));
+    state.hoverTimeouts.clear();
+  }
 
+  // ==================== CONTROLE DO MENU MOBILE ====================
+  
   /**
    * Fecha o menu mobile
    */
   function closeMobileMenu() {
-    if (!STATE.isMenuOpen || STATE.isTransitioning) return;
+    if (!state.isMenuOpen || state.isTransitioning) return;
     
-    console.log('Fechando menu mobile');
-    STATE.isTransitioning = true;
+    state.isTransitioning = true;
     
-    // Remove classes visuais
-    if (DOM.navList) DOM.navList.classList.remove('nav__list--open');
-    if (DOM.hamburger) {
-      DOM.hamburger.classList.remove('active');
-      DOM.hamburger.setAttribute('aria-expanded', 'false');
+    // Fecha visualmente
+    if (elements.navList) {
+      elements.navList.classList.remove('nav__list--open');
     }
     
-    // Fecha dropdowns e libera scroll
-    closeAllDropdowns();
-    toggleBodyScroll(false);
+    if (elements.hamburger) {
+      elements.hamburger.classList.remove('active');
+      elements.hamburger.setAttribute('aria-expanded', 'false');
+    }
     
-    // Atualiza estado após transição
+    // Fecha overlay
+    if (elements.navOverlay) {
+      elements.navOverlay.classList.remove('active');
+      setTimeout(() => {
+        elements.navOverlay.style.display = 'none';
+        elements.navOverlay.setAttribute('aria-hidden', 'true');
+      }, 400);
+    }
+    
+    // Libera scroll
+    manageBodyScroll(false);
+    
+    // Fecha dropdowns
+    closeAllDropdowns();
+    
+    // Atualiza estado
     setTimeout(() => {
-      STATE.isMenuOpen = false;
-      STATE.isTransitioning = false;
-    }, CONFIG.transitionDuration);
+      state.isMenuOpen = false;
+      state.isTransitioning = false;
+    }, CONFIG.animationDuration);
   }
 
   /**
    * Abre o menu mobile
    */
   function openMobileMenu() {
-    if (STATE.isMenuOpen || STATE.isTransitioning) return;
+    if (state.isMenuOpen || state.isTransitioning) return;
     
-    console.log('Abrindo menu mobile');
-    STATE.isTransitioning = true;
+    state.isTransitioning = true;
     
-    // Adiciona classes visuais
-    if (DOM.navList) DOM.navList.classList.add('nav__list--open');
-    if (DOM.hamburger) {
-      DOM.hamburger.classList.add('active');
-      DOM.hamburger.setAttribute('aria-expanded', 'true');
+    // Cria overlay se necessário
+    createOverlay();
+    
+    // Mostra e anima overlay
+    if (elements.navOverlay) {
+      elements.navOverlay.style.display = 'block';
+      setTimeout(() => {
+        elements.navOverlay.classList.add('active');
+        elements.navOverlay.setAttribute('aria-hidden', 'false');
+      }, 10);
     }
     
-    // Bloqueia scroll do body
-    toggleBodyScroll(true);
+    // Abre visualmente
+    if (elements.navList) {
+      elements.navList.classList.add('nav__list--open');
+    }
     
-    // Atualiza estado após transição
+    if (elements.hamburger) {
+      elements.hamburger.classList.add('active');
+      elements.hamburger.setAttribute('aria-expanded', 'true');
+    }
+    
+    // Bloqueia scroll
+    manageBodyScroll(true);
+    
+    // Atualiza estado
     setTimeout(() => {
-      STATE.isMenuOpen = true;
-      STATE.isTransitioning = false;
-    }, CONFIG.transitionDuration);
+      state.isMenuOpen = true;
+      state.isTransitioning = false;
+      
+      // Foco no primeiro link para acessibilidade
+      const firstLink = elements.navList.querySelector('.nav__link');
+      if (firstLink) firstLink.focus();
+    }, CONFIG.animationDuration);
   }
 
   /**
-   * Toggle menu mobile
+   * Alterna menu mobile
    */
   function toggleMobileMenu() {
-    if (STATE.isTransitioning) return;
+    if (state.isTransitioning) return;
     
-    console.log('Toggle menu mobile, estado atual:', STATE.isMenuOpen);
-    
-    if (STATE.isMenuOpen) {
+    if (state.isMenuOpen) {
       closeMobileMenu();
     } else {
       openMobileMenu();
     }
   }
 
-  // ==================== EVENT HANDLERS ====================
-
+  // ==================== MANIPULADORES DE EVENTOS ====================
+  
   /**
-   * Handler para clique no hamburger
+   * Handler para hover no desktop
    */
-  function handleHamburgerClick(e) {
-    e.stopPropagation();
-    e.preventDefault();
-    toggleMobileMenu();
-  }
-
-  /**
-   * Handler para teclado no hamburger
-   */
-  function handleHamburgerKeydown(e) {
-    if (e.key === 'Enter' || e.key === ' ') {
-      e.preventDefault();
-      toggleMobileMenu();
-    }
-    if (e.key === 'Escape' && STATE.isMenuOpen) {
-      closeMobileMenu();
-      DOM.hamburger?.focus();
-    }
-  }
-
-  /**
-   * Handler para hover desktop (mouse enter)
-   */
-  function handleDesktopMouseEnter(item) {
-    if (STATE.isMobile) return;
+  function handleDesktopHover(item) {
+    if (state.isMobile) return;
     
-    clearAllTimeouts();
+    clearTimeout(state.hoverTimeouts.get(item));
     
     const timeoutId = setTimeout(() => {
       closeAllDropdowns();
       openDropdown(item);
     }, CONFIG.hoverDelay);
     
-    STATE.hoverTimeouts.set(item, timeoutId);
+    state.hoverTimeouts.set(item, timeoutId);
   }
 
   /**
-   * Handler para hover desktop (mouse leave)
+   * Handler para mouse leave no desktop
    */
-  function handleDesktopMouseLeave(item) {
-    if (STATE.isMobile) return;
+  function handleDesktopLeave(item) {
+    if (state.isMobile) return;
     
-    clearAllTimeouts();
+    clearTimeout(state.hoverTimeouts.get(item));
     
     const timeoutId = setTimeout(() => {
       const dropdown = item.querySelector('.dropdown, .mega-menu');
-      const isOverItem = item.matches(':hover');
-      const isOverDropdown = dropdown?.matches(':hover');
+      const isHoveringItem = item.matches(':hover');
+      const isHoveringDropdown = dropdown?.matches(':hover');
       
-      if (!isOverItem && !isOverDropdown) {
+      if (!isHoveringItem && !isHoveringDropdown) {
         closeDropdown(item);
       }
     }, CONFIG.closeDelay);
     
-    STATE.hoverTimeouts.set(item, timeoutId);
+    state.hoverTimeouts.set(item, timeoutId);
   }
 
   /**
-   * Handler para focus desktop
-   */
-  function handleDesktopFocus(item) {
-    if (STATE.isMobile) return;
-    
-    clearAllTimeouts();
-    closeAllDropdowns();
-    openDropdown(item);
-  }
-
-  /**
-   * Handler para blur desktop
-   */
-  function handleDesktopBlur(item) {
-    if (STATE.isMobile) return;
-    
-    setTimeout(() => {
-      if (!item.contains(document.activeElement)) {
-        closeDropdown(item);
-      }
-    }, 100);
-  }
-
-  /**
-   * Handler para clique mobile nos links
+   * Handler para cliques no mobile
    */
   function handleMobileClick(e, item, hasDropdown) {
-    if (!STATE.isMobile) return;
-    
-    console.log('Clique mobile no item');
+    if (!state.isMobile) return;
     
     if (hasDropdown) {
       e.preventDefault();
       e.stopPropagation();
       toggleDropdown(item);
     } else {
-      // Link regular - fecha o menu
-      setTimeout(() => closeMobileMenu(), 100);
+      // Link normal fecha o menu após um delay
+      setTimeout(closeMobileMenu, 150);
     }
   }
 
@@ -332,18 +344,18 @@
    * Handler para cliques fora do menu
    */
   function handleOutsideClick(e) {
-    const clickedInside = e.target.closest('.header__inner');
-    const clickedOnNav = e.target.closest('.nav__item');
-    const clickedOnDropdown = e.target.closest('.mega-menu, .dropdown');
+    const clickedInside = e.target.closest('.header__inner') || 
+                         e.target.closest('.nav__list');
+    const clickedHamburger = e.target.closest('#hamburger');
     
     // Mobile: fecha menu se clicar fora
-    if (STATE.isMobile && STATE.isMenuOpen && !clickedInside) {
+    if (state.isMobile && state.isMenuOpen && !clickedInside && !clickedHamburger) {
       closeMobileMenu();
       return;
     }
     
     // Desktop: fecha dropdowns se clicar fora
-    if (!STATE.isMobile && !clickedOnNav && !clickedOnDropdown) {
+    if (!state.isMobile && !clickedInside) {
       closeAllDropdowns();
     }
   }
@@ -354,226 +366,233 @@
   function handleEscapeKey(e) {
     if (e.key !== 'Escape') return;
     
-    if (STATE.isMobile && STATE.isMenuOpen) {
+    if (state.isMobile && state.isMenuOpen) {
       closeMobileMenu();
-      DOM.hamburger?.focus();
+      if (elements.hamburger) elements.hamburger.focus();
     } else {
       closeAllDropdowns();
     }
   }
 
   /**
-   * Handler para resize da janela
+   * Handler para redimensionamento
    */
   const handleResize = debounce(() => {
-    const wasMobile = STATE.isMobile;
-    STATE.isMobile = checkMobileMode();
+    const wasMobile = state.isMobile;
+    state.isMobile = checkMobileMode();
     
-    console.log(`Resize: era mobile=${wasMobile}, agora mobile=${STATE.isMobile}, largura=${window.innerWidth}`);
-    
-    if (wasMobile !== STATE.isMobile) {
-      // Mudou de modo - reseta tudo
-      console.log(`Mudou para modo ${STATE.isMobile ? 'mobile' : 'desktop'}`);
+    if (wasMobile !== state.isMobile) {
+      // Modo alterado - reset completo
       closeMobileMenu();
       closeAllDropdowns();
       
-      // Re-inicializa event listeners
+      // Reinicializa listeners específicos do modo
       setupNavigationItems();
     }
-  }, CONFIG.transitionDuration);
+  }, 150);
 
-  // ==================== SETUP FUNCTIONS ====================
-
+  // ==================== CONFIGURAÇÃO ====================
+  
   /**
    * Inicializa atributos ARIA
    */
   function initializeARIA() {
-    console.log('Inicializando ARIA');
-    
-    // Setup hamburger
-    if (DOM.hamburger) {
-      DOM.hamburger.setAttribute('aria-label', 'Menu de navegação');
-      DOM.hamburger.setAttribute('aria-expanded', 'false');
-      DOM.hamburger.setAttribute('aria-controls', 'navList');
+    // Hamburger
+    if (elements.hamburger) {
+      elements.hamburger.setAttribute('aria-label', 'Abrir menu de navegação');
+      elements.hamburger.setAttribute('aria-expanded', 'false');
+      elements.hamburger.setAttribute('aria-controls', 'navList');
     }
     
-    // Setup items de navegação
-    DOM.navItems.forEach((item, index) => {
+    // Itens de navegação
+    elements.navItems.forEach((item, index) => {
       const link = item.querySelector('.nav__link');
       const dropdown = item.querySelector('.dropdown, .mega-menu');
       
       if (!link) return;
       
-      if (!link.id) link.id = `nav-link-${index}`;
+      if (!link.id) {
+        link.id = `nav-link-${index}`;
+      }
       
       if (dropdown) {
         link.setAttribute('aria-haspopup', 'true');
         link.setAttribute('aria-expanded', 'false');
-        dropdown.setAttribute('id', `dropdown-${index}`);
+        
+        if (!dropdown.id) {
+          dropdown.id = `dropdown-${index}`;
+        }
+        
         dropdown.setAttribute('aria-hidden', 'true');
         dropdown.setAttribute('aria-labelledby', link.id);
-        link.setAttribute('aria-controls', `dropdown-${index}`);
       }
     });
   }
 
   /**
-   * Remove todos os event listeners de um item
-   */
-  function removeItemListeners(item) {
-    const newItem = item.cloneNode(true);
-    item.parentNode.replaceChild(newItem, item);
-    return newItem;
-  }
-
-  /**
-   * Setup dos items de navegação
+   * Configura os itens de navegação
    */
   function setupNavigationItems() {
-    console.log('Configurando items de navegação, modo:', STATE.isMobile ? 'mobile' : 'desktop');
-    
-    DOM.navItems.forEach((item, index) => {
+    elements.navItems.forEach((item, index) => {
       const link = item.querySelector('.nav__link');
       const dropdown = item.querySelector('.dropdown, .mega-menu');
       const hasDropdown = !!dropdown;
       
       if (!link) return;
       
-      // DESKTOP: Eventos de hover e focus
-      if (!STATE.isMobile && hasDropdown) {
-        item.addEventListener('mouseenter', () => handleDesktopMouseEnter(item));
-        item.addEventListener('mouseleave', () => handleDesktopMouseLeave(item));
-        item.addEventListener('focusin', () => handleDesktopFocus(item));
-        item.addEventListener('focusout', () => handleDesktopBlur(item));
+      // Remove listeners antigos
+      const newItem = item.cloneNode(true);
+      item.parentNode.replaceChild(newItem, item);
+      elements.navItems[index] = newItem;
+      
+      const newLink = newItem.querySelector('.nav__link');
+      const newDropdown = newItem.querySelector('.dropdown, .mega-menu');
+      
+      // Desktop: hover
+      if (!state.isMobile && hasDropdown) {
+        newItem.addEventListener('mouseenter', () => handleDesktopHover(newItem));
+        newItem.addEventListener('mouseleave', () => handleDesktopLeave(newItem));
         
-        // Dropdown também precisa de eventos
-        if (dropdown) {
-          dropdown.addEventListener('mouseenter', () => clearAllTimeouts());
-          dropdown.addEventListener('mouseleave', () => handleDesktopMouseLeave(item));
+        if (newDropdown) {
+          newDropdown.addEventListener('mouseenter', () => {
+            clearTimeout(state.hoverTimeouts.get(newItem));
+          });
+          
+          newDropdown.addEventListener('mouseleave', () => {
+            handleDesktopLeave(newItem);
+          });
         }
       }
       
-      // MOBILE: Evento de clique
-      link.addEventListener('click', (e) => handleMobileClick(e, item, hasDropdown));
-      
-      // Keyboard support
-      link.addEventListener('keydown', (e) => {
-        if ((e.key === 'Enter' || e.key === ' ') && STATE.isMobile && hasDropdown) {
+      // Mobile: clique
+      newLink.addEventListener('click', (e) => {
+        if (state.isMobile && hasDropdown) {
           e.preventDefault();
-          handleMobileClick(e, item, hasDropdown);
+          e.stopPropagation();
+          toggleDropdown(newItem);
+        } else if (state.isMobile) {
+          setTimeout(closeMobileMenu, 150);
+        }
+      });
+      
+      // Suporte a teclado
+      newLink.addEventListener('keydown', (e) => {
+        if ((e.key === 'Enter' || e.key === ' ') && state.isMobile && hasDropdown) {
+          e.preventDefault();
+          toggleDropdown(newItem);
+        }
+        
+        // Navegação por setas no mobile
+        if (state.isMobile && state.isMenuOpen) {
+          const items = Array.from(elements.navItems);
+          const currentIndex = items.indexOf(newItem);
+          
+          if (e.key === 'ArrowDown') {
+            e.preventDefault();
+            const nextItem = items[currentIndex + 1];
+            if (nextItem) {
+              const nextLink = nextItem.querySelector('.nav__link');
+              if (nextLink) nextLink.focus();
+            }
+          }
+          
+          if (e.key === 'ArrowUp') {
+            e.preventDefault();
+            const prevItem = items[currentIndex - 1];
+            if (prevItem) {
+              const prevLink = prevItem.querySelector('.nav__link');
+              if (prevLink) prevLink.focus();
+            }
+          }
         }
       });
     });
   }
 
   /**
-   * Setup do botão hamburger
+   * Configura o botão hamburger
    */
   function setupHamburger() {
-    if (!DOM.hamburger || !DOM.navList) {
-      console.error('Hamburger ou navList não encontrado!');
-      return;
-    }
+    if (!elements.hamburger) return;
     
-    console.log('Configurando hamburger');
+    elements.hamburger.addEventListener('click', (e) => {
+      e.stopPropagation();
+      toggleMobileMenu();
+    });
     
-    DOM.hamburger.addEventListener('click', handleHamburgerClick);
-    DOM.hamburger.addEventListener('keydown', handleHamburgerKeydown);
+    elements.hamburger.addEventListener('keydown', (e) => {
+      if (e.key === 'Enter' || e.key === ' ') {
+        e.preventDefault();
+        toggleMobileMenu();
+      }
+      
+      if (e.key === 'Escape' && state.isMenuOpen) {
+        closeMobileMenu();
+      }
+    });
   }
 
   /**
-   * Setup de event listeners globais
+   * Configura listeners globais
    */
   function setupGlobalListeners() {
-    console.log('Configurando listeners globais');
-    
     // Clique fora
     document.addEventListener('click', handleOutsideClick);
     
-    // Tecla Escape
+    // Teclado
     document.addEventListener('keydown', handleEscapeKey);
     
-    // Resize e orientação
+    // Redimensionamento
     window.addEventListener('resize', handleResize);
+    
+    // Mudança de orientação
     window.addEventListener('orientationchange', () => {
       setTimeout(handleResize, 200);
     });
   }
 
-  /**
-   * Previne scroll em touch no iOS
-   */
-  function setupTouchScrollPrevention() {
-    if (!DOM.navList) return;
-    
-    let startY = 0;
-    
-    DOM.navList.addEventListener('touchstart', (e) => {
-      startY = e.touches[0].pageY;
-    }, { passive: true });
-    
-    DOM.navList.addEventListener('touchmove', (e) => {
-      const currentY = e.touches[0].pageY;
-      const scrollTop = DOM.navList.scrollTop;
-      const scrollHeight = DOM.navList.scrollHeight;
-      const clientHeight = DOM.navList.clientHeight;
-      
-      // Prevenir overscroll
-      if ((scrollTop <= 0 && currentY > startY) || 
-          (scrollTop + clientHeight >= scrollHeight && currentY < startY)) {
-        e.preventDefault();
-      }
-    }, { passive: false });
-  }
-
   // ==================== INICIALIZAÇÃO ====================
-
+  
   /**
-   * Inicializa todo o sistema de navegação
+   * Inicializa o sistema completo
    */
   function init() {
-    console.log('=== INICIANDO MENU HAMBURGER ===');
+    console.log('🚀 Inicializando menu hamburger profissional...');
     
-    // 1. Cachear elementos DOM
-    DOM.hamburger = document.getElementById('hamburger');
-    DOM.navList = document.getElementById('navList');
-    DOM.navItems = Array.from(document.querySelectorAll('.nav__item'));
+    // Cache de elementos
+    elements.hamburger = document.getElementById('hamburger');
+    elements.navList = document.getElementById('navList');
+    elements.navItems = Array.from(document.querySelectorAll('.nav__item'));
+    elements.body = document.body;
     
-    if (!DOM.hamburger || !DOM.navList) {
-      console.error('Elementos essenciais não encontrados!');
+    // Verifica elementos essenciais
+    if (!elements.hamburger || !elements.navList) {
+      console.error('❌ Elementos essenciais não encontrados!');
       return;
     }
     
-    // 2. Definir estado inicial
-    STATE.isMobile = checkMobileMode();
-    STATE.isMenuOpen = false;
+    // Estado inicial
+    state.isMobile = checkMobileMode();
+    state.isMenuOpen = false;
     
-    console.log('Estado inicial - Mobile:', STATE.isMobile, 'Largura:', window.innerWidth);
-    
-    // 3. Inicializar ARIA
+    // Inicialização
     initializeARIA();
-    
-    // 4. Setup hamburger
     setupHamburger();
-    
-    // 5. Setup items de navegação
     setupNavigationItems();
-    
-    // 6. Setup listeners globais
     setupGlobalListeners();
     
-    // 7. Setup touch scroll prevention
-    setupTouchScrollPrevention();
+    // Cria overlay (será mostrado quando necessário)
+    createOverlay();
     
-    console.log('=== MENU HAMBURGER INICIALIZADO COM SUCESSO ===');
+    console.log('✅ Menu hamburger inicializado com sucesso!');
+    console.log(`📱 Modo: ${state.isMobile ? 'Mobile' : 'Desktop'}`);
   }
 
-  // ==================== AUTO-INIT ====================
-
+  // ==================== INICIALIZAÇÃO AUTOMÁTICA ====================
+  
   if (document.readyState === 'loading') {
     document.addEventListener('DOMContentLoaded', init);
   } else {
     init();
   }
-
 })();
