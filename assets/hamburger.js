@@ -1,79 +1,38 @@
 // ============================================
-// HAMBURGUER JS - VERSÃO FINAL REVISADA
-// Controle preciso de hierarquia e sobreposição
+// HAMBURGUER JS - VERSÃO PREMIUM
+// Menu de tela cheia com funcionalidades premium
 // ============================================
 
 (function () {
   'use strict';
 
-  // ==================== CONFIGURAÇÃO PRECISA ====================
   const CONFIG = {
     breakpoint: 900,
-    hoverDelay: 200,
-    closeDelay: 300,
-    animationDuration: 300,
-    enableAnimations: true,
-    accordionBehavior: true,
-    touchDelay: 50 // Delay para evitar toques acidentais
+    animationDuration: 400,
+    itemStaggerDelay: 50
   };
 
-  // ==================== SISTEMA DE CACHE ORGANIZADO ====================
+  // Elementos principais
   const elements = {
-    // Elementos principais
     hamburger: null,
     navList: null,
     navItems: [],
-    
-    // Containers hierárquicos
-    navItemsContainer: null,
-    
-    // Elementos de overlay
     navOverlay: null,
-    
-    // Elementos de estado
-    body: document.body,
-    html: document.documentElement,
-    
-    // Cache de dimensões para evitar reflows
-    dimensions: {
-      headerHeight: 0,
-      viewportHeight: 0,
-      viewportWidth: 0
-    }
+    navClose: null,
+    body: document.body
   };
 
-  // ==================== ESTADO GLOBAL CONTROLADO ====================
+  // Estado
   const state = {
-    // Estado de navegação
     isMobile: false,
     isMenuOpen: false,
-    activeDropdown: null,
-    
-    // Estado de transição
     isTransitioning: false,
-    isAnimating: false,
-    
-    // Estado de interação
-    lastInteraction: 0,
-    pendingInteraction: false,
-    
-    // Cache de timeouts
-    resizeTimeout: null,
-    hoverTimeouts: new Map(),
-    interactionTimeouts: new Map(),
-    
-    // Posição de scroll
-    scrollPosition: 0,
-    
-    // Registro de eventos para cleanup
-    eventListeners: new Map()
+    activeDropdown: null,
+    scrollPosition: 0
   };
 
-  // ==================== SISTEMA DE UTILITÁRIOS ====================
+  // ==================== FUNÇÕES UTILITÁRIAS ====================
   
-  /**
-   * Debounce otimizado para performance
-   */
   function debounce(func, wait) {
     let timeout;
     return function executedFunction(...args) {
@@ -86,56 +45,17 @@
     };
   }
 
-  /**
-   * Throttle para eventos de scroll/resize
-   */
-  function throttle(func, limit) {
-    let inThrottle;
-    return function(...args) {
-      if (!inThrottle) {
-        func(...args);
-        inThrottle = true;
-        setTimeout(() => inThrottle = false, limit);
-      }
-    };
-  }
-
-  /**
-   * Verifica modo mobile com margem de segurança
-   */
   function checkMobileMode() {
-    const width = window.innerWidth;
-    const height = window.innerHeight;
-    
-    // Atualiza cache de dimensões
-    elements.dimensions.viewportWidth = width;
-    elements.dimensions.viewportHeight = height;
-    
-    // Modo mobile com breakpoint
-    return width <= CONFIG.breakpoint;
-  }
-
-  /**
-   * Atualiza dimensões do header
-   */
-  function updateHeaderDimensions() {
-    const header = document.querySelector('.header');
-    if (header) {
-      elements.dimensions.headerHeight = header.offsetHeight;
-    }
+    return window.innerWidth <= CONFIG.breakpoint;
   }
 
   // ==================== SISTEMA DE OVERLAY ====================
   
-  /**
-   * Cria overlay com gestão de z-index
-   */
   function createOverlay() {
     if (elements.navOverlay) return;
     
     const overlay = document.createElement('div');
     overlay.className = 'nav-overlay';
-    overlay.setAttribute('role', 'presentation');
     overlay.setAttribute('aria-hidden', 'true');
     overlay.style.cssText = `
       position: fixed;
@@ -143,170 +63,92 @@
       left: 0;
       right: 0;
       bottom: 0;
-      background: rgba(0, 0, 0, 0.7);
-      z-index: 399;
+      z-index: 999;
       opacity: 0;
       visibility: hidden;
-      transition: opacity 0.3s ease, visibility 0.3s ease;
-      backdrop-filter: blur(4px);
+      transition: opacity 0.4s ease, visibility 0.4s ease;
     `;
     
-    // Adiciona eventos com namespace para fácil remoção
-    addEventListener(overlay, 'click', 'overlay-click', closeMobileMenu);
-    addEventListener(overlay, 'touchstart', 'overlay-touch', closeMobileMenu);
-    
+    overlay.addEventListener('click', closeMobileMenu);
     document.body.appendChild(overlay);
     elements.navOverlay = overlay;
   }
 
   // ==================== GESTÃO DE SCROLL ====================
   
-  /**
-   * Gerencia scroll do body de forma não-bloqueante
-   */
   function manageBodyScroll(lock) {
     if (lock) {
-      // Salva posição atual
       state.scrollPosition = window.scrollY;
-      
-      // Aplica bloqueio
-      requestAnimationFrame(() => {
-        elements.body.style.position = 'fixed';
-        elements.body.style.top = `-${state.scrollPosition}px`;
-        elements.body.style.width = '100%';
-        elements.body.style.overflow = 'hidden';
-        elements.body.classList.add('menu-open');
-        
-        // Salva para restauração
-        elements.body.dataset.scrollPosition = state.scrollPosition;
-      });
+      elements.body.style.position = 'fixed';
+      elements.body.style.top = `-${state.scrollPosition}px`;
+      elements.body.style.width = '100%';
+      elements.body.style.overflow = 'hidden';
+      elements.body.classList.add('menu-open');
+      elements.body.setAttribute('data-scroll-position', state.scrollPosition);
     } else {
-      // Remove bloqueio
-      requestAnimationFrame(() => {
-        elements.body.style.position = '';
-        elements.body.style.top = '';
-        elements.body.style.width = '';
-        elements.body.style.overflow = '';
-        elements.body.classList.remove('menu-open');
-        
-        // Restaura posição
-        const savedPosition = elements.body.dataset.scrollPosition;
-        if (savedPosition) {
-          window.scrollTo(0, parseInt(savedPosition));
-          delete elements.body.dataset.scrollPosition;
-        }
-      });
+      elements.body.style.position = '';
+      elements.body.style.top = '';
+      elements.body.style.width = '';
+      elements.body.style.overflow = '';
+      elements.body.classList.remove('menu-open');
+      
+      const savedPosition = elements.body.getAttribute('data-scroll-position');
+      if (savedPosition) {
+        window.scrollTo(0, parseInt(savedPosition));
+      }
+      elements.body.removeAttribute('data-scroll-position');
     }
   }
 
-  // ==================== SISTEMA DE ACORDEÃO HIERÁRQUICO ====================
+  // ==================== ACORDEÃO ====================
   
-  /**
-   * Fecha todos os dropdowns com animação controlada
-   */
   function closeAllDropdowns() {
-    if (state.isAnimating) return;
-    
-    state.isAnimating = true;
-    
-    elements.navItems.forEach((item, index) => {
-      if (item.classList.contains('open')) {
-        // Animação de fechamento com delay progressivo
-        setTimeout(() => {
-          const link = item.querySelector('.nav__link');
-          const dropdown = item.querySelector('.dropdown, .mega-menu');
-          
-          item.classList.remove('open');
-          if (link) link.setAttribute('aria-expanded', 'false');
-          if (dropdown) dropdown.setAttribute('aria-hidden', 'true');
-        }, index * 20); // Delay escalonado
-      }
+    elements.navItems.forEach(item => {
+      const link = item.querySelector('.nav__link');
+      const dropdown = item.querySelector('.dropdown, .mega-menu');
+      
+      item.classList.remove('open');
+      if (link) link.setAttribute('aria-expanded', 'false');
+      if (dropdown) dropdown.setAttribute('aria-hidden', 'true');
     });
     
     state.activeDropdown = null;
-    clearAllTimeouts();
-    
-    // Reset estado de animação
-    setTimeout(() => {
-      state.isAnimating = false;
-    }, CONFIG.animationDuration);
   }
 
-  /**
-   * Abre dropdown específico com gestão hierárquica
-   */
-  function openDropdown(item) {
-    if (state.isTransitioning || state.isAnimating) return;
+  function toggleDropdown(item) {
+    if (state.isTransitioning) return;
     
-    const link = item.querySelector('.nav__link');
-    const dropdown = item.querySelector('.dropdown, .mega-menu');
+    const isOpening = !item.classList.contains('open');
     
-    if (!link || !dropdown) return;
-    
-    state.isAnimating = true;
-    
-    // COMPORTAMENTO DE ACORDEÃO NO MOBILE
-    if (state.isMobile && CONFIG.accordionBehavior) {
-      // Fecha outros dropdowns primeiro
+    // Fecha outros dropdowns no mobile
+    if (state.isMobile && isOpening) {
       elements.navItems.forEach(otherItem => {
         if (otherItem !== item && otherItem.classList.contains('open')) {
-          const otherLink = otherItem.querySelector('.nav__link');
-          const otherDropdown = otherItem.querySelector('.dropdown, .mega-menu');
-          
-          otherItem.classList.remove('open');
-          if (otherLink) otherLink.setAttribute('aria-expanded', 'false');
-          if (otherDropdown) otherDropdown.setAttribute('aria-hidden', 'true');
+          closeDropdown(otherItem);
         }
       });
-      
-      // Pequeno delay para animação de fechamento
-      setTimeout(() => {
-        item.classList.add('open');
-        link.setAttribute('aria-expanded', 'true');
-        dropdown.setAttribute('aria-hidden', 'false');
-        state.activeDropdown = item;
-        
-        // Scroll suave para o item aberto
-        if (state.isMobile && elements.navList) {
-          const itemTop = item.offsetTop;
-          const containerHeight = elements.navList.clientHeight;
-          const itemHeight = item.offsetHeight;
-          
-          if (itemTop > containerHeight / 2) {
-            elements.navList.scrollTo({
-              top: itemTop - (containerHeight / 2) + (itemHeight / 2),
-              behavior: 'smooth'
-            });
-          }
-        }
-        
-        // Foco no primeiro link para acessibilidade
-        setTimeout(() => {
-          const firstLink = dropdown.querySelector('a');
-          if (firstLink && state.isMobile) {
-            firstLink.focus();
-          }
-          state.isAnimating = false;
-        }, 100);
-      }, 100);
+    }
+    
+    // Alterna o atual
+    if (isOpening) {
+      openDropdown(item);
     } else {
-      // Comportamento padrão (desktop)
-      item.classList.add('open');
-      link.setAttribute('aria-expanded', 'true');
-      dropdown.setAttribute('aria-hidden', 'false');
-      state.activeDropdown = item;
-      state.isAnimating = false;
+      closeDropdown(item);
     }
   }
 
-  /**
-   * Fecha dropdown específico
-   */
+  function openDropdown(item) {
+    const link = item.querySelector('.nav__link');
+    const dropdown = item.querySelector('.dropdown, .mega-menu');
+    
+    item.classList.add('open');
+    if (link) link.setAttribute('aria-expanded', 'true');
+    if (dropdown) dropdown.setAttribute('aria-hidden', 'false');
+    
+    state.activeDropdown = item;
+  }
+
   function closeDropdown(item) {
-    if (state.isTransitioning || state.isAnimating) return;
-    
-    state.isAnimating = true;
-    
     const link = item.querySelector('.nav__link');
     const dropdown = item.querySelector('.dropdown, .mega-menu');
     
@@ -317,51 +159,16 @@
     if (state.activeDropdown === item) {
       state.activeDropdown = null;
     }
-    
-    setTimeout(() => {
-      state.isAnimating = false;
-    }, CONFIG.animationDuration);
   }
 
-  /**
-   * Alterna dropdown com controle de interação
-   */
-  function toggleDropdown(item) {
-    // Previne interações muito rápidas
-    const now = Date.now();
-    if (now - state.lastInteraction < CONFIG.touchDelay) return;
-    state.lastInteraction = now;
-    
-    if (item.classList.contains('open')) {
-      closeDropdown(item);
-    } else {
-      openDropdown(item);
-    }
-  }
-
-  /**
-   * Limpa todos os timeouts
-   */
-  function clearAllTimeouts() {
-    state.hoverTimeouts.forEach(timeout => clearTimeout(timeout));
-    state.hoverTimeouts.clear();
-    
-    state.interactionTimeouts.forEach(timeout => clearTimeout(timeout));
-    state.interactionTimeouts.clear();
-  }
-
-  // ==================== CONTROLE DO MENU MOBILE ====================
+  // ==================== MENU MOBILE ====================
   
-  /**
-   * Fecha menu mobile com animação completa
-   */
   function closeMobileMenu() {
     if (!state.isMenuOpen || state.isTransitioning) return;
     
-    console.log('[Menu] Fechando menu mobile');
     state.isTransitioning = true;
     
-    // Fecha visualmente
+    // Fecha visual
     if (elements.navList) {
       elements.navList.classList.remove('nav__list--open');
     }
@@ -377,36 +184,42 @@
       setTimeout(() => {
         elements.navOverlay.style.display = 'none';
         elements.navOverlay.setAttribute('aria-hidden', 'true');
-      }, 300);
+      }, 400);
     }
     
     // Libera scroll
     manageBodyScroll(false);
     
-    // Fecha todos os dropdowns
+    // Fecha dropdowns
     closeAllDropdowns();
     
-    // Retorna foco para hamburguer
+    // Anima itens para saída
+    elements.navItems.forEach((item, index) => {
+      item.style.transitionDelay = `${index * 20}ms`;
+      item.style.opacity = '0';
+      item.style.transform = 'translateY(10px)';
+    });
+    
+    // Atualiza estado
     setTimeout(() => {
-      if (elements.hamburger) {
-        elements.hamburger.focus();
-      }
       state.isMenuOpen = false;
       state.isTransitioning = false;
-      console.log('[Menu] Menu mobile fechado');
+      
+      // Reset animações dos itens
+      elements.navItems.forEach(item => {
+        item.style.transitionDelay = '';
+        item.style.opacity = '';
+        item.style.transform = '';
+      });
     }, CONFIG.animationDuration);
   }
 
-  /**
-   * Abre menu mobile com inicialização completa
-   */
   function openMobileMenu() {
     if (state.isMenuOpen || state.isTransitioning) return;
     
-    console.log('[Menu] Abrindo menu mobile');
     state.isTransitioning = true;
     
-    // Cria overlay se necessário
+    // Cria overlay
     createOverlay();
     
     // Mostra overlay
@@ -432,23 +245,27 @@
     // Bloqueia scroll
     manageBodyScroll(true);
     
+    // Anima itens para entrada
+    setTimeout(() => {
+      elements.navItems.forEach((item, index) => {
+        item.style.transitionDelay = `${index * CONFIG.itemStaggerDelay}ms`;
+        item.style.opacity = '1';
+        item.style.transform = 'translateY(0)';
+      });
+    }, 100);
+    
     // Atualiza estado
     setTimeout(() => {
       state.isMenuOpen = true;
       state.isTransitioning = false;
       
-      // Foco no primeiro item
-      const firstLink = elements.navList?.querySelector('.nav__link');
-      if (firstLink) {
-        setTimeout(() => firstLink.focus(), 50);
+      // Foco no botão fechar
+      if (elements.navClose) {
+        elements.navClose.focus();
       }
-      console.log('[Menu] Menu mobile aberto');
     }, CONFIG.animationDuration);
   }
 
-  /**
-   * Alterna menu mobile
-   */
   function toggleMobileMenu() {
     if (state.isTransitioning) return;
     
@@ -459,89 +276,18 @@
     }
   }
 
-  // ==================== SISTEMA DE EVENTOS ====================
+  // ==================== EVENT HANDLERS ====================
   
-  /**
-   * Adiciona event listener com namespace
-   */
-  function addEventListener(element, event, namespace, handler) {
-    const namespacedHandler = (e) => {
-      handler(e);
-    };
-    
-    element.addEventListener(event, namespacedHandler);
-    
-    // Armazena para remoção posterior
-    if (!state.eventListeners.has(element)) {
-      state.eventListeners.set(element, []);
-    }
-    state.eventListeners.get(element).push({ event, handler: namespacedHandler, namespace });
+  function handleHamburgerClick(e) {
+    e.stopPropagation();
+    toggleMobileMenu();
   }
 
-  /**
-   * Remove event listeners por namespace
-   */
-  function removeEventListeners(element, namespace) {
-    if (!state.eventListeners.has(element)) return;
-    
-    const listeners = state.eventListeners.get(element);
-    const remaining = [];
-    
-    listeners.forEach(listener => {
-      if (listener.namespace === namespace) {
-        element.removeEventListener(listener.event, listener.handler);
-      } else {
-        remaining.push(listener);
-      }
-    });
-    
-    if (remaining.length > 0) {
-      state.eventListeners.set(element, remaining);
-    } else {
-      state.eventListeners.delete(element);
-    }
+  function handleCloseClick(e) {
+    e.stopPropagation();
+    closeMobileMenu();
   }
 
-  /**
-   * Handler para hover desktop
-   */
-  function handleDesktopHover(item) {
-    if (state.isMobile) return;
-    
-    clearTimeout(state.hoverTimeouts.get(item));
-    
-    const timeoutId = setTimeout(() => {
-      closeAllDropdowns();
-      openDropdown(item);
-    }, CONFIG.hoverDelay);
-    
-    state.hoverTimeouts.set(item, timeoutId);
-  }
-
-  /**
-   * Handler para mouse leave desktop
-   */
-  function handleDesktopLeave(item) {
-    if (state.isMobile) return;
-    
-    clearTimeout(state.hoverTimeouts.get(item));
-    
-    const timeoutId = setTimeout(() => {
-      const dropdown = item.querySelector('.dropdown, .mega-menu');
-      const isHoveringItem = item.matches(':hover');
-      const isHoveringDropdown = dropdown?.matches(':hover');
-      
-      if (!isHoveringItem && !isHoveringDropdown) {
-        closeDropdown(item);
-      }
-    }, CONFIG.closeDelay);
-    
-    state.hoverTimeouts.set(item, timeoutId);
-  }
-
-  /**
-   * Handler para clique mobile
-   */
   function handleMobileClick(e, item, hasDropdown) {
     if (!state.isMobile) return;
     
@@ -550,17 +296,13 @@
       e.stopPropagation();
       toggleDropdown(item);
     } else {
-      // Link normal - fecha menu
       setTimeout(closeMobileMenu, 150);
     }
   }
 
-  /**
-   * Handler para clique fora
-   */
   function handleOutsideClick(e) {
-    const clickedInside = e.target.closest('.header__inner') || 
-                         e.target.closest('.nav__list');
+    const clickedInside = e.target.closest('.nav__list') || 
+                         e.target.closest('.nav__mobile-header');
     const clickedHamburger = e.target.closest('#hamburger');
     
     if (state.isMobile && state.isMenuOpen && !clickedInside && !clickedHamburger) {
@@ -573,9 +315,6 @@
     }
   }
 
-  /**
-   * Handler para tecla Escape
-   */
   function handleEscapeKey(e) {
     if (e.key !== 'Escape') return;
     
@@ -587,226 +326,68 @@
     }
   }
 
-  /**
-   * Handler para setas do teclado
-   */
-  function handleArrowKeys(e, item) {
-    if (!state.isMobile || !state.isMenuOpen) return;
+  function handleKeydown(e, item, hasDropdown) {
+    if (e.key === 'Enter' || e.key === ' ') {
+      if (state.isMobile && hasDropdown) {
+        e.preventDefault();
+        toggleDropdown(item);
+      }
+    }
     
-    const items = Array.from(elements.navItems);
-    const currentIndex = items.indexOf(item);
-    
-    switch(e.key) {
-      case 'ArrowDown':
-        e.preventDefault();
-        const nextItem = items[currentIndex + 1];
-        if (nextItem) {
-          const nextLink = nextItem.querySelector('.nav__link');
-          if (nextLink) nextLink.focus();
-        }
-        break;
-        
-      case 'ArrowUp':
-        e.preventDefault();
-        const prevItem = items[currentIndex - 1];
-        if (prevItem) {
-          const prevLink = prevItem.querySelector('.nav__link');
-          if (prevLink) prevLink.focus();
-        }
-        break;
-        
-      case 'ArrowRight':
-        if (item.classList.contains('open')) {
-          e.preventDefault();
-          const dropdown = item.querySelector('.dropdown, .mega-menu');
-          if (dropdown) {
-            const firstSubLink = dropdown.querySelector('a');
-            if (firstSubLink) firstSubLink.focus();
-          }
-        }
-        break;
-        
-      case 'ArrowLeft':
-        e.preventDefault();
-        if (item.classList.contains('open')) {
-          closeDropdown(item);
-        } else {
-          const parentItem = item.closest('.nav__item');
-          if (parentItem) {
-            const parentLink = parentItem.querySelector('.nav__link');
-            if (parentLink) parentLink.focus();
-          }
-        }
-        break;
+    if (e.key === 'Escape' && state.isMobile && item.classList.contains('open')) {
+      e.preventDefault();
+      closeDropdown(item);
     }
   }
 
-  /**
-   * Handler para resize otimizado
-   */
   const handleResize = debounce(() => {
     const wasMobile = state.isMobile;
     state.isMobile = checkMobileMode();
     
     if (wasMobile !== state.isMobile) {
-      console.log(`[Menu] Modo alterado: ${wasMobile ? 'Mobile' : 'Desktop'} → ${state.isMobile ? 'Mobile' : 'Desktop'}`);
-      
       closeMobileMenu();
       closeAllDropdowns();
       setupNavigationItems();
-      updateHeaderDimensions();
     }
   }, 150);
 
-  // ==================== INICIALIZAÇÃO SISTEMÁTICA ====================
+  // ==================== SETUP ====================
   
-  /**
-   * Inicializa ARIA com verificação completa
-   */
-  function initializeARIA() {
-    console.log('[Menu] Inicializando ARIA...');
-    
-    // Hamburguer
-    if (elements.hamburger) {
-      elements.hamburger.setAttribute('aria-label', 'Menu de navegação');
-      elements.hamburger.setAttribute('aria-expanded', 'false');
-      elements.hamburger.setAttribute('aria-controls', 'navList');
-    }
-    
-    // Itens de navegação
-    elements.navItems.forEach((item, index) => {
-      const link = item.querySelector('.nav__link');
-      const dropdown = item.querySelector('.dropdown, .mega-menu');
-      
-      if (!link) {
-        console.warn(`[Menu] Item ${index} sem link .nav__link`);
-        return;
-      }
-      
-      // IDs únicos
-      if (!link.id) link.id = `nav-link-${index}`;
-      
-      // Atributos ARIA para dropdowns
-      if (dropdown) {
-        link.setAttribute('aria-haspopup', 'true');
-        link.setAttribute('aria-expanded', 'false');
-        
-        if (!dropdown.id) dropdown.id = `dropdown-${index}`;
-        
-        dropdown.setAttribute('aria-hidden', 'true');
-        dropdown.setAttribute('aria-labelledby', link.id);
-        link.setAttribute('aria-controls', dropdown.id);
-        
-        // Verifica hierarquia interna
-        const subLinks = dropdown.querySelectorAll('a');
-        subLinks.forEach((subLink, subIndex) => {
-          if (!subLink.id) subLink.id = `${dropdown.id}-item-${subIndex}`;
-        });
-      }
-    });
-    
-    console.log('[Menu] ARIA inicializado com sucesso');
-  }
-
-  /**
-   * Configura itens de navegação com gestão hierárquica
-   */
   function setupNavigationItems() {
-    console.log('[Menu] Configurando itens no modo:', state.isMobile ? 'MOBILE' : 'DESKTOP');
-    
-    // Remove listeners antigos
-    elements.navItems.forEach(item => {
-      removeEventListeners(item, 'navigation');
-    });
-    
-    // Configura novos listeners
-    elements.navItems.forEach((item, index) => {
+    elements.navItems.forEach((item) => {
       const link = item.querySelector('.nav__link');
-      const dropdown = item.querySelector('.dropdown, .mega-menu');
-      const hasDropdown = !!dropdown;
+      const hasDropdown = item.querySelector('.dropdown, .mega-menu');
       
-      if (!link) {
-        console.warn(`[Menu] Ignorando item ${index}: sem link .nav__link`);
-        return;
-      }
+      if (!link) return;
       
-      // ===== DESKTOP =====
-      if (!state.isMobile && hasDropdown) {
-        addEventListener(item, 'mouseenter', 'navigation', () => handleDesktopHover(item));
-        addEventListener(item, 'mouseleave', 'navigation', () => handleDesktopLeave(item));
-        
-        if (dropdown) {
-          addEventListener(dropdown, 'mouseenter', 'navigation', () => {
-            clearTimeout(state.hoverTimeouts.get(item));
-          });
-          addEventListener(dropdown, 'mouseleave', 'navigation', () => {
-            handleDesktopLeave(item);
-          });
+      // Remove listeners antigos
+      const newItem = item.cloneNode(true);
+      item.parentNode.replaceChild(newItem, item);
+      const newLink = newItem.querySelector('.nav__link');
+      
+      // Clique mobile
+      newLink.addEventListener('click', (e) => {
+        if (state.isMobile && hasDropdown) {
+          e.preventDefault();
+          e.stopPropagation();
+          toggleDropdown(newItem);
+        } else if (state.isMobile) {
+          setTimeout(closeMobileMenu, 150);
         }
-      }
-      
-      // ===== MOBILE =====
-      // Clique principal
-      addEventListener(link, 'click', 'navigation', (e) => {
-        handleMobileClick(e, item, hasDropdown);
       });
       
       // Teclado
-      addEventListener(link, 'keydown', 'navigation', (e) => {
-        // Enter/Espaço para dropdowns
-        if ((e.key === 'Enter' || e.key === ' ') && state.isMobile && hasDropdown) {
-          e.preventDefault();
-          toggleDropdown(item);
-        }
-        
-        // Navegação por setas
-        handleArrowKeys(e, item);
-        
-        // Escape
-        if (e.key === 'Escape') {
-          if (item.classList.contains('open')) {
-            e.preventDefault();
-            closeDropdown(item);
-            link.focus();
-          }
-        }
+      newLink.addEventListener('keydown', (e) => {
+        handleKeydown(e, newItem, hasDropdown);
       });
-      
-      // ===== SUBMENUS =====
-      if (hasDropdown) {
-        const subLinks = dropdown.querySelectorAll('a');
-        subLinks.forEach(subLink => {
-          addEventListener(subLink, 'keydown', 'navigation', (e) => {
-            if (e.key === 'Escape' && state.isMobile) {
-              e.preventDefault();
-              closeDropdown(item);
-              link.focus();
-            }
-          });
-        });
-      }
     });
   }
 
-  /**
-   * Configura hamburguer com prevenção de duplo clique
-   */
   function setupHamburger() {
-    if (!elements.hamburger) {
-      console.error('[Menu] ERRO: #hamburger não encontrado');
-      return;
-    }
+    if (!elements.hamburger) return;
     
-    // Remove listeners antigos
-    removeEventListeners(elements.hamburger, 'hamburger');
-    
-    // Adiciona novos listeners
-    addEventListener(elements.hamburger, 'click', 'hamburger', (e) => {
-      e.stopPropagation();
-      toggleMobileMenu();
-    });
-    
-    addEventListener(elements.hamburger, 'keydown', 'hamburger', (e) => {
+    elements.hamburger.addEventListener('click', handleHamburgerClick);
+    elements.hamburger.addEventListener('keydown', (e) => {
       if (e.key === 'Enter' || e.key === ' ') {
         e.preventDefault();
         toggleMobileMenu();
@@ -817,119 +398,99 @@
     });
   }
 
-  /**
-   * Configura listeners globais
-   */
-  function setupGlobalListeners() {
-    // Clique fora
-    addEventListener(document, 'click', 'global', handleOutsideClick);
+  function setupCloseButton() {
+    const closeBtn = document.querySelector('.nav__close');
+    if (!closeBtn) return;
     
-    // Teclado
-    addEventListener(document, 'keydown', 'global', handleEscapeKey);
-    
-    // Resize
-    addEventListener(window, 'resize', 'global', handleResize);
-    
-    // Orientation change
-    addEventListener(window, 'orientationchange', 'global', () => {
-      setTimeout(handleResize, 200);
+    elements.navClose = closeBtn;
+    closeBtn.addEventListener('click', handleCloseClick);
+    closeBtn.addEventListener('keydown', (e) => {
+      if (e.key === 'Enter' || e.key === ' ') {
+        e.preventDefault();
+        closeMobileMenu();
+      }
     });
-    
-    // Previne scroll no iOS
-    if (elements.navList) {
-      let startY = 0;
-      
-      addEventListener(elements.navList, 'touchstart', 'global', (e) => {
-        startY = e.touches[0].clientY;
-      }, { passive: true });
-      
-      addEventListener(elements.navList, 'touchmove', 'global', (e) => {
-        const currentY = e.touches[0].clientY;
-        const scrollTop = elements.navList.scrollTop;
-        const scrollHeight = elements.navList.scrollHeight;
-        const clientHeight = elements.navList.clientHeight;
-        
-        if ((scrollTop <= 0 && currentY > startY) || 
-            (scrollTop + clientHeight >= scrollHeight && currentY < startY)) {
-          e.preventDefault();
-        }
-      }, { passive: false });
-    }
   }
 
-  /**
-   * Inicialização completa do sistema
-   */
-  function init() {
-    console.log('🔧 [Menu] Iniciando sistema de navegação...');
+  function setupGlobalListeners() {
+    document.addEventListener('click', handleOutsideClick);
+    document.addEventListener('keydown', handleEscapeKey);
+    window.addEventListener('resize', handleResize);
+    window.addEventListener('orientationchange', () => {
+      setTimeout(handleResize, 200);
+    });
+  }
+
+  function initializeARIA() {
+    // Hamburguer
+    if (elements.hamburger) {
+      elements.hamburger.setAttribute('aria-label', 'Abrir menu');
+      elements.hamburger.setAttribute('aria-expanded', 'false');
+      elements.hamburger.setAttribute('aria-controls', 'navList');
+    }
     
-    // 1. Cache de elementos
+    // Botão fechar
+    const closeBtn = document.querySelector('.nav__close');
+    if (closeBtn) {
+      closeBtn.setAttribute('aria-label', 'Fechar menu');
+    }
+    
+    // Itens
+    elements.navItems.forEach((item, index) => {
+      const link = item.querySelector('.nav__link');
+      const dropdown = item.querySelector('.dropdown, .mega-menu');
+      
+      if (!link) return;
+      
+      if (!link.id) link.id = `nav-link-${index}`;
+      
+      if (dropdown) {
+        link.setAttribute('aria-haspopup', 'true');
+        link.setAttribute('aria-expanded', 'false');
+        
+        if (!dropdown.id) dropdown.id = `dropdown-${index}`;
+        
+        dropdown.setAttribute('aria-hidden', 'true');
+        dropdown.setAttribute('aria-labelledby', link.id);
+      }
+    });
+  }
+
+  // ==================== INICIALIZAÇÃO ====================
+  
+  function init() {
+    console.log('🚀 Inicializando menu premium...');
+    
+    // Cache elementos
     elements.hamburger = document.getElementById('hamburger');
     elements.navList = document.getElementById('navList');
     elements.navItems = Array.from(document.querySelectorAll('.nav__item'));
-    elements.navItemsContainer = document.querySelector('.nav__items-container');
     elements.body = document.body;
-    elements.html = document.documentElement;
     
-    // 2. Verificação rigorosa
-    if (!elements.hamburger) {
-      console.error('❌ [Menu] Elemento #hamburger não encontrado');
+    // Verifica elementos
+    if (!elements.hamburger || !elements.navList) {
+      console.error('Elementos não encontrados');
       return;
     }
     
-    if (!elements.navList) {
-      console.error('❌ [Menu] Elemento #navList não encontrado');
-      return;
-    }
-    
-    if (elements.navItems.length === 0) {
-      console.warn('⚠️ [Menu] Nenhum item .nav__item encontrado');
-    }
-    
-    // 3. Estado inicial
+    // Estado inicial
     state.isMobile = checkMobileMode();
-    state.isMenuOpen = false;
-    state.isTransitioning = false;
     
-    // 4. Dimensões
-    updateHeaderDimensions();
-    
-    // 5. Inicialização sequencial
+    // Inicializa
     initializeARIA();
     setupHamburger();
+    setupCloseButton();
     setupNavigationItems();
     setupGlobalListeners();
-    
-    // 6. Cria overlay
     createOverlay();
     
-    console.log('✅ [Menu] Sistema inicializado com sucesso');
-    console.log(`   Modo: ${state.isMobile ? 'Mobile' : 'Desktop'}`);
-    console.log(`   Itens: ${elements.navItems.length}`);
-    console.log(`   Dimensões: ${elements.dimensions.viewportWidth}x${elements.dimensions.viewportHeight}`);
+    console.log('✅ Menu premium inicializado');
   }
 
-  // ==================== INICIALIZAÇÃO CONTROLADA ====================
-  
-  // Aguarda DOM pronto
+  // Inicia quando DOM estiver pronto
   if (document.readyState === 'loading') {
     document.addEventListener('DOMContentLoaded', init);
   } else {
-    // Pequeno delay para garantir que todos os elementos estejam renderizados
-    setTimeout(init, 50);
+    init();
   }
-  
-  // API pública para controle externo
-  window.MobileMenu = {
-    open: openMobileMenu,
-    close: closeMobileMenu,
-    toggle: toggleMobileMenu,
-    closeAllDropdowns: closeAllDropdowns,
-    isOpen: () => state.isMenuOpen,
-    isMobile: () => state.isMobile,
-    refresh: () => {
-      setupNavigationItems();
-      updateHeaderDimensions();
-    }
-  };
 })();
