@@ -1,5 +1,6 @@
 
-        /* ===== VARIÁVEIS GLOBAIS ===== */
+@import url('bottom-nav.css');
+    /* ===== VARIÁVEIS GLOBAIS ===== */
         :root {
             --bg-dark: #06021a;
             /* Cor de fundo escura */
@@ -304,6 +305,28 @@
             white-space: nowrap;
             /* Impede quebra de linha */
         }
+
+        .btn-saiba {
+                  display: block;
+                  padding: 14px 32px;
+                  background: #0019d4;
+                  margin: 0 auto;
+                  /* center and be responsive */
+                  color: white;
+                  font-size: 22px;
+                  font-weight: 500;
+                  border-radius: 16px;
+                  text-decoration: none;
+                  box-shadow: 0px 2px 8px rgba(0, 0, 0, 0.25);
+                  transition: 0.2s;
+                  max-width: calc(100% - 40px);
+                  text-align: center;
+                }
+
+                .btn-saiba:hover {
+                  filter: brightness(1.1);
+                }
+
 
         /* ===== BOTÃO PRIMÁRIO ===== */
         .btn--primary {
@@ -1332,3 +1355,218 @@
                 /* Espaço entre colunas */
             }
         }
+
+/* Import shared responsive rules (overrides located in responsive.css) */
+@import url('responsive.css');
+
+/* ===== HAMBÚRGUER ===== */
+.hamburger {
+    display: none;                /* Oculta por padrão (desktop) */
+    background: transparent;      /* Fundo transparente */
+    border: 0;                    /* Remove borda */
+    padding: 8px;                 /* Espaçamento interno */
+    cursor: pointer;              /* Cursor de ponteiro */
+    position: relative;          /* Posição relativa */
+    z-index: 1001;               /* Z-index alto */
+    flex-direction: column;      /* Direção coluna para as linhas */
+    gap: 4px;                    /* Espaço entre as linhas */
+}
+
+/* ===== LINHAS DO HAMBÚRGUER ===== */
+.hamburger span {
+    display: block;               /* Exibição em bloco */
+    width: 24px;                  /* Largura */
+    height: 2px;                  /* Altura */
+    background: var(--accent);   /* Cor azul */
+    border-radius: 2px;           /* Bordas levemente arredondadas */
+    transition: transform .3s ease, opacity .3s ease; /* Transições suaves */
+}
+
+/* ===== ANIMAÇÃO DO HAMBÚRGUER - LINHA 1 ===== */
+.hamburger.active span:nth-child(1) {
+    transform: rotate(45deg) translate(6px, 6px); /* Rotaciona e move */
+}
+
+/* ===== ANIMAÇÃO DO HAMBÚRGUER - LINHA 2 ===== */
+.hamburger.active span:nth-child(2) {
+    opacity: 0;                  /* Torna invisível */
+}
+
+/* ===== ANIMAÇÃO DO HAMBÚRGUER - LINHA 3 ===== */
+.hamburger.active span:nth-child(3) {
+    transform: rotate(-45deg) translate(6px, -6px); /* Rotaciona e move */
+}
+
+/* ===== SETA DO DROPDOWN ===== */
+.nav__arrow {
+    transition: transform 0.2s ease; /* Transição suave para rotação */
+}
+
+/* ===== ROTAÇÃO DA SETA NO HOVER ===== */
+.has-mega:hover .nav__arrow,
+.has-dropdown:hover .nav__arrow {
+    transform: rotate(180deg);   /* Rotaciona 180 graus */
+}
+
+/* ===== CLEAN MOBILE HAMBURGER MENU (overrides) ===== */
+@media (max-width: 900px) {
+    /* show hamburger button */
+    .hamburger { 
+        display: inline-flex; 
+        align-items: center; 
+        justify-content: center; 
+        width: 44px; 
+        height: 44px; 
+        margin-left: auto;
+    }
+
+    /* hamburger lines (animated into X when active) */
+    .hamburger span { 
+        width: 22px; 
+        height: 2px; 
+        background: var(--accent); 
+        border-radius: 2px; 
+        position: relative; 
+        display: block; 
+        transition: transform .32s ease, opacity .2s ease; 
+    }
+    
+    .hamburger span::before, 
+    .hamburger span::after { 
+        content: ''; 
+        position: absolute; 
+        left: 0; 
+        width: 22px; 
+        height: 2px; 
+        background: var(--accent); 
+        border-radius: 2px; 
+        transition: transform .32s ease, top .18s ease; 
+    }
+    
+    .hamburger span::before { 
+        top: -7px; 
+    }
+    
+    .hamburger span::after { 
+        top: 7px; 
+    }
+    
+    .hamburger.active span { 
+        background: transparent; 
+    }
+    
+    .hamburger.active span::before { 
+        transform: rotate(45deg); 
+        top: 0; 
+    }
+    
+    .hamburger.active span::after { 
+        transform: rotate(-45deg); 
+        top: 0; 
+    }
+
+    /* full-screen dropdown panel anchored under header */
+    .nav__list {
+        position: fixed;
+        top: calc(var(--topstrip-height) + var(--header-height));
+        left: 0;
+        right: 0;
+        height: calc(100vh - var(--topstrip-height) - var(--header-height));
+        background: rgba(255, 255, 255, 0.98);
+        transform: translateY(-100%);
+        transition: transform .34s cubic-bezier(.2, .8, .2, 1);
+        display: flex;
+        flex-direction: column;
+        gap: 0;
+        padding: 8px 0 20px 0;
+        overflow-y: auto;
+        z-index: 1100;
+    }
+    
+    .nav__list.nav__list--open { 
+        transform: translateY(0); 
+    }
+
+    /* vertical items, clear separations */
+    .nav__item { 
+        width: 100%; 
+        border-bottom: 1px solid var(--gray-100); 
+    }
+    
+    .nav__link { 
+        padding: 14px 20px; 
+        width: 100%; 
+        display: flex; 
+        justify-content: space-between; 
+        align-items: center; 
+    }
+
+    /* convert dropdowns/mega menus into accordion panels */
+    .dropdown, 
+    .mega-menu { 
+        max-height: 0; 
+        overflow: hidden; 
+        opacity: 0; 
+        visibility: hidden; 
+        transition: max-height .28s ease, opacity .18s ease; 
+        padding: 0 20px; 
+        background: transparent; 
+        border-radius: 0; 
+    }
+    
+    .nav__item.open > .dropdown, 
+    .nav__item.open > .mega-menu { 
+        max-height: 1400px; 
+        opacity: 1; 
+        visibility: visible; 
+        padding: 12px 20px 18px 20px; 
+        background: var(--dropdown-bg); 
+        border-top: 1px solid var(--gray-200); 
+    }
+
+    /* arrows */
+    .nav__arrow { 
+        transition: transform .22s ease; 
+    }
+    
+    .nav__item.open .nav__arrow { 
+        transform: rotate(180deg); 
+    }
+
+    /* adjust focus styles for mobile */
+    .nav__link:focus { 
+        outline: 3px solid rgba(0, 0, 0, 0.06); 
+        outline-offset: 3px; 
+    }
+    
+    /* Hide header CTA on mobile */
+    .header__cta {
+        display: none !important;
+    }
+}
+
+/* Desktop-safe overrides */
+@media (min-width: 901px) {
+    /* Hide mobile hamburger on desktop */
+    .hamburger { 
+        display: none !important; 
+    }
+    
+    /* Restore normal nav layout on desktop */
+    .nav__list {
+        position: static !important;
+        display: flex !important;
+        height: auto !important;
+        top: auto !important;
+        bottom: auto !important;
+        left: auto !important;
+        right: auto !important;
+        background: transparent !important;
+        padding: 0 !important;
+        margin: 0 !important;
+        opacity: 1 !important;
+        visibility: visible !important;
+        transform: none !important;
+        z-index: auto !important;
+    }
+}

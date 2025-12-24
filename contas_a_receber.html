@@ -11,6 +11,8 @@
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
         rel="stylesheet">
     <link rel="stylesheet" href="styles/Index.css">
+
+    
     
 </head>
 
@@ -34,6 +36,10 @@
             <button class="hamburger" aria-label="Abrir menu" id="hamburger" aria-expanded="false">
                 <span></span><span></span><span></span>
             </button>
+
+          <div class="mobile-menu" id="mobileMenu">
+    <!-- NAV + CTA serão movidos aqui no mobile via JS -->
+</div>
 
             <!-- ===== NAVEGAÇÃO PRINCIPAL ===== -->
             <nav class="nav header__nav" aria-label="Main Navigation">
@@ -134,11 +140,11 @@
           <li class="nav__item has-dropdown" data-key="nosso-trabalho">
             <a href="nosso-trabalho.html" class="nav__link" aria-haspopup="true" aria-expanded="false">
               Nosso Trabalho
-                <path d="M3 4.5L6 7.5L9 4.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
             </a>
-          </li>
-
-          <!-- ===== ITEM SISTEMAS (COM DROPDOWN) ===== -->
+                                                                    <script src="assets/hamburger.js"></script>
+                                                                    <a href="https://wa.me/5511999999999" class="whatsapp-float" width="80px" target="blank" rel="noopener noreferrer">
+                                                                        <img src="./assets/whatsapp-icon.png" class="whatsapp-icon">
+                                                                    </a>
           <li class="nav__item has-dropdown" data-key="sistemas">
             <a href="#" class="nav__link" aria-haspopup="true" aria-expanded="false">
               Sistemas
@@ -187,27 +193,6 @@
                 <a href="index.html" class="btn-saiba">
                     Saiba Mais
                 </a>
-
-                <style>
-                    .btn-saiba {
-                        display: inline-block;
-                        padding: 14px 32px;
-                        background: #0019d4;
-                         margin: 0 355px;
-                        /* azul igual */
-                        color: white;
-                        font-size: 22px;
-                        font-weight: 500;
-                        border-radius: 16px;
-                        text-decoration: none;
-                        box-shadow: 0px 2px 8px rgba(0, 0, 0, 0.25);
-                        transition: 0.2s;
-                    }
-
-                    .btn-saiba:hover {
-                        filter: brightness(1.1);
-                    }
-                </style>
 
                 <br>
 
@@ -366,196 +351,7 @@
             </div>
         </div>
     </footer>
-
-    <script>
-        // ===== INICIALIZAÇÃO QUANDO O DOCUMENTO É CARREGADO =====
-        document.addEventListener('DOMContentLoaded', function () {
-            // ===== ELEMENTOS DO DOM =====
-            const hamburger = document.getElementById('hamburger');
-            const navList = document.getElementById('navList');
-            const navItems = document.querySelectorAll('.nav__item');
-            const header = document.querySelector('.header');
-            const breakpointMobile = 900;
-            let isMobile = window.innerWidth <= breakpointMobile;
-
-            // ===== FUNÇÃO PARA FECHAR TODOS OS DROPDOWNS =====
-            function closeAllDropdowns() {
-                navItems.forEach(item => {
-                    item.classList.remove('open');
-                    const link = item.querySelector('.nav__link');
-                    if (link) {
-                        link.setAttribute('aria-expanded', 'false');
-                    }
-                });
-
-                document.querySelectorAll('.dropdown, .mega-menu').forEach(dropdown => {
-                    dropdown.setAttribute('aria-hidden', 'true');
-                });
-            }
-
-            // ===== FUNÇÃO PARA FECHAR MENU MOBILE =====
-            function closeMobileMenu() {
-                navList.classList.remove('nav__list--open');
-                hamburger.classList.remove('active');
-                hamburger.setAttribute('aria-expanded', 'false');
-                closeAllDropdowns();
-            }
-
-            // ===== EVENT LISTENER PARA O BOTÃO HAMBÚRGUER =====
-            if (hamburger) {
-                hamburger.addEventListener('click', (e) => {
-                    e.stopPropagation();
-                    const isOpen = navList.classList.toggle('nav__list--open');
-                    hamburger.classList.toggle('active');
-                    hamburger.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
-
-                    if (!isOpen) {
-                        closeAllDropdowns();
-                    }
-                });
-            }
-
-            // ===== EVENT LISTENER PARA CLIQUE FORA DO MENU =====
-            document.addEventListener('click', (e) => {
-                if (!e.target.closest('.header__inner')) {
-                    closeMobileMenu();
-                }
-            });
-
-            // ===== EVENT LISTENERS PARA OS ITENS DO MENU =====
-            navItems.forEach(item => {
-                const link = item.querySelector('.nav__link');
-                const dropdown = item.querySelector('.dropdown');
-                const mega = item.querySelector('.mega-menu');
-
-                // ===== COMPORTAMENTO NO DESKTOP =====
-                if (!isMobile) {
-                    item.addEventListener('mouseenter', () => {
-                        closeAllDropdowns();
-                        item.classList.add('open');
-                        link.setAttribute('aria-expanded', 'true');
-                        if (dropdown) dropdown.setAttribute('aria-hidden', 'false');
-                        if (mega) mega.setAttribute('aria-hidden', 'false');
-                    });
-
-                    item.addEventListener('mouseleave', () => {
-                        item.classList.remove('open');
-                        link.setAttribute('aria-expanded', 'false');
-                        if (dropdown) dropdown.setAttribute('aria-hidden', 'true');
-                        if (mega) mega.setAttribute('aria-hidden', 'true');
-                    });
-                }
-
-                // ===== COMPORTAMENTO NO MOBILE =====
-                if (link) {
-                    link.addEventListener('click', (e) => {
-                        if (isMobile) {
-                            if (dropdown || mega) {
-                                e.preventDefault();
-                                e.stopPropagation();
-
-                                const isOpen = item.classList.contains('open');
-
-                                // Fecha outros dropdowns abertos
-                                navItems.forEach(otherItem => {
-                                    if (otherItem !== item) {
-                                        otherItem.classList.remove('open');
-                                        const otherLink = otherItem.querySelector('.nav__link');
-                                        if (otherLink) otherLink.setAttribute('aria-expanded', 'false');
-                                        const otherDropdown = otherItem.querySelector('.dropdown');
-                                        const otherMega = otherItem.querySelector('.mega-menu');
-                                        if (otherDropdown) otherDropdown.setAttribute('aria-hidden', 'true');
-                                        if (otherMega) otherMega.setAttribute('aria-hidden', 'true');
-                                    }
-                                });
-
-                                // Abre/fecha o dropdown atual
-                                if (!isOpen) {
-                                    item.classList.add('open');
-                                    link.setAttribute('aria-expanded', 'true');
-                                    if (dropdown) dropdown.setAttribute('aria-hidden', 'false');
-                                    if (mega) mega.setAttribute('aria-hidden', 'false');
-                                } else {
-                                    item.classList.remove('open');
-                                    link.setAttribute('aria-expanded', 'false');
-                                    if (dropdown) dropdown.setAttribute('aria-hidden', 'true');
-                                    if (mega) mega.setAttribute('aria-hidden', 'true');
-                                }
-                            } else {
-                                // Se não tem dropdown, fecha o menu
-                                closeMobileMenu();
-                            }
-                        }
-                    });
-                }
-
-                // ===== COMPORTAMENTO DE TECLADO =====
-                if (link) {
-                    link.addEventListener('keydown', (e) => {
-                        if (e.key === 'Enter' || e.key === ' ') {
-                            if (isMobile && (dropdown || mega)) {
-                                e.preventDefault();
-                                link.click();
-                            }
-                        }
-
-                        if (e.key === 'Escape') {
-                            closeAllDropdowns();
-                            if (isMobile) {
-                                closeMobileMenu();
-                            }
-                        }
-                    });
-
-                    link.addEventListener('focus', () => {
-                        if (!isMobile) {
-                            closeAllDropdowns();
-                            item.classList.add('open');
-                            link.setAttribute('aria-expanded', 'true');
-                            if (dropdown) dropdown.setAttribute('aria-hidden', 'false');
-                            if (mega) mega.setAttribute('aria-hidden', 'false');
-                        }
-                    });
-                }
-            });
-
-            // ===== EVENT LISTENER PARA TECLA ESC =====
-            document.addEventListener('keydown', (e) => {
-                if (e.key === 'Escape') {
-                    closeAllDropdowns();
-                    closeMobileMenu();
-
-                    if (hamburger && hamburger.getAttribute('aria-expanded') === 'true') {
-                        hamburger.focus();
-                    }
-                }
-            });
-
-            // ===== EVENT LISTENER PARA TAB =====
-            document.addEventListener('keydown', (e) => {
-                if (e.key === 'Tab') {
-                    setTimeout(() => {
-                        const focused = document.activeElement;
-                        if (!focused.closest('.nav__item') && !focused.closest('.header__inner')) {
-                            closeAllDropdowns();
-                        }
-                    }, 10);
-                }
-            });
-
-            // ===== EVENT LISTENER PARA RESIZE =====
-            window.addEventListener('resize', () => {
-                isMobile = window.innerWidth <= breakpointMobile;
-
-                if (!isMobile) {
-                    closeMobileMenu();
-                }
-            });
-
-            // ===== INICIALIZAÇÃO =====
-            isMobile = window.innerWidth <= breakpointMobile;
-        });
-    </script>
+    <script src="assets/hamburger.js"></script>
     <a href="https://wa.me/5511999999999" class="whatsapp-float" width="80px" target="blank" rel="noopener noreferrer">
   <img src="./assets/whatsapp-icon.png" class="whatsapp-icon">
 </a>
