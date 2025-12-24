@@ -1,5 +1,5 @@
 // ============================================
-// HAMBURGUER JS - SIMPLES E FUNCIONAL
+// HAMBURGUER JS - COM VERIFICAÇÃO DE TEXTO
 // ============================================
 
 (function () {
@@ -26,6 +26,37 @@
     return;
   }
   
+  console.log('✅ Elementos encontrados:', {
+    hamburger: !!hamburger,
+    mobileMenu: !!mobileMenu,
+    overlay: !!overlay,
+    closeButton: !!closeButton,
+    menuItems: menuItems.length
+  });
+  
+  // ============ DEBUG: VERIFICAR TEXTO ============
+  function checkTextVisibility() {
+    console.log('🔍 Verificando visibilidade do texto...');
+    
+    const links = document.querySelectorAll('.mobile-menu__link, .mobile-menu__sublink');
+    links.forEach((link, index) => {
+      const computedStyle = window.getComputedStyle(link);
+      const color = computedStyle.color;
+      const visibility = computedStyle.visibility;
+      const opacity = computedStyle.opacity;
+      const display = computedStyle.display;
+      
+      console.log(`  Link ${index + 1}:`, {
+        text: link.textContent.trim(),
+        color: color,
+        visibility: visibility,
+        opacity: opacity,
+        display: display,
+        hasText: link.textContent.trim().length > 0
+      });
+    });
+  }
+  
   // ============ ESTADO ============
   let isMenuOpen = false;
   let isMobile = window.innerWidth <= 900;
@@ -36,25 +67,36 @@
   function openMenu() {
     console.log('📱 Abrindo menu...');
     
+    if (isMenuOpen) return;
+    
     // Abre menu
     mobileMenu.classList.add('mobile-menu--open');
     hamburger.classList.add('active');
     
     // Mostra overlay
     if (overlay) {
-      overlay.classList.add('active');
+      overlay.style.display = 'block';
+      setTimeout(() => {
+        overlay.classList.add('active');
+      }, 10);
     }
     
     // Bloqueia scroll
     body.classList.add('menu-open');
     
     isMenuOpen = true;
+    
+    // Verifica texto após abrir
+    setTimeout(checkTextVisibility, 100);
+    
     console.log('✅ Menu aberto');
   }
   
   // FECHAR MENU
   function closeMenu() {
     console.log('📱 Fechando menu...');
+    
+    if (!isMenuOpen) return;
     
     // Fecha menu
     mobileMenu.classList.remove('mobile-menu--open');
@@ -63,6 +105,9 @@
     // Esconde overlay
     if (overlay) {
       overlay.classList.remove('active');
+      setTimeout(() => {
+        overlay.style.display = 'none';
+      }, 300);
     }
     
     // Libera scroll
@@ -79,6 +124,7 @@
   
   // ALTERNAR MENU
   function toggleMenu() {
+    console.log('🔄 Alternando menu...');
     if (isMenuOpen) {
       closeMenu();
     } else {
@@ -88,24 +134,23 @@
   
   // ABRIR/FECHAR SUBMENU
   function toggleSubmenu(item) {
-    console.log('📂 Alternando submenu...');
+    console.log('📂 Alternando submenu:', item.querySelector('.mobile-menu__link')?.textContent?.trim());
     
-    // Se já está aberto, fecha
-    if (item.classList.contains('open')) {
-      item.classList.remove('open');
-      console.log('✅ Submenu fechado');
-    } else {
-      // Fecha outros submenus
+    const isOpening = !item.classList.contains('open');
+    
+    // Fecha outros submenus
+    if (isOpening) {
       menuItems.forEach(otherItem => {
         if (otherItem !== item && otherItem.classList.contains('open')) {
           otherItem.classList.remove('open');
         }
       });
-      
-      // Abre este
-      item.classList.add('open');
-      console.log('✅ Submenu aberto');
     }
+    
+    // Alterna este
+    item.classList.toggle('open');
+    
+    console.log('✅ Submenu', item.classList.contains('open') ? 'aberto' : 'fechado');
   }
   
   // ============ EVENT LISTENERS ============
@@ -113,6 +158,7 @@
   // 1. BOTÃO HAMBURGUER
   hamburger.addEventListener('click', function(e) {
     e.stopPropagation();
+    e.preventDefault();
     toggleMenu();
   });
   
@@ -120,14 +166,17 @@
   if (closeButton) {
     closeButton.addEventListener('click', function(e) {
       e.stopPropagation();
+      e.preventDefault();
       closeMenu();
     });
   }
   
   // 3. OVERLAY
   if (overlay) {
-    overlay.addEventListener('click', function() {
-      closeMenu();
+    overlay.addEventListener('click', function(e) {
+      if (e.target === overlay) {
+        closeMenu();
+      }
     });
   }
   
@@ -136,19 +185,23 @@
     const link = item.querySelector('.mobile-menu__link');
     const hasDropdown = item.querySelector('.mobile-menu__dropdown');
     
-    if (link && hasDropdown) {
-      link.addEventListener('click', function(e) {
-        e.preventDefault();
-        e.stopPropagation();
-        toggleSubmenu(item);
-      });
-    } else if (link) {
-      // Link sem dropdown fecha o menu
-      link.addEventListener('click', function() {
-        if (isMobile) {
-          setTimeout(closeMenu, 200);
-        }
-      });
+    if (link) {
+      // Verifica se tem dropdown
+      if (hasDropdown) {
+        link.addEventListener('click', function(e) {
+          e.preventDefault();
+          e.stopPropagation();
+          toggleSubmenu(item);
+        });
+      } else {
+        // Link sem dropdown fecha o menu
+        link.addEventListener('click', function(e) {
+          if (isMobile && isMenuOpen) {
+            e.preventDefault();
+            setTimeout(closeMenu, 200);
+          }
+        });
+      }
     }
   });
   
@@ -177,11 +230,8 @@
   // ============ INICIALIZAÇÃO ============
   console.log('✅ Menu hamburguer inicializado');
   console.log(`📱 Modo: ${isMobile ? 'Mobile' : 'Desktop'}`);
-  console.log(`🎯 Elementos:`, {
-    hamburger: !!hamburger,
-    mobileMenu: !!mobileMenu,
-    overlay: !!overlay,
-    closeButton: !!closeButton,
-    menuItems: menuItems.length
-  });
+  console.log(`📏 Largura: ${window.innerWidth}px`);
+  
+  // Verifica texto na inicialização
+  setTimeout(checkTextVisibility, 500);
 })();
