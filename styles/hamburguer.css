@@ -1,7 +1,13 @@
-/* ============ RESET ============ */
+/* ============ RESET E CORES ============ */
 :root {
   --accent: #070a3f;
+  --accent-light: #2d3199;
   --white: #ffffff;
+  --gray-50: #f9fafb;
+  --gray-100: #f5f5f5;
+  --gray-200: #e5e5e5;
+  --gray-800: #333333;
+  --gray-900: #1a1a1a;
 }
 
 /* ============ BOTÃO HAMBURGUER ============ */
@@ -14,6 +20,8 @@
   cursor: pointer;
   padding: 0;
   margin-left: auto;
+  position: relative;
+  z-index: 1001;
 }
 
 .hamburger__container {
@@ -37,7 +45,6 @@
 .hamburger__line:nth-child(2) { top: 50%; transform: translateY(-50%); }
 .hamburger__line:nth-child(3) { bottom: 0; }
 
-/* Transformação para X */
 .hamburger.active .hamburger__line:nth-child(1) {
   top: 50%;
   transform: translateY(-50%) rotate(45deg);
@@ -63,7 +70,7 @@
   }
   
   /* ESCONDER NAVBAR DESKTOP */
-  .nav__list {
+  .nav__list:not(.mobile-menu) {
     display: none !important;
   }
   
@@ -79,11 +86,13 @@
     opacity: 0;
     visibility: hidden;
     transition: opacity 0.3s ease;
+    pointer-events: none;
   }
   
   .nav-overlay.active {
     opacity: 1;
     visibility: visible;
+    pointer-events: auto;
   }
   
   /* MENU LATERAL - ESCONDIDO POR PADRÃO */
@@ -101,9 +110,11 @@
     display: flex !important;
     flex-direction: column;
     overflow-y: auto;
+    overflow-x: hidden;
     padding: 0;
     margin: 0;
     box-shadow: 0 0 30px rgba(0, 0, 0, 0.2);
+    pointer-events: auto;
   }
   
   /* MENU ABERTO */
@@ -118,13 +129,24 @@
     justify-content: space-between;
     padding: 20px;
     background: var(--white);
-    border-bottom: 1px solid #f0f0f0;
+    border-bottom: 1px solid var(--gray-200);
     min-height: 80px;
+    flex-shrink: 0;
+    position: sticky;
+    top: 0;
+    z-index: 10;
+  }
+  
+  .mobile-menu__logo {
+    display: flex;
+    align-items: center;
   }
   
   .mobile-menu__logo img {
     height: 40px;
     width: auto;
+    max-width: 180px;
+    display: block;
   }
   
   .mobile-menu__close {
@@ -138,39 +160,79 @@
     align-items: center;
     justify-content: center;
     color: var(--white);
-    font-size: 20px;
+    font-size: 24px;
+    font-weight: 300;
+    line-height: 1;
+    transition: background 0.3s ease;
   }
   
-  /* CONTEÚDO */
+  .mobile-menu__close:hover {
+    background: var(--accent-light);
+  }
+  
+  /* CONTEÚDO DO MENU */
   .mobile-menu__content {
     flex: 1;
     padding: 20px;
+    display: flex;
+    flex-direction: column;
+    overflow-y: auto;
   }
   
-  /* ITENS */
+  /* ITENS DO MENU - TEXTO VISÍVEL */
   .mobile-menu__item {
     width: 100%;
-    margin-bottom: 5px;
+    margin-bottom: 8px;
+    position: relative;
   }
   
+  /* LINKS PRINCIPAIS - TEXTO ESCURO VISÍVEL */
   .mobile-menu__link {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    padding: 16px 20px;
+    padding: 18px 20px;
     font-size: 16px;
-    color: #333;
+    font-weight: 500;
+    color: var(--gray-900) !important; /* ⬅️ TEXTO ESCURO */
     text-decoration: none;
     border-radius: 8px;
-    border: 1px solid #f0f0f0;
+    border: 1px solid var(--gray-200);
     background: var(--white);
-    min-height: 56px;
+    min-height: 60px;
     cursor: pointer;
+    transition: all 0.2s ease;
+  }
+  
+  /* FORÇAR VISIBILIDADE DO TEXTO */
+  .mobile-menu__link,
+  .mobile-menu__link:visited,
+  .mobile-menu__link:active,
+  .mobile-menu__link:focus {
+    color: var(--gray-900) !important;
+    text-decoration: none !important;
   }
   
   .mobile-menu__link:hover {
-    background: #f8f9ff;
+    background: var(--gray-50);
     border-color: var(--accent);
+    color: var(--accent) !important;
+  }
+  
+  /* SETA DO DROPDOWN */
+  .mobile-menu__arrow {
+    display: inline-block;
+    width: 16px;
+    height: 16px;
+    margin-left: 10px;
+    transition: transform 0.3s ease;
+    color: currentColor;
+    text-align: center;
+    line-height: 1;
+  }
+  
+  .mobile-menu__item.open .mobile-menu__arrow {
+    transform: rotate(180deg);
   }
   
   /* SUBMENUS */
@@ -178,8 +240,11 @@
     max-height: 0;
     overflow: hidden;
     transition: max-height 0.4s ease;
-    background: #f8f9ff;
+    background: var(--gray-50);
     border-radius: 0 0 8px 8px;
+    margin-top: -4px;
+    border: 1px solid var(--gray-200);
+    border-top: none;
   }
   
   .mobile-menu__item.open .mobile-menu__dropdown {
@@ -188,21 +253,52 @@
   
   .mobile-menu__sublist {
     list-style: none;
-    padding: 10px 0;
+    padding: 16px 0;
     margin: 0;
   }
   
+  /* SUBLINKS - TEXTO VISÍVEL */
   .mobile-menu__sublink {
     display: block;
-    padding: 12px 20px 12px 40px;
-    font-size: 14px;
-    color: #555;
+    padding: 14px 20px 14px 40px;
+    font-size: 15px;
+    color: var(--gray-800) !important; /* ⬅️ TEXTO VISÍVEL */
     text-decoration: none;
+    transition: all 0.2s ease;
+    position: relative;
+  }
+  
+  .mobile-menu__sublink:before {
+    content: "";
+    position: absolute;
+    left: 24px;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 6px;
+    height: 6px;
+    background: var(--accent);
+    border-radius: 50%;
+    opacity: 0.5;
+  }
+  
+  .mobile-menu__sublink:hover,
+  .mobile-menu__sublink:focus {
+    background: rgba(7, 10, 63, 0.05);
+    color: var(--accent) !important;
+    padding-left: 44px;
   }
   
   /* BLOQUEAR SCROLL QUANDO MENU ABERTO */
   body.menu-open {
     overflow: hidden !important;
+    position: fixed;
+    width: 100%;
+    height: 100%;
+  }
+  
+  /* GARANTIR QUE TEXTO DO BOTÃO X SEJA VISÍVEL */
+  .mobile-menu__close {
+    color: var(--white) !important;
   }
 }
 
@@ -215,7 +311,20 @@
   }
   
   /* MOSTRAR NAVBAR DESKTOP NORMAL */
-  .nav__list {
+  .nav__list:not(.mobile-menu) {
     display: flex !important;
   }
+}
+
+/* ============ CORREÇÃO DE VISIBILIDADE FORÇADA ============ */
+/* Se ainda não aparecer, adicione estas regras de debug */
+.mobile-menu__content * {
+  color: inherit !important;
+  visibility: visible !important;
+  opacity: 1 !important;
+}
+
+.mobile-menu__link,
+.mobile-menu__sublink {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif !important;
 }
