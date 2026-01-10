@@ -9,32 +9,11 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="styles/home.css">
-  <script src="scripts.js"></script>
-  <!-- Meta Pixel Code -->
-  <script>
-    !function(f,b,e,v,n,t,s)
-    {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
-    n.callMethod.apply(n,arguments):n.queue.push(arguments)};
-    if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
-    n.queue=[];t=b.createElement(e);t.async=!0;
-    t.src=v;s=b.getElementsByTagName(e)[0];
-    s.parentNode.insertBefore(t,s)}(window, document,'script',
-    'https://connect.facebook.net/en_US/fbevents.js');
-    fbq('init', '3457191164418833');
-    fbq('trackCustom', 'ViewHomePage');
-    </script>
-    <noscript><img height="1" width="1" style="display:none"
-    src="https://www.facebook.com/tr?id=3457191164418833&ev=PageView&noscript=1"
-    /></noscript>
-  <!-- End Meta Pixel Code -->
-  
 </head>
 <body>
-
-
   <!-- ===== FAIXA SUPERIOR ===== -->
   <div class="topstrip" role="region" aria-label="Promoção">
-    Agende uma reunião diagnóstica 
+    Agende uma reunião diagnóstica gratuitamente
   </div>
 
   <!-- ===== CABEÇALHO PRINCIPAL ===== -->
@@ -47,14 +26,12 @@
         </a>
       </div>
 
-       <!-- ===== BOTÃO HAMBÚRGUER (MOBILE) ===== -->
-            <button class="hamburger" aria-label="Abrir menu" id="hamburger" aria-expanded="false">
-                <span></span><span></span><span></span>
-            </button>
-
-          <div class="mobile-menu" id="mobileMenu">
-    <!-- NAV + CTA serão movidos aqui no mobile via JS -->
-</div>
+      <!-- ===== BOTÃO HAMBÚRGUER (MOBILE) ===== -->
+      <button class="hamburger" aria-label="Abrir menu" id="hamburger" aria-expanded="false">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
 
       <!-- ===== NAVEGAÇÃO PRINCIPAL ===== -->
       <nav class="nav header__nav" aria-label="Main Navigation">
@@ -102,12 +79,13 @@
                         <li><a href="cobertura-eventos.html" class="mega-menu__link">Cobertura de Eventos</a></li>
                         <li><a href="dashboard_performance.html" class="mega-menu__link">Dashboards de Performance</a></li>
                         <li><a href="crm.html" class="mega-menu__link">Implementação de CRM</a></li>
-                         <a href="#" class="mega-menu__link">Terceirização Comercial</a>
+                        <li>
+                          <a href="#" class="mega-menu__link">Terceirização Comercial</a>
                           <ul class="mega-menu__sublist">
-                       <li><a href="time_pre_vendas.html" class="mega-menu__link mega-menu__link--child">Time de Pré-vendas (SDRs)</a></li>
-                        <li><a href="time_fechamento_vendas.html" class="mega-menu__link mega-menu__link--child">Time de Fechamento de Vendas (Closers)</a></li>
-                        <li><a href="costumer_sucess.html" class="mega-menu__link mega-menu__link--child">Time de Sucesso do Cliente (CS)</a></li>
-                        <li><a href="contas_a_receber.html" class="mega-menu__link mega-menu__link--child">Time de Contas a Receber (AR)</a></li>
+                            <li><a href="time_pre_vendas.html" class="mega-menu__link mega-menu__link--child">Time de Pré-vendas (SDRs)</a></li>
+                            <li><a href="time_fechamento_vendas.html" class="mega-menu__link mega-menu__link--child">Time de Fechamento de Vendas (Closers)</a></li>
+                            <li><a href="costumer_sucess.html" class="mega-menu__link mega-menu__link--child">Time de Sucesso do Cliente (CS)</a></li>
+                            <li><a href="contas_a_receber.html" class="mega-menu__link mega-menu__link--child">Time de Contas a Receber (AR)</a></li>
                           </ul>
                         </li>
                       </ul>
@@ -132,8 +110,6 @@
                       </ul>
                     </div>
                   </div>
-                  
-              
                 </div>
               </div>
             </div>
@@ -143,8 +119,16 @@
           <li class="nav__item has-dropdown" data-key="nosso-trabalho">
             <a href="nosso-trabalho.html" class="nav__link" aria-haspopup="true" aria-expanded="false">
               Nosso Trabalho
+              <svg class="nav__arrow" width="12" height="12" viewBox="0 0 12 12" fill="none">
                 <path d="M3 4.5L6 7.5L9 4.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
             </a>
+            <div class="dropdown" role="menu" aria-hidden="true">
+              <ul class="dropdown__list">
+                <li><a href="#" class="dropdown__link">Portfólio</a></li>
+                <li><a href="#" class="dropdown__link">Cases de Sucesso</a></li>
+              </ul>
+            </div>
           </li>
 
           <!-- ===== ITEM SISTEMAS (COM DROPDOWN) ===== -->
@@ -166,16 +150,23 @@
           <li class="nav__item has-dropdown" data-key="contatos">
             <a href="contatos.html" class="nav__link" aria-haspopup="true" aria-expanded="false">
               Contatos
+              <svg class="nav__arrow" width="12" height="12" viewBox="0 0 12 12" fill="none">
                 <path d="M3 4.5L6 7.5L9 4.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
               </svg>
             </a>
+            <div class="dropdown" role="menu" aria-hidden="true">
+              <ul class="dropdown__list">
+                <li><a href="contatos.html" class="dropdown__link">Entre em Contato</a></li>
+                <li><a href="#" class="dropdown__link">Agendar Reunião</a></li>
+              </ul>
+            </div>
           </li>
         </ul>
       </nav>
 
       <!-- ===== CALL TO ACTION DO CABEÇALHO ===== -->
       <div class="header__cta">
-        <a class="btn btn--primary" href="contatos.html" onclick="trackClickAgendeJa()">Agende já</a>
+        <a class="btn btn--primary" href="contatos.html">Agende já</a>
       </div>
     </div>
   </header>
@@ -256,7 +247,7 @@
             <h3 class="card__kicker">Blog BX</h3>
             <h4 class="card__title">O excesso de conteúdo e a escassez de mensagem</h4>
             <p class="card__excerpt">Muita gente posta demais, mas comunica de menos. Conteúdo sem mensagem vira ruído.</p>
-            <a class="btn btn--small" href="https://www.linkedin.com/pulse/o-excesso-de-conte%C3%BAdo-e-escassez-mensagem-felipe-augusto-b8cef/" onclick="trackVejaMaisCard1()">Clique e descubra!</a>
+            <a class="btn btn--small" href="https://www.linkedin.com/pulse/o-excesso-de-conte%C3%BAdo-e-escassez-mensagem-felipe-augusto-b8cef/">Clique e descubra!</a>
           </div>
         </article>
 
@@ -269,7 +260,7 @@
             <h3 class="card__kicker">Blog BX</h3>
             <h4 class="card__title">O custo oculto de operar clínica no modo "improviso"</h4>
             <p class="card__excerpt">Trabalhar no improviso gera prejuízos invisíveis: retrabalho, falhas, desgaste e perda de pacientes.</p>
-            <a class="btn btn--small" href="https://www.linkedin.com/pulse/o-custo-oculto-de-operar-cl%C3%ADnica-modo-improviso-felipe-augusto-eoilf/?trackingId=vko1wON1SIieyBoLjhDUvg%3D%3D" onclick="trackVejaMaisCard2()">Clique e descubra!</a>
+            <a class="btn btn--small" href="https://www.linkedin.com/pulse/o-custo-oculto-de-operar-cl%C3%ADnica-modo-improviso-felipe-augusto-eoilf/?trackingId=vko1wON1SIieyBoLjhDUvg%3D%3D">Clique e descubra!</a>
           </div>
         </article>
 
@@ -282,120 +273,118 @@
             <h3 class="card__kicker">Blog BX</h3>
             <h4 class="card__title">Marketing não cria reputação — amplifica o que já existe</h4>
             <p class="card__excerpt">Marketing não conserta nada — ele só torna mais visível o que a clínica realmente é.</p>
-            <a class="btn btn--small" href="https://www.linkedin.com/pulse/marketing-n%C3%A3o-cria-reputa%C3%A7%C3%A3o-amplifica-o-que-j%C3%A1-existe-felipe-augusto-xdhmf/?trackingId=u0puoO2DSimXeOmfl%2BMMZg%3D%3D" onclick="trackVejaMaisCard3()">Clique e descubra!</a>
+            <a class="btn btn--small" href="https://www.linkedin.com/pulse/marketing-n%C3%A3o-cria-reputa%C3%A7%C3%A3o-amplifica-o-que-j%C3%A1-existe-felipe-augusto-xdhmf/?trackingId=u0puoO2DSimXeOmfl%2BMMZg%3D%3D">Clique e descubra!</a>
           </div>
         </article>
       </div>
 
       <!-- ===== BOTÃO "VER MAIS" ===== -->
       <div class="featured__more">
-        <a class="btn btn--pill" href="https://www.linkedin.com/newsletters/decis%C3%A3o-cl%C3%ADnica-7386941384936689664/" onclick="trackBotaoVejaMaisAqui()">Veja mais conteúdos aqui</a>
+        <a class="btn btn--pill" href="https://www.linkedin.com/newsletters/decis%C3%A3o-cl%C3%ADnica-7386941384936689664/">Veja mais conteúdos aqui</a>
       </div>
     </div>
   </section>
 
-    <!-- ===== RODAPÉ ===== -->
-    <footer class="footer" role="contentinfo">
-        <div class="container footer__inner">
-            <!-- ===== MARCA DO RODAPÉ ===== -->
-            <div class="footer__brand">
-                <!-- ===== MARCA DO RODAPÉ ===== -->
-            <div class="footer__brand">
-                <article class="contact-card">
-        <div>
+  <!-- ===== RODAPÉ ===== -->
+  <footer class="footer" role="contentinfo">
+    <div class="container">
+      <div class="footer__inner">
+        <!-- ===== CONTACT CARD (ESQUERDA) ===== -->
+        <div class="footer__form">
+          <article class="contact-card">
             <h3>Entre em contato conosco</h3>
 
             <form class="contact-form">
-                <div class="form-group">
-                    <label for="nome">Seu nome</label>
-                    <input type="text" id="nome" placeholder="Seu nome" aria-label="nome" />
+              <div class="form-group">
+                <label for="nome">Seu nome</label>
+                <input type="text" id="nome" placeholder="Seu nome" />
+              </div>
+
+              <div class="form-group">
+                <label for="email">Seu e-mail</label>
+                <input type="email" id="email" placeholder="Seu e-mail" />
+              </div>
+
+              <div class="form-group">
+                <label for="telefone">Seu telefone</label>
+                <input type="tel" id="telefone" placeholder="Seu telefone" />
+              </div>
+
+              <div class="form-footer">
+                <div class="checkbox-group">
+                  <input type="checkbox" id="notificacoes" />
+                  <label for="notificacoes">
+                    Aceito receber notificações
+                  </label>
                 </div>
 
-                <div class="form-group">
-                    <label for="email">Seu e-mail</label>
-                    <input type="email" id="email" placeholder="Seu e-mail" aria-label="email" />
-                </div>
-
-                <div class="form-group">
-                    <label for="telefone">Seu Telefone</label>
-                    <input type="tel" id="telefone" placeholder="Seu Telefone" aria-label="telefone" />
-                </div>
-
-                <div class="form-footer">
-                    <div class="checkbox-group">
-                        <input type="checkbox" id="notificacoes" />
-                        <label for="notificacoes">Aceito que concordo em receber notificações</label>
-                    </div>
-                    <button type="submit" class="btn-submit" onclick="formValidate()">Para mais detalhes!</button>
-                </div>
+                <button type="submit" class="btn-submit">
+                  Para mais detalhes!
+                </button>
+              </div>
             </form>
+          </article>
         </div>
-    </article>
-            </div>
-            </div>
 
-            <!-- ===== COLUNAS DO RODAPÉ ===== -->
-            <div class="footer__cols">
-                <!-- ===== COLUNA 1 - INSTITUCIONAL ===== -->
-                <div class="footer__col">
-                    <h4>INSTITUCIONAL</h4>
-                    <ul>
-                        <li><a href="index.html">Home</a></li>
-                        <li><a href="nosso-trabalho.html">Nosso Trabalho</a></li>
-                        <li><a href="nosso-trabalho.html">Sobre Nós</a></li>
-                        <li><a href="nosso-trabalho.html">Equipe BX</a></li>
-                        <li><a href="nosso-trabalho.html">Missão, Visão e Valores</a></li>
-                    </ul>
-                </div>
+        <!-- ===== COLUNAS (DIREITA) ===== -->
+        <div class="footer__cols">
+          <!-- INSTITUCIONAL -->
+          <div class="footer__col">
+            <h4>INSTITUCIONAL</h4>
+            <ul>
+              <li><a href="index.html">Home</a></li>
+              <li><a href="nosso-trabalho.html">Nosso Trabalho</a></li>
+              <li><a href="#">Sobre Nós</a></li>
+              <li><a href="#">Equipe BX</a></li>
+              <li><a href="#">Missão, Visão e Valores</a></li>
+            </ul>
+          </div>
 
-                <!-- ===== COLUNA 2 - SERVIÇOS ===== -->
-                <div class="footer__col">
-                    <h4>SERVIÇOS</h4>
-                    <ul>
-                        <li><a href="crm.html">Implementação de CRM</a></li>
-                        <li><a href="sites-corporativos.html">Criação de Sites e Landing Pages</a></li>
-                        <li><a href="e-commerce.html">Criação de E-commerce</a></li>
-                        <li><a href="social_media.html">Social Media</a></li>
-                        <li><a href="trafego_pago.html">Tráfego Pago</a></li>
-                        <li><a href="automacoes_ia.html">Automações com IA</a></li>
-                        <li><a href="dashboard_performance.html">Dashboards de Performance</a></li>
-                        <li><a href="edicao_profissional.html">Edição de Videos</a></li>
-                    </ul>
-                </div>
+          <!-- SERVIÇOS -->
+          <div class="footer__col">
+            <h4>SERVIÇOS</h4>
+            <ul>
+              <li><a href="crm.html">Implementação de CRM</a></li>
+              <li><a href="sites-corporativos.html">Criação de Sites</a></li>
+              <li><a href="e-commerce.html">Criação de E-commerce</a></li>
+              <li><a href="social_media.html">Social Media</a></li>
+              <li><a href="trafego_pago.html">Tráfego Pago</a></li>
+              <li><a href="automacoes_ia.html">Automações com IA</a></li>
+              <li><a href="dashboard_performance.html">Dashboards</a></li>
+              <li><a href="edicao_profissional.html">Edição de Vídeos</a></li>
+            </ul>
+          </div>
 
-                <!-- ===== COLUNA 3 - SOLUÇÕES ===== -->
-                <div class="footer__col">
-                    <h4>SOLUÇÕES</h4>
-                    <ul>
-                        <li><a href="nour_clinicas.html">Sistema Nour Clínicas</a></li>
-                        <li><a href="#">Consultoria de Marketing</a></li>
-                        <li><a href="#">Treinamentos Corporativos</a></li>
-                        <li><a href="#">Materiais Gratuitos</a></li>
-                    </ul>
-                </div>
-
-            </div>
+          <!-- SOLUÇÕES -->
+          <div class="footer__col">
+            <h4>SOLUÇÕES</h4>
+            <ul>
+              <li><a href="nour_clinicas.html">Sistema Nour Clínicas</a></li>
+              <li><a href="#">Consultoria de Marketing</a></li>
+              <li><a href="#">Treinamentos Corporativos</a></li>
+              <li><a href="#">Materiais Gratuitos</a></li>
+            </ul>
+          </div>
         </div>
-        
+      </div>
+    </div>
 
-        <!-- ===== PARTE INFERIOR DO RODAPÉ ===== -->
-        <div class="footer__bottom">
-            <div class="container">
-                <div class="footer__copyright">
-                    &copy; 2025 BX Assessoria. Todos os direitos reservados.
-                </div>
-            </div>
-        </div>
-    </footer>
+    <!-- ===== BARRA INFERIOR ===== -->
+    <div class="footer__bottom">
+      <div class="container">
+        <p class="footer__copyright">
+          © 2025 BX Assessoria. Todos os direitos reservados.
+        </p>
+      </div>
+    </div>
+  </footer>
 
-  <!-- ===== JAVASCRIPT ===== -->
+  <!-- ===== WHATSAPP FLOAT ===== -->
+  <a href="https://wa.me/5511989023070" class="whatsapp-float" target="_blank" rel="noopener noreferrer">
+    <img src="./assets/whatsapp-icon.png" class="whatsapp-icon" alt="WhatsApp">
+  </a>
   <script src="assets/hamburger.js"></script>
 
-<a href="https://wa.me/5511976153809" class="whatsapp-float" width="80px" target="blank" rel="noopener noreferrer">
-  <img src="./assets/whatsapp-icon.png" class="whatsapp-icon" onclick="trackClickWhatsapp()">
-</a>
-
+    
 </body>
-
 </html>
-

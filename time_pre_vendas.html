@@ -11,29 +11,12 @@
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
         rel="stylesheet">
     <link rel="stylesheet" href="styles/Index.css">
-    <script src="scripts.js"></script>
-  <!-- Meta Pixel Code -->
-  <script>
-    !function(f,b,e,v,n,t,s)
-    {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
-    n.callMethod.apply(n,arguments):n.queue.push(arguments)};
-    if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
-    n.queue=[];t=b.createElement(e);t.async=!0;
-    t.src=v;s=b.getElementsByTagName(e)[0];
-    s.parentNode.insertBefore(t,s)}(window, document,'script',
-    'https://connect.facebook.net/en_US/fbevents.js');
-    fbq('init', '3457191164418833');
-    fbq('trackCustom', 'ViewTimePreVendas');
-    </script>
-    <noscript><img height="1" width="1" style="display:none"
-    src="https://www.facebook.com/tr?id=3457191164418833&ev=PageView&noscript=1"
-    /></noscript>
-  <!-- End Meta Pixel Code -->
 
     
 </head>
 
 <body>
+<div id="header-root"></div>
  <!-- ===== FAIXA SUPERIOR ===== -->
     <div class="topstrip" role="region" aria-label="Promoção">
         Agende uma reunião diagnóstica gratuitamente
@@ -188,7 +171,7 @@
 
       <!-- ===== CALL TO ACTION DO CABEÇALHO ===== -->
       <div class="header__cta">
-        <a class="btn btn--primary" href="contatos.html" onclick="trackClickAgendeJa()">Agende já</a>
+        <a class="btn btn--primary" href="contatos.html">Agende já</a>
       </div>
     </div>
   </header>
@@ -306,7 +289,7 @@
                         <input type="checkbox" id="notificacoes" />
                         <label for="notificacoes">Aceito que concordo em receber notificações</label>
                     </div>
-                    <button type="submit" class="btn-submit" onclick="formValidate()">Para mais detalhes!</button>
+                    <button type="submit" class="btn-submit">Para mais detalhes!</button>
                 </div>
             </form>
         </div>
@@ -366,9 +349,10 @@
         </div>
     </footer>
         <script src="assets/hamburger.js"></script>
-        <a href="https://wa.me/5511999999999" class="whatsapp-float" width="80px" target="blank" rel="noopener noreferrer">
-    <img src="./assets/whatsapp-icon.png" class="whatsapp-icon" onclick="trackClickWhatsapp()">
+    <a href="https://wa.me/5511989023070" class="whatsapp-float" width="80px" target="blank" rel="noopener noreferrer">
+    <img src="./assets/whatsapp-icon.png" class="whatsapp-icon">
 </a>
+<script src="assets/header-loader.js"></script>
 </body>
 
 </html>

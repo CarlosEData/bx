@@ -11,30 +11,13 @@
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
         rel="stylesheet">
     <link rel="stylesheet" href="styles/Evoluir_negocio.css">
-    <script src="scripts.js"></script>
-  <!-- Meta Pixel Code -->
-  <script>
-    !function(f,b,e,v,n,t,s)
-    {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
-    n.callMethod.apply(n,arguments):n.queue.push(arguments)};
-    if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
-    n.queue=[];t=b.createElement(e);t.async=!0;
-    t.src=v;s=b.getElementsByTagName(e)[0];
-    s.parentNode.insertBefore(t,s)}(window, document,'script',
-    'https://connect.facebook.net/en_US/fbevents.js');
-    fbq('init', '3457191164418833');
-    fbq('trackCustom', 'ViewDiagnosticoComercial');
-    </script>
-    <noscript><img height="1" width="1" style="display:none"
-    src="https://www.facebook.com/tr?id=3457191164418833&ev=PageView&noscript=1"
-    /></noscript>
-  <!-- End Meta Pixel Code -->
 
     
 </head>
 
 <body>
-     <!-- ===== FAIXA SUPERIOR ===== -->
+<div id="header-root"></div>
+      <!-- ===== FAIXA SUPERIOR ===== -->
   <div class="topstrip" role="region" aria-label="Promoção">
     Agende uma reunião diagnóstica gratuitamente
   </div>
@@ -47,14 +30,13 @@
         <a href="#" class="brand" aria-label="BX - Home">
           <img src="assets/3.png" alt="BX - Consultoria em Marketing Digital" class="header__logo" />
         </a>
-      <!-- ===== BOTÃO HAMBÚRGUER (MOBILE) ===== -->
+      </div>
+
+       <!-- ===== BOTÃO HAMBÚRGUER (MOBILE) ===== -->
             <button class="hamburger" aria-label="Abrir menu" id="hamburger" aria-expanded="false">
                 <span></span><span></span><span></span>
             </button>
 
-          <div class="mobile-menu" id="mobileMenu">
-    <!-- NAV + CTA serão movidos aqui no mobile via JS -->
-</div>
       <!-- ===== NAVEGAÇÃO PRINCIPAL ===== -->
       <nav class="nav header__nav" aria-label="Main Navigation">
         <ul class="nav__list" id="navList">
@@ -132,7 +114,7 @@
                     </div>
                   </div>
                   
-            
+              
                 </div>
               </div>
             </div>
@@ -174,11 +156,10 @@
 
       <!-- ===== CALL TO ACTION DO CABEÇALHO ===== -->
       <div class="header__cta">
-        <a class="btn btn--primary" href="contatos.html" onclick="trackClickAgendeJa()">Agende já</a>
+        <a class="btn btn--primary" href="contatos.html">Agende já</a>
       </div>
     </div>
   </header>
-
     <!-- ===== SEÇÃO PRINCIPAL ===== -->
     <section class="main-content" id="diagnostico-comercial">
         <div class="container">
@@ -231,26 +212,26 @@
             <div class="solutions-grid">
                 <!-- ===== CARD SOCIAL MEDIA ===== -->
                 <div class="solution-card">
-                    <h3>1 Coleta de informações</h3>
-                    <p> Entendemos seu momento e principais desafios.</p>
+                    <h3>Coleta de informações</h3>
+                    <p>Entendemos seu momento e principais desafios.</p>
                 </div>
 
                 <!-- ===== CARD TRÁFEGO PAGO ===== -->
                 <div class="solution-card">
-                    <h3>2 Análise completa</h3>
+                    <h3>Análise completa</h3>
                     <p>Avaliamos marketing, vendas, atendimento e canais.
                     </p>
                 </div>
 
                 <!-- ===== CARD EDIÇÃO DE VÍDEOS ===== -->
                 <div class="solution-card">
-                    <h3>3 Identificação de gaps no funil</h3>
+                    <h3>Identificação de gaps no funil</h3>
                     <p>Apontamos pontos críticos e oportunidades reais.</p>
                 </div>
 
                 <!-- ===== CARD TERCEIRIZAÇÃO COMERCIAL ===== -->
                 <div class="solution-card">
-                    <h3>4 Direcionamento final</h3>
+                    <h3>Direcionamento final</h3>
                     <p>Você recebe o diagnóstico com prioridades claras.</p>
                 </div>
             </div>
@@ -327,7 +308,7 @@
                         <input type="checkbox" id="notificacoes" />
                         <label for="notificacoes">Aceito que concordo em receber notificações</label>
                     </div>
-                    <button type="submit" class="btn-submit" onclick="formValidate()">Para mais detalhes!</button>
+                    <button type="submit" class="btn-submit">Para mais detalhes!</button>
                 </div>
             </form>
         </div>
@@ -386,10 +367,10 @@
             </div>
         </div>
     </footer>
-        <script src="assets/hamburger.js"></script>
-    <a href="https://wa.me/5511999999999" class="whatsapp-float" width="80px" target="blank" rel="noopener noreferrer">
-  <img src="./assets/whatsapp-icon.png" class="whatsapp-icon" onclick="trackClickWhatsapp()">
+    <a href="https://wa.me/5511989023070" class="whatsapp-float" width="80px" target="blank" rel="noopener noreferrer">
+  <img src="./assets/whatsapp-icon.png" class="whatsapp-icon">
 </a>
-</body>
+        <script src="assets/hamburger.js"></script>
 
+</body>
 </html>

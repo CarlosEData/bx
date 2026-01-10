@@ -1,41 +1,17 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>BX - Implementação de CRM</title>
+    <title>BX - Contas a Receber</title>
     <link rel="shortcut icon" href="assets/ibx.png">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
-        rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="styles/Index.css">
-    <script src="scripts.js"></script>
-  <!-- Meta Pixel Code -->
-  <script>
-    !function(f,b,e,v,n,t,s)
-    {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
-    n.callMethod.apply(n,arguments):n.queue.push(arguments)};
-    if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
-    n.queue=[];t=b.createElement(e);t.async=!0;
-    t.src=v;s=b.getElementsByTagName(e)[0];
-    s.parentNode.insertBefore(t,s)}(window, document,'script',
-    'https://connect.facebook.net/en_US/fbevents.js');
-    fbq('init', '3457191164418833');
-    fbq('trackCustom', 'ViewContasAReceber');
-    </script>
-    <noscript><img height="1" width="1" style="display:none"
-    src="https://www.facebook.com/tr?id=3457191164418833&ev=PageView&noscript=1"
-    /></noscript>
-  <!-- End Meta Pixel Code -->
-
-    
-    
 </head>
-
 <body>
-     <!-- ===== FAIXA SUPERIOR ===== -->
+    <!-- ===== FAIXA SUPERIOR ===== -->
     <div class="topstrip" role="region" aria-label="Promoção">
         Agende uma reunião diagnóstica gratuitamente
     </div>
@@ -52,15 +28,11 @@
 
             <!-- ===== BOTÃO HAMBÚRGUER (MOBILE) ===== -->
             <button class="hamburger" aria-label="Abrir menu" id="hamburger" aria-expanded="false">
-                <span></span><span></span><span></span>
+                <span></span>
             </button>
 
-          <div class="mobile-menu" id="mobileMenu">
-    <!-- NAV + CTA serão movidos aqui no mobile via JS -->
-</div>
-
             <!-- ===== NAVEGAÇÃO PRINCIPAL ===== -->
-            <nav class="nav header__nav" aria-label="Main Navigation">
+            <nav class="nav" aria-label="Navegação Principal">
                 <ul class="nav__list" id="navList">
                     <!-- ===== ITEM HOME ===== -->
                     <li class="nav__item">
@@ -86,114 +58,100 @@
                                         <div class="mega-menu__section">
                                             <h4 class="mega-menu__section-title">Para evoluir seu negócio</h4>
                                             <ul class="mega-menu__list">
-                                                <li><a href="diagnostico_comercial.html"
-                                                        class="mega-menu__link">Diagnóstico Comercial</a></li>
-                                                <li><a href="consultoria_PME.html" class="mega-menu__link">Consultoria
-                                                        para PMEs</a></li>
-                                                <li><a href="treinamento_corporativo.html"
-                                                        class="mega-menu__link">Treinamentos Corporativos</a></li>
+                                                <li><a href="diagnostico_comercial.html" class="mega-menu__link">Diagnóstico Comercial</a></li>
+                                                <li><a href="consultoria_PME.html" class="mega-menu__link">Consultoria para PMEs</a></li>
+                                                <li><a href="treinamento_corporativo.html" class="mega-menu__link">Treinamentos Corporativos</a></li>
                                             </ul>
                                         </div>
                                     </div>
 
                                    <!-- ===== COLUNA 2 - MAIS EFICIÊNCIA ===== -->
-                  <div class="mega-menu__col">
-                    <div class="mega-menu__section">
-                      <h4 class="mega-menu__section-title">Mais eficiência</h4>
-                      <ul class="mega-menu__list">
-                        <li><a href="sites-corporativos.html" class="mega-menu__link">Criação de Sites Corporativos</a></li>
-                        <li><a href="e-commerce.html" class="mega-menu__link">Criação de E-commerces</a></li>
-                        <li><a href="sistema_gestao.html" class="mega-menu__link">Sistema de Gestão</a></li>
-                        <li><a href="gravacao-video.html" class="mega-menu__link">Gravação de Vídeos Profissionais</a></li>
-                        <li><a href="automacoes_ia.html" class="mega-menu__link">Automações</a></li>
-                        <li><a href="cobertura-eventos.html" class="mega-menu__link">Cobertura de Eventos</a></li>
-                        <li><a href="dashboard_performance.html" class="mega-menu__link">Dashboards de Performance</a></li>
-                        <li><a href="crm.html" class="mega-menu__link">Implementação de CRM</a></li>
-                         <a href="#" class="mega-menu__link">Terceirização Comercial</a>
-                          <ul class="mega-menu__sublist">
-                       <li><a href="time_pre_vendas.html" class="mega-menu__link mega-menu__link--child">Time de Pré-vendas (SDRs)</a></li>
-                        <li><a href="time_fechamento_vendas.html" class="mega-menu__link mega-menu__link--child">Time de Fechamento de Vendas (Closers)</a></li>
-                        <li><a href="costumer_sucess.html" class="mega-menu__link mega-menu__link--child">Time de Sucesso do Cliente (CS)</a></li>
-                        <li><a href="contas_a_receber.html" class="mega-menu__link mega-menu__link--child">Time de Contas a Receber (AR)</a></li>
-                          </ul>
-                        </li>
-                      </ul>
-                    </div>
-                  </div>
+                                    <div class="mega-menu__col">
+                                        <div class="mega-menu__section">
+                                            <h4 class="mega-menu__section-title">Mais eficiência</h4>
+                                            <ul class="mega-menu__list">
+                                                <li><a href="sites-corporativos.html" class="mega-menu__link">Criação de Sites Corporativos</a></li>
+                                                <li><a href="e-commerce.html" class="mega-menu__link">Criação de E-commerces</a></li>
+                                                <li><a href="sistema_gestao.html" class="mega-menu__link">Sistema de Gestão</a></li>
+                                                <li><a href="gravacao-video.html" class="mega-menu__link">Gravação de Vídeos Profissionais</a></li>
+                                                <li><a href="automacoes_ia.html" class="mega-menu__link">Automações</a></li>
+                                                <li><a href="cobertura-eventos.html" class="mega-menu__link">Cobertura de Eventos</a></li>
+                                                <li><a href="dashboard_performance.html" class="mega-menu__link">Dashboards de Performance</a></li>
+                                                <li><a href="crm.html" class="mega-menu__link">Implementação de CRM</a></li>
+                                                <li>
+                                                    <span class="mega-menu__link" style="cursor: default;">Terceirização Comercial</span>
+                                                    <ul class="mega-menu__sublist">
+                                                        <li><a href="time_pre_vendas.html" class="mega-menu__link mega-menu__link--child">Time de Pré-vendas (SDRs)</a></li>
+                                                        <li><a href="time_fechamento_vendas.html" class="mega-menu__link mega-menu__link--child">Time de Fechamento de Vendas (Closers)</a></li>
+                                                        <li><a href="costumer_sucess.html" class="mega-menu__link mega-menu__link--child">Time de Sucesso do Cliente (CS)</a></li>
+                                                        <li><a href="contas_a_receber.html" class="mega-menu__link mega-menu__link--child">Time de Contas a Receber (AR)</a></li>
+                                                    </ul>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                    </div>
 
                                     <!-- ===== COLUNA 3 - EXECUÇÃO E ACOMPANHAMENTO ===== -->
                                     <div class="mega-menu__col">
                                         <div class="mega-menu__section">
                                             <h4 class="mega-menu__section-title">Execução e Acompanhamento</h4>
                                             <ul class="mega-menu__list">
-                                                <li><a href="social_media.html" class="mega-menu__link">Social Media</a>
-                                                </li>
+                                                <li><a href="social_media.html" class="mega-menu__link">Social Media</a></li>
                                                 <li>
                                                     <a href="trafego_pago.html" class="mega-menu__link">Tráfego Pago</a>
                                                     <ul class="mega-menu__sublist">
-                                                        <li><a href="#"
-                                                                class="mega-menu__link mega-menu__link--child">Google
-                                                                Ads</a></li>
-                                                        <li><a href="#"
-                                                                class="mega-menu__link mega-menu__link--child">Meta
-                                                                Ads</a></li>
-                                                        <li><a href="#"
-                                                                class="mega-menu__link mega-menu__link--child">TikTok
-                                                                Ads</a></li>
+                                                        <li><a href="#" class="mega-menu__link mega-menu__link--child">Google Ads</a></li>
+                                                        <li><a href="#" class="mega-menu__link mega-menu__link--child">Meta Ads</a></li>
+                                                        <li><a href="#" class="mega-menu__link mega-menu__link--child">TikTok Ads</a></li>
                                                     </ul>
                                                 </li>
-                                                <li><a href="edicao_profissional.html" class="mega-menu__link">Edição
-                                                        Profissional de Vídeo</a></li>
+                                                <li><a href="edicao_profissional.html" class="mega-menu__link">Edição Profissional de Vídeo</a></li>
                                             </ul>
                                         </div>
-                                 </div>
-                  
-               
-                </div>
-              </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </li>
+
+                    <!-- ===== ITEM NOSSO TRABALHO ===== -->
+                    <li class="nav__item">
+                        <a href="nosso-trabalho.html" class="nav__link">
+                            Nosso Trabalho
+                        </a>
+                    </li>
+
+                    <!-- ===== ITEM SISTEMAS (COM DROPDOWN) ===== -->
+                    <li class="nav__item has-dropdown" data-key="sistemas">
+                        <a href="#" class="nav__link" aria-haspopup="true" aria-expanded="false">
+                            Sistemas
+                            <svg class="nav__arrow" width="12" height="12" viewBox="0 0 12 12" fill="none">
+                                <path d="M3 4.5L6 7.5L9 4.5" stroke="currentColor" stroke-width="1.5"
+                                    stroke-linecap="round" stroke-linejoin="round" />
+                            </svg>
+                        </a>
+                        <div class="dropdown" role="menu" aria-hidden="true">
+                            <ul class="dropdown__list">
+                                <li><a href="nour_clinicas.html" class="dropdown__link">Nour Clínicas</a></li>
+                            </ul>
+                        </div>
+                    </li>
+
+                    <!-- ===== ITEM CONTATOS ===== -->
+                    <li class="nav__item">
+                        <a href="contatos.html" class="nav__link">
+                            Contatos
+                        </a>
+                    </li>
+                </ul>
+            </nav>
+
+            <!-- ===== CALL TO ACTION DO CABEÇALHO ===== -->
+            <div class="header__cta">
+                <a class="btn btn--primary" href="contatos.html">Agende já</a>
             </div>
-          </li>
-
-          <!-- ===== ITEM NOSSO TRABALHO (COM DROPDOWN) ===== -->
-          <li class="nav__item has-dropdown" data-key="nosso-trabalho">
-            <a href="nosso-trabalho.html" class="nav__link" aria-haspopup="true" aria-expanded="false">
-              Nosso Trabalho
-            </a>
-                                                                    <script src="assets/hamburger.js"></script>
-                                                                    <a href="https://wa.me/5511999999999" class="whatsapp-float" width="80px" target="blank" rel="noopener noreferrer">
-                                                                        <img src="./assets/whatsapp-icon.png" class="whatsapp-icon">
-                                                                    </a>
-          <li class="nav__item has-dropdown" data-key="sistemas">
-            <a href="#" class="nav__link" aria-haspopup="true" aria-expanded="false">
-              Sistemas
-              <svg class="nav__arrow" width="12" height="12" viewBox="0 0 12 12" fill="none">
-                <path d="M3 4.5L6 7.5L9 4.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-              </svg>
-            </a>
-            <div class="dropdown" role="menu" aria-hidden="true">
-              <ul class="dropdown__list">
-                <li><a href="nour_clinicas.html" class="dropdown__link">Nour Clínicas</a></li>
-              </ul>
-            </div>
-          </li>
-
-          <!-- ===== ITEM CONTATOS (COM DROPDOWN) ===== -->
-          <li class="nav__item has-dropdown" data-key="contatos">
-            <a href="contatos.html" class="nav__link" aria-haspopup="true" aria-expanded="false">
-              Contatos
-                <path d="M3 4.5L6 7.5L9 4.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-              </svg>
-            </a>
-          </li>
-        </ul>
-      </nav>
-
-      <!-- ===== CALL TO ACTION DO CABEÇALHO ===== -->
-      <div class="header__cta">
-        <a class="btn btn--primary" href="contatos.html" onclick="trackClickAgendeJa()">Agende já</a>
-      </div>
-    </div>
-  </header>
+        </div>
+    </header>
 
     <!-- ===== SEÇÃO PRINCIPAL ===== -->
     <section class="main-content" id="contas-a-receber">
@@ -206,16 +164,11 @@
                     financeira. Com isso, sua empresa recebe mais, recebe mais rápido e com muito menos esforço.
                 </p>
 
-                <br>
-
                 <a href="index.html" class="btn-saiba">
                     Saiba Mais
                 </a>
 
-                <br>
-
-                <h2 style="color: var(--white); margin-top: 40px; margin-bottom: 20px;">Por que um setor de Contas a
-                    Receber é indispensável?</h2>
+                <h2>Por que um setor de Contas a Receber é indispensável?</h2>
                 <p>Quando o financeiro opera sem processo, a empresa vive no escuro. Atrasos viram rotina, boletos
                     vencem, clientes esquecem pagamentos e a inadimplência cresce sem controle. Isso compromete o caixa,
                     atrapalha investimentos e limita a expansão do negócio.
@@ -225,8 +178,7 @@
                     organizado e capaz de sustentar crescimento real.
                 </p>
 
-                <h2 style="color: var(--white); margin-top: 40px; margin-bottom: 20px;">Como funciona o Contas a Receber
-                    da BX?</h2>
+                <h2>Como funciona o Contas a Receber da BX?</h2>
                 <p>Começamos analisando sua operação financeira, seus modelos de cobrança, métodos de pagamento e
                     comportamento dos clientes. A partir disso, estruturamos todo o fluxo com régua de cobrança
                     preventiva e corretiva, mensagens, prazos, rotinas, integrações e métricas.
@@ -258,8 +210,7 @@
                 <!-- ===== CARD TRÁFEGO PAGO ===== -->
                 <div class="solution-card">
                     <h3>Tráfego Pago</h3>
-                    <p>Campanhas constantes no Google Ads, Meta Ads e TikTok Ads para atrair leads prontos para comprar.
-                    </p>
+                    <p>Campanhas constantes no Google Ads, Meta Ads e TikTok Ads para atrair leads prontos para comprar.</p>
                 </div>
 
                 <!-- ===== CARD EDIÇÃO DE VÍDEOS ===== -->
@@ -277,45 +228,38 @@
         </div>
     </section>
 
-
-     <!-- ===== RODAPÉ ===== -->
+    <!-- ===== RODAPÉ ===== -->
     <footer class="footer" role="contentinfo">
         <div class="container footer__inner">
             <!-- ===== MARCA DO RODAPÉ ===== -->
             <div class="footer__brand">
-                <!-- ===== MARCA DO RODAPÉ ===== -->
-            <div class="footer__brand">
-                <article class="contact-card">
-        <div>
-            <h3>Entre em contato conosco</h3>
-
-            <form class="contact-form">
-                <div class="form-group">
-                    <label for="nome">Seu nome</label>
-                    <input type="text" id="nome" placeholder="Seu nome" aria-label="nome" />
-                </div>
-
-                <div class="form-group">
-                    <label for="email">Seu e-mail</label>
-                    <input type="email" id="email" placeholder="Seu e-mail" aria-label="email" />
-                </div>
-
-                <div class="form-group">
-                    <label for="telefone">Seu Telefone</label>
-                    <input type="tel" id="telefone" placeholder="Seu Telefone" aria-label="telefone" />
-                </div>
-
-                <div class="form-footer">
-                    <div class="checkbox-group">
-                        <input type="checkbox" id="notificacoes" />
-                        <label for="notificacoes">Aceito que concordo em receber notificações</label>
+                <img src="assets/ibx.png" alt="BX - Consultoria em Marketing Digital" />
+                <div class="contact-card">
+                    <div>
+                        <h3>Entre em contato conosco</h3>
+                        <form class="contact-form">
+                            <div class="form-group">
+                                <label for="nome">Seu nome</label>
+                                <input type="text" id="nome" placeholder="Seu nome" aria-label="nome" />
+                            </div>
+                            <div class="form-group">
+                                <label for="email">Seu e-mail</label>
+                                <input type="email" id="email" placeholder="Seu e-mail" aria-label="email" />
+                            </div>
+                            <div class="form-group">
+                                <label for="telefone">Seu Telefone</label>
+                                <input type="tel" id="telefone" placeholder="Seu Telefone" aria-label="telefone" />
+                            </div>
+                            <div class="form-footer">
+                                <div class="checkbox-group">
+                                    <input type="checkbox" id="notificacoes" />
+                                    <label for="notificacoes">Aceito que concordo em receber notificações</label>
+                                </div>
+                                <button type="submit" class="btn-submit">Para mais detalhes!</button>
+                            </div>
+                        </form>
                     </div>
-                    <button type="submit" class="btn-submit" onclick="formValidate()">Para mais detalhes!</button>
                 </div>
-            </form>
-        </div>
-    </article>
-            </div>
             </div>
 
             <!-- ===== COLUNAS DO RODAPÉ ===== -->
@@ -369,10 +313,13 @@
             </div>
         </div>
     </footer>
-    <script src="assets/hamburger.js"></script>
-    <a href="https://wa.me/5511999999999" class="whatsapp-float" width="80px" target="blank" rel="noopener noreferrer">
-  <img src="./assets/whatsapp-icon.png" class="whatsapp-icon" onclick="trackClickWhatsapp()">
-</a>
-</body>
 
+    <!-- ===== WHATSAPP FLOAT ===== -->
+    <a href="https://wa.me/5511989023070" class="whatsapp-float" target="_blank" rel="noopener noreferrer">
+        <img src="./assets/whatsapp-icon.png" class="whatsapp-icon" alt="WhatsApp">
+    </a>
+
+    <!-- ===== SCRIPTS ===== -->
+    <script src="assets/hamburger.js"></script>
+</body>
 </html>

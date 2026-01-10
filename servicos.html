@@ -604,6 +604,47 @@
         display:flex !important;
       }
 
+/* Forçar que esteja ligado à viewport; aplicar em alta especificidade */
+.whatsapp-float {
+  position: fixed !important;
+  bottom: 20px !important;
+  right: 20px !important;
+  width: 64px;
+  height: 64px;
+  border-radius: 50%;
+  background: #25d366;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 6px 18px rgba(0,0,0,0.25);
+  z-index: 2147483647 !important; /* z-index extremo para evitar estar abaixo de algo */
+  text-decoration: none;
+  cursor: pointer;
+  transition: transform .16s ease;
+  -webkit-tap-highlight-color: transparent;
+}
+
+/* hover / foco */
+.whatsapp-float:hover,
+.whatsapp-float:focus {
+  transform: scale(1.06);
+  outline: none;
+}
+
+/* SVG do ícone */
+.whatsapp-icon {
+  width: 34px;
+  height: 34px;
+  display: block;
+}
+
+/* pequeno ajuste em telas móveis */
+@media (max-width: 420px) {
+  .whatsapp-float { width: 52px; height: 52px; bottom: 16px; right: 14px; }
+  .whatsapp-icon { width: 28px; height: 28px; }
+}
+
+
       .hamburger{
         display:flex;
       }
@@ -741,6 +782,7 @@
   </style>
 </head>
 <body>
+<div id="header-root"></div>
   <div class="topstrip" role="region" aria-label="Promoção">
     Agende uma reunião diagnóstica gratuitamente
   </div>
@@ -1259,5 +1301,11 @@
       updateMobileState();
     });
   </script>
+  
+<script src="assets/header-loader.js"></script>
+
+<a href="https://wa.me/5511989023070" class="whatsapp-float" width="80px" target="blank" rel="noopener noreferrer">
+  <img src="./assets/whatsapp-icon.png" class="whatsapp-icon">
+  </a>
 </body>
 </html>
