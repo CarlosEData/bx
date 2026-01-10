@@ -11,29 +11,11 @@
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
         rel="stylesheet">
     <link rel="stylesheet" href="styles/Index.css">
-    <script src="scripts.js"></script>
-  <!-- Meta Pixel Code -->
-  <script>
-    !function(f,b,e,v,n,t,s)
-    {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
-    n.callMethod.apply(n,arguments):n.queue.push(arguments)};
-    if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
-    n.queue=[];t=b.createElement(e);t.async=!0;
-    t.src=v;s=b.getElementsByTagName(e)[0];
-    s.parentNode.insertBefore(t,s)}(window, document,'script',
-    'https://connect.facebook.net/en_US/fbevents.js');
-    fbq('init', '3457191164418833');
-    fbq('trackCustom', 'ViewCoberturaEventos');
-    </script>
-    <noscript><img height="1" width="1" style="display:none"
-    src="https://www.facebook.com/tr?id=3457191164418833&ev=PageView&noscript=1"
-    /></noscript>
-  <!-- End Meta Pixel Code -->
 </head>
 
 <body>
 <div id="header-root"></div>
-     <!-- ===== FAIXA SUPERIOR ===== -->
+   <!-- ===== FAIXA SUPERIOR ===== -->
   <div class="topstrip" role="region" aria-label="Promoção">
     Agende uma reunião diagnóstica gratuitamente
   </div>
@@ -48,14 +30,12 @@
         </a>
       </div>
 
-       <!-- ===== BOTÃO HAMBÚRGUER (MOBILE) ===== -->
-            <button class="hamburger" aria-label="Abrir menu" id="hamburger" aria-expanded="false">
-                <span></span><span></span><span></span>
-            </button>
-
-          <div class="mobile-menu" id="mobileMenu">
-    <!-- NAV + CTA serão movidos aqui no mobile via JS -->
-</div>
+      <!-- ===== BOTÃO HAMBÚRGUER (MOBILE) ===== -->
+      <button class="hamburger" aria-label="Abrir menu" id="hamburger" aria-expanded="false">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
 
       <!-- ===== NAVEGAÇÃO PRINCIPAL ===== -->
       <nav class="nav header__nav" aria-label="Main Navigation">
@@ -103,12 +83,13 @@
                         <li><a href="cobertura-eventos.html" class="mega-menu__link">Cobertura de Eventos</a></li>
                         <li><a href="dashboard_performance.html" class="mega-menu__link">Dashboards de Performance</a></li>
                         <li><a href="crm.html" class="mega-menu__link">Implementação de CRM</a></li>
-                         <a href="#" class="mega-menu__link">Terceirização Comercial</a>
+                        <li>
+                          <a href="#" class="mega-menu__link">Terceirização Comercial</a>
                           <ul class="mega-menu__sublist">
-                       <li><a href="time_pre_vendas.html" class="mega-menu__link mega-menu__link--child">Time de Pré-vendas (SDRs)</a></li>
-                        <li><a href="time_fechamento_vendas.html" class="mega-menu__link mega-menu__link--child">Time de Fechamento de Vendas (Closers)</a></li>
-                        <li><a href="costumer_sucess.html" class="mega-menu__link mega-menu__link--child">Time de Sucesso do Cliente (CS)</a></li>
-                        <li><a href="contas_a_receber.html" class="mega-menu__link mega-menu__link--child">Time de Contas a Receber (AR)</a></li>
+                            <li><a href="time_pre_vendas.html" class="mega-menu__link mega-menu__link--child">Time de Pré-vendas (SDRs)</a></li>
+                            <li><a href="time_fechamento_vendas.html" class="mega-menu__link mega-menu__link--child">Time de Fechamento de Vendas (Closers)</a></li>
+                            <li><a href="costumer_sucess.html" class="mega-menu__link mega-menu__link--child">Time de Sucesso do Cliente (CS)</a></li>
+                            <li><a href="contas_a_receber.html" class="mega-menu__link mega-menu__link--child">Time de Contas a Receber (AR)</a></li>
                           </ul>
                         </li>
                       </ul>
@@ -133,19 +114,14 @@
                       </ul>
                     </div>
                   </div>
-                  
-              
                 </div>
               </div>
             </div>
           </li>
 
           <!-- ===== ITEM NOSSO TRABALHO (COM DROPDOWN) ===== -->
-          <li class="nav__item has-dropdown" data-key="nosso-trabalho">
-            <a href="nosso-trabalho.html" class="nav__link" aria-haspopup="true" aria-expanded="false">
-              Nosso Trabalho
-                <path d="M3 4.5L6 7.5L9 4.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-            </a>
+          <li class="nav__item">
+            <a href="nosso-trabalho.html" class="nav__link">Nosso Trabalho</a>
           </li>
 
           <!-- ===== ITEM SISTEMAS (COM DROPDOWN) ===== -->
@@ -163,13 +139,9 @@
             </div>
           </li>
 
-          <!-- ===== ITEM CONTATOS (COM DROPDOWN) ===== -->
-          <li class="nav__item has-dropdown" data-key="contatos">
-            <a href="contatos.html" class="nav__link" aria-haspopup="true" aria-expanded="false">
-              Contatos
-                <path d="M3 4.5L6 7.5L9 4.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-              </svg>
-            </a>
+        <!-- ===== ITEM CONTATOS (COM DROPDOWN) ===== -->
+                    <li class="nav__item">
+            <a href="contatos.html" class="nav__link">Contatos</a>
           </li>
         </ul>
       </nav>
@@ -193,9 +165,8 @@
 
                         <br>
 
-                <a href="index.html" class="btn-saiba">
-                    Saiba Mais
-                </a>
+                       <a class="btn btn--primary" href="https://wa.me/5511989023070">Saiba Mais</a>
+
 
 
                 <br>
@@ -359,7 +330,7 @@
     
 <script src="assets/hamburger.js"></script>
     <a href="https://wa.me/5511999999999" class="whatsapp-float" width="80px" target="blank" rel="noopener noreferrer">
-  <img src="./assets/whatsapp-icon.png" class="whatsapp-icon" onclick="trackClickWhatsapp()">
+  <img src="./assets/whatsapp-icon.png" class="whatsapp-icon">
 </a>
 <script src="assets/header-loader.js"></script>
 </body>
