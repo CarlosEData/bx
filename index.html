@@ -9,24 +9,24 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="styles/home.css">
-
+  <script src="scripts.js"></script>
   <!-- Meta Pixel Code -->
-<script>
-!function(f,b,e,v,n,t,s)
-{if(f.fbq)return;n=f.fbq=function(){n.callMethod?
-n.callMethod.apply(n,arguments):n.queue.push(arguments)};
-if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
-n.queue=[];t=b.createElement(e);t.async=!0;
-t.src=v;s=b.getElementsByTagName(e)[0];
-s.parentNode.insertBefore(t,s)}(window, document,'script',
-'https://connect.facebook.net/en_US/fbevents.js');
-fbq('init', '3457191164418833');
-fbq('track', 'PageView');
-</script>
-<noscript><img height="1" width="1" style="display:none"
-src="https://www.facebook.com/tr?id=3457191164418833&ev=PageView&noscript=1"
-/></noscript>
-<!-- End Meta Pixel Code -->
+  <script>
+    !function(f,b,e,v,n,t,s)
+    {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+    n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+    if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+    n.queue=[];t=b.createElement(e);t.async=!0;
+    t.src=v;s=b.getElementsByTagName(e)[0];
+    s.parentNode.insertBefore(t,s)}(window, document,'script',
+    'https://connect.facebook.net/en_US/fbevents.js');
+    fbq('init', '3457191164418833');
+    fbq('trackCustom', 'ViewHomePage');
+    </script>
+    <noscript><img height="1" width="1" style="display:none"
+    src="https://www.facebook.com/tr?id=3457191164418833&ev=PageView&noscript=1"
+    /></noscript>
+  <!-- End Meta Pixel Code -->
   
 </head>
 <body>
@@ -175,7 +175,7 @@ src="https://www.facebook.com/tr?id=3457191164418833&ev=PageView&noscript=1"
 
       <!-- ===== CALL TO ACTION DO CABEÇALHO ===== -->
       <div class="header__cta">
-        <a class="btn btn--primary" href="contatos.html">Agende já</a>
+        <a class="btn btn--primary" href="contatos.html" onclick="trackClickAgendeJa()">Agende já</a>
       </div>
     </div>
   </header>
@@ -256,7 +256,7 @@ src="https://www.facebook.com/tr?id=3457191164418833&ev=PageView&noscript=1"
             <h3 class="card__kicker">Blog BX</h3>
             <h4 class="card__title">O excesso de conteúdo e a escassez de mensagem</h4>
             <p class="card__excerpt">Muita gente posta demais, mas comunica de menos. Conteúdo sem mensagem vira ruído.</p>
-            <a class="btn btn--small" href="https://www.linkedin.com/pulse/o-excesso-de-conte%C3%BAdo-e-escassez-mensagem-felipe-augusto-b8cef/">Clique e descubra!</a>
+            <a class="btn btn--small" href="https://www.linkedin.com/pulse/o-excesso-de-conte%C3%BAdo-e-escassez-mensagem-felipe-augusto-b8cef/" onclick="trackVejaMaisCard1()">Clique e descubra!</a>
           </div>
         </article>
 
@@ -269,7 +269,7 @@ src="https://www.facebook.com/tr?id=3457191164418833&ev=PageView&noscript=1"
             <h3 class="card__kicker">Blog BX</h3>
             <h4 class="card__title">O custo oculto de operar clínica no modo "improviso"</h4>
             <p class="card__excerpt">Trabalhar no improviso gera prejuízos invisíveis: retrabalho, falhas, desgaste e perda de pacientes.</p>
-            <a class="btn btn--small" href="https://www.linkedin.com/pulse/o-custo-oculto-de-operar-cl%C3%ADnica-modo-improviso-felipe-augusto-eoilf/?trackingId=vko1wON1SIieyBoLjhDUvg%3D%3D">Clique e descubra!</a>
+            <a class="btn btn--small" href="https://www.linkedin.com/pulse/o-custo-oculto-de-operar-cl%C3%ADnica-modo-improviso-felipe-augusto-eoilf/?trackingId=vko1wON1SIieyBoLjhDUvg%3D%3D" onclick="trackVejaMaisCard2()">Clique e descubra!</a>
           </div>
         </article>
 
@@ -282,14 +282,14 @@ src="https://www.facebook.com/tr?id=3457191164418833&ev=PageView&noscript=1"
             <h3 class="card__kicker">Blog BX</h3>
             <h4 class="card__title">Marketing não cria reputação — amplifica o que já existe</h4>
             <p class="card__excerpt">Marketing não conserta nada — ele só torna mais visível o que a clínica realmente é.</p>
-            <a class="btn btn--small" href="https://www.linkedin.com/pulse/marketing-n%C3%A3o-cria-reputa%C3%A7%C3%A3o-amplifica-o-que-j%C3%A1-existe-felipe-augusto-xdhmf/?trackingId=u0puoO2DSimXeOmfl%2BMMZg%3D%3D">Clique e descubra!</a>
+            <a class="btn btn--small" href="https://www.linkedin.com/pulse/marketing-n%C3%A3o-cria-reputa%C3%A7%C3%A3o-amplifica-o-que-j%C3%A1-existe-felipe-augusto-xdhmf/?trackingId=u0puoO2DSimXeOmfl%2BMMZg%3D%3D" onclick="trackVejaMaisCard3()">Clique e descubra!</a>
           </div>
         </article>
       </div>
 
       <!-- ===== BOTÃO "VER MAIS" ===== -->
       <div class="featured__more">
-        <a class="btn btn--pill" href="https://www.linkedin.com/newsletters/decis%C3%A3o-cl%C3%ADnica-7386941384936689664/">Veja mais conteúdos aqui</a>
+        <a class="btn btn--pill" href="https://www.linkedin.com/newsletters/decis%C3%A3o-cl%C3%ADnica-7386941384936689664/" onclick="trackBotaoVejaMaisAqui()">Veja mais conteúdos aqui</a>
       </div>
     </div>
   </section>
@@ -326,7 +326,7 @@ src="https://www.facebook.com/tr?id=3457191164418833&ev=PageView&noscript=1"
                         <input type="checkbox" id="notificacoes" />
                         <label for="notificacoes">Aceito que concordo em receber notificações</label>
                     </div>
-                    <button type="submit" class="btn-submit">Para mais detalhes!</button>
+                    <button type="submit" class="btn-submit" onclick="formValidate()">Para mais detalhes!</button>
                 </div>
             </form>
         </div>
@@ -391,8 +391,8 @@ src="https://www.facebook.com/tr?id=3457191164418833&ev=PageView&noscript=1"
   <!-- ===== JAVASCRIPT ===== -->
   <script src="assets/hamburger.js"></script>
 
-<a href="https://wa.me/5511999999999" class="whatsapp-float" width="80px" target="blank" rel="noopener noreferrer">
-  <img src="./assets/whatsapp-icon.png" class="whatsapp-icon">
+<a href="https://wa.me/5511976153809" class="whatsapp-float" width="80px" target="blank" rel="noopener noreferrer">
+  <img src="./assets/whatsapp-icon.png" class="whatsapp-icon" onclick="trackClickWhatsapp()">
 </a>
 
 </body>
