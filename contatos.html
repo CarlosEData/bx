@@ -9,6 +9,24 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="styles/contatos.css">
+    <script src="scripts.js"></script>
+  <!-- Meta Pixel Code -->
+  <script>
+    !function(f,b,e,v,n,t,s)
+    {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+    n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+    if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+    n.queue=[];t=b.createElement(e);t.async=!0;
+    t.src=v;s=b.getElementsByTagName(e)[0];
+    s.parentNode.insertBefore(t,s)}(window, document,'script',
+    'https://connect.facebook.net/en_US/fbevents.js');
+    fbq('init', '3457191164418833');
+    fbq('trackCustom', 'ViewContatosPage');
+    </script>
+    <noscript><img height="1" width="1" style="display:none"
+    src="https://www.facebook.com/tr?id=3457191164418833&ev=PageView&noscript=1"
+    /></noscript>
+  <!-- End Meta Pixel Code -->
     <style>
         /* Temporary inline CSS for testing */
         .debug {
@@ -456,8 +474,8 @@
     });
     </script>
     
-    <a href="https://wa.me/5511999999999" class="whatsapp-float" target="_blank" rel="noopener noreferrer">
-        <img src="./assets/whatsapp-icon.png" class="whatsapp-icon" alt="WhatsApp">
+    <a href="https://wa.me/5511989023070" class="whatsapp-float" target="_blank" rel="noopener noreferrer">
+        <img src="./assets/whatsapp-icon.png" class="whatsapp-icon" alt="WhatsApp" onclick="trackClickWhatsapp()">
     </a>
 </body>
 </html>
