@@ -1,0 +1,537 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BX - Nosso Trabalho</title>
+    <link rel="shortcut icon" href="assets/ibx.png">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles/Nosso_trabalho.css">
+</head>
+<body>
+<div id="header-root"></div>
+    <!-- ===== FAIXA SUPERIOR ===== -->
+  <div class="topstrip" role="region" aria-label="Promoção">
+    Agende uma reunião diagnóstica gratuitamente
+  </div>
+
+  <!-- ===== CABEÇALHO PRINCIPAL ===== -->
+  <header class="header" role="banner">
+    <div class="container header__inner">
+      <!-- ===== LOGO ===== -->
+      <div class="header__left">
+        <a href="#" class="brand" aria-label="BX - Home">
+          <img src="assets/3.png" alt="BX - Consultoria em Marketing Digital" class="header__logo" />
+        </a>
+      </div>
+
+      <!-- ===== BOTÃO HAMBÚRGUER (MOBILE) ===== -->
+      <button class="hamburger" aria-label="Abrir menu" id="hamburger" aria-expanded="false">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+
+      <!-- ===== NAVEGAÇÃO PRINCIPAL ===== -->
+      <nav class="nav header__nav" aria-label="Main Navigation">
+        <ul class="nav__list" id="navList">
+          <!-- ===== ITEM HOME ===== -->
+          <li class="nav__item">
+            <a href="index.html" class="nav__link">Home</a>
+          </li>
+
+          <!-- ===== ITEM NOSSA ASSESSORIA 360º (COM MEGA MENU) ===== -->
+          <li class="nav__item has-mega" data-key="assessoria">
+            <a href="#" class="nav__link" aria-haspopup="true" aria-expanded="false">
+              Nossa Assessoria 360º
+              <svg class="nav__arrow" width="12" height="12" viewBox="0 0 12 12" fill="none">
+                <path d="M3 4.5L6 7.5L9 4.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+            </a>
+
+            <!-- ===== MEGA MENU NOSSA ASSESSORIA 360º ===== -->
+            <div class="mega-menu" role="menu" aria-hidden="true">
+              <div class="mega-menu__content">
+                <div class="mega-menu__grid">
+                  <!-- ===== COLUNA 1 - PARA EVOLUIR SEU NEGÓCIO ===== -->
+                  <div class="mega-menu__col">
+                    <div class="mega-menu__section">
+                      <h4 class="mega-menu__section-title">Para evoluir seu negócio</h4>
+                      <ul class="mega-menu__list">
+                        <li><a href="diagnostico_comercial.html" class="mega-menu__link">Diagnóstico Comercial</a></li>
+                        <li><a href="consultoria_PME.html" class="mega-menu__link">Consultoria para PMEs</a></li>
+                        <li><a href="treinamento_corporativo.html" class="mega-menu__link">Treinamentos Corporativos</a></li>
+                      </ul>
+                    </div>
+                  </div>
+                  
+                  <!-- ===== COLUNA 2 - MAIS EFICIÊNCIA ===== -->
+                  <div class="mega-menu__col">
+                    <div class="mega-menu__section">
+                      <h4 class="mega-menu__section-title">Mais eficiência</h4>
+                      <ul class="mega-menu__list">
+                        <li><a href="sites-corporativos.html" class="mega-menu__link">Criação de Sites Corporativos</a></li>
+                        <li><a href="e-commerce.html" class="mega-menu__link">Criação de E-commerces</a></li>
+                        <li><a href="sistema_gestao.html" class="mega-menu__link">Sistema de Gestão</a></li>
+                        <li><a href="gravacao-video.html" class="mega-menu__link">Gravação de Vídeos Profissionais</a></li>
+                        <li><a href="automacoes_ia.html" class="mega-menu__link">Automações</a></li>
+                        <li><a href="cobertura-eventos.html" class="mega-menu__link">Cobertura de Eventos</a></li>
+                        <li><a href="dashboard_performance.html" class="mega-menu__link">Dashboards de Performance</a></li>
+                        <li><a href="crm.html" class="mega-menu__link">Implementação de CRM</a></li>
+                        <li>
+                          <a href="#" class="mega-menu__link">Terceirização Comercial</a>
+                          <ul class="mega-menu__sublist">
+                            <li><a href="time_pre_vendas.html" class="mega-menu__link mega-menu__link--child">Time de Pré-vendas (SDRs)</a></li>
+                            <li><a href="time_fechamento_vendas.html" class="mega-menu__link mega-menu__link--child">Time de Fechamento de Vendas (Closers)</a></li>
+                            <li><a href="costumer_sucess.html" class="mega-menu__link mega-menu__link--child">Time de Sucesso do Cliente (CS)</a></li>
+                            <li><a href="contas_a_receber.html" class="mega-menu__link mega-menu__link--child">Time de Contas a Receber (AR)</a></li>
+                          </ul>
+                        </li>
+                      </ul>
+                    </div>
+                  </div>
+                  
+                  <!-- ===== COLUNA 3 - EXECUÇÃO E ACOMPANHAMENTO ===== -->
+                  <div class="mega-menu__col">
+                    <div class="mega-menu__section">
+                      <h4 class="mega-menu__section-title">Execução e Acompanhamento</h4>
+                      <ul class="mega-menu__list">
+                        <li><a href="social_media.html" class="mega-menu__link">Social Media</a></li>
+                        <li>
+                          <a href="trafego_pago.html" class="mega-menu__link">Tráfego Pago</a>
+                          <ul class="mega-menu__sublist">
+                            <li><a href="#" class="mega-menu__link mega-menu__link--child">Google Ads</a></li>
+                            <li><a href="#" class="mega-menu__link mega-menu__link--child">Meta Ads</a></li>
+                            <li><a href="#" class="mega-menu__link mega-menu__link--child">TikTok Ads</a></li>
+                          </ul>
+                        </li>
+                        <li><a href="edicao_profissional.html" class="mega-menu__link">Edição Profissional de Vídeo</a></li>
+                      </ul>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </li>
+
+          <!-- ===== ITEM NOSSO TRABALHO (COM DROPDOWN) ===== -->
+          <li class="nav__item">
+            <a href="nosso-trabalho.html" class="nav__link">Nosso Trabalho</a>
+          </li>
+
+          <!-- ===== ITEM SISTEMAS (COM DROPDOWN) ===== -->
+          <li class="nav__item has-dropdown" data-key="sistemas">
+            <a href="#" class="nav__link" aria-haspopup="true" aria-expanded="false">
+              Sistemas
+              <svg class="nav__arrow" width="12" height="12" viewBox="0 0 12 12" fill="none">
+                <path d="M3 4.5L6 7.5L9 4.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+            </a>
+            <div class="dropdown" role="menu" aria-hidden="true">
+              <ul class="dropdown__list">
+                <li><a href="nour_clinicas.html" class="dropdown__link">Nour Clínicas</a></li>
+              </ul>
+            </div>
+          </li>
+
+        <!-- ===== ITEM CONTATOS (COM DROPDOWN) ===== -->
+                    <li class="nav__item">
+            <a href="contatos.html" class="nav__link">Contatos</a>
+          </li>
+        </ul>
+      </nav>
+
+      <!-- ===== CALL TO ACTION DO CABEÇALHO ===== -->
+      <div class="header__cta">
+        <a class="btn btn--primary" href="contatos.html">Agende já</a>
+      </div>
+    </div>
+  </header>
+
+    <!-- ===== SEÇÃO NOSSO TRABALHO ===== -->
+    <section class="our-work" id="nosso-trabalho">
+        <div class="container">
+            <h1 class="section-title">Nosso Trabalho</h1>
+            <div class="section-content">
+                <p>A BX nasceu com um propósito claro: transformar empresas que dependem de tentativas em negócios que crescem com estratégia, previsibilidade e estrutura. Enquanto a maioria das agências foca apenas em operar ferramentas, nós focamos em construir a base que sustenta o crescimento real. Acreditamos que nenhuma operação escala sem método, sem processo e sem uma visão clara de como gerar demanda, converter clientes e expandir resultados de forma sustentável.</p>
+                
+                <p>Somos uma empresa de Growth e Estruturação de Negócios que une estratégia, operação e tecnologia para desenvolver negócios preparados para o agora e para o que vem depois. Nossa missão é tirar empreendedores da improvisação e colocá-los em um modelo organizado, mensurável e escalável.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== SEÇÃO NOSSA ESSÊNCIA ===== -->
+    <section class="our-essence" id="sobre-nos">
+        <div class="container">
+            <h2 class="section-title" style="color: var(--accent);">Nossa essência</h2>
+            <div class="section-content" style="color: var(--gray-900);">
+                <p>A BX não é uma agência de marketing. Nós vamos além.<br>
+                Antes de falar em campanhas, tráfego ou redes sociais, olhamos para o coração do negócio: estrutura comercial, comportamento do cliente, oportunidades de melhoria e gargalos que impedem o crescimento.<br>
+                Nossa essência está em criar uma visão completa da operação e construir soluções sob medida. Cada estratégia é desenhada com base no momento da empresa, no seu mercado e no seu potencial de escala.<br>
+                Trabalhamos com profundidade, método e análise contínua para que cada ação faça sentido no presente e construindo o futuro da marca.</p>
+                
+                <div class="essence-grid">
+                    <div class="essence-card">
+                        <h3>Como pensamos crescimento</h3>
+                        <p>Para nós, crescer não é apenas vender mais.<br>
+                        Crescer é criar um modelo previsível onde:<br>
+                        • Você sabe de onde vêm os seus clientes<br>
+                        • Você entende porque eles compram<br>
+                        • Você tem controle do seu funil<br>
+                        • Sua operação entrega o que promete<br>
+                        • Seus resultados melhoram continuamente</p>
+                    </div>
+                </div>
+                
+                <h3 style="margin-top: 50px; margin-bottom: 20px; color: var(--accent);">A BX estrutura empresas em quatro pilares essenciais:</h3>
+                
+                <div class="pillars">
+                    <div class="pillar">
+                        <h4>Atrair</h4>
+                        <p>Geramos fluxo diário de potenciais clientes com estratégias de performance, conteúdo e posicionamento.</p>
+                    </div>
+                    <div class="pillar">
+                        <h4>Converter</h4>
+                        <p>Desenhamos processos comerciais, treinamentos, scripts, automações e fluxos inteligentes que aumentam conversão em cada etapa.</p>
+                    </div>
+                    <div class="pillar">
+                        <h4>Entregar</h4>
+                        <p>Ajudamos a construir operações que funcionam rápido, com clareza e sem desperdícios, reduzindo retrabalho e elevando a experiência do cliente.</p>
+                    </div>
+                    <div class="pillar">
+                        <h4>Escalar</h4>
+                        <p>Criamos modelos que crescem de forma sustentável, usando tecnologia, inteligência de dados e otimizações contínuas.<br>
+                        É esse ciclo que torna o crescimento exponencial possível e replicável.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== SEÇÃO DIFERENCIAL ===== -->
+    <section class="differential">
+        <div class="container">
+            <h2 class="section-title" style="color: var(--accent);">Nosso diferencial</h2>
+            <div class="section-content" style="color: var(--gray-900);">
+                <p>Empresas crescem quando estratégia, operação e tecnologia trabalham juntas. Por isso, nosso maior diferencial é integrar todas as peças da máquina de crescimento em um único lugar.</p>
+                
+                <ul class="differential-list">
+                    <li>Estratégia baseada em diagnóstico real</li>
+                    <li>Estruturação completa da jornada do cliente</li>
+                    <li>Execução com tecnologia e inteligência de dados</li>
+                    <li>Equipes especializadas em cada etapa do funil</li>
+                    <li>Processos validados para escalar negócios de saúde, estética e serviços</li>
+                </ul>
+                
+                <p style="margin-top: 30px; font-weight: bold;">Não entregamos serviços soltos. Entregamos estrutura.</p>
+                
+                <h3 style="margin-top: 50px; margin-bottom: 20px; color: var(--accent);">Por que a BX existe</h3>
+                <p>Existimos porque acreditamos que todo negócio pode crescer rápido, mas poucos crescem certo.<br>
+                A maioria das empresas tem potencial, mas falta direcionamento, método e clareza. Falta alguém que olhe para o todo e conecte todas as partes do crescimento em uma operação única, simples e eficiente.<br>
+                A BX nasceu para ser essa parceria. Para ajudar empresas a destravar seus resultados, acelerar sua evolução e construir marcas fortes e lucrativas. Somos especialistas em fazer negócios funcionarem melhor, venderem mais e crescerem com consistência.</p>
+                
+                <h3 style="margin-top: 50px; margin-bottom: 20px; color: var(--accent);">Nosso compromisso</h3>
+                <p>O nosso compromisso é com o crescimento do cliente. Não com métricas vazias, não com entregas genéricas, não com fórmulas prontas. Trabalhamos com profundidade, personalização e foco total em resultado real.<br>
+                Quando uma empresa entra para a BX, ela recebe não só um serviço, mas uma nova forma de pensar, operar e crescer.<br>
+                Somos o parceiro que constrói, organiza, executa e acompanha cada etapa. Somos quem torna seu crescimento inevitável.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== SEÇÃO MISSÃO, VISÃO E VALORES ===== -->
+    <section class="mission-vision-values" id="missao">
+        <div class="container">
+            <h2 class="section-title" style="color: var(--accent);">Missão, Visão e Valores</h2>
+            <div class="section-content" style="color: var(--gray-900);">
+                <p style="text-align: center; margin-bottom: 40px; font-style: italic;">Sua equipe mais qualificada com nossos treinamentos corporativos.</p>
+                
+                <h3 style="margin-top: 40px; margin-bottom: 20px; color: var(--accent);">Missão</h3>
+                <p>Construir o futuro da gestão empresarial, aumentando a eficiência operacional, gerando mais oportunidades de vendas e acelerando o crescimento dessas empresas.<br>
+                Fazemos isso unindo educação, estratégia, execução e inovação ajudando nossos clientes e parceiros comerciais a crescerem de maneira sustentável e organizada.</p>
+                
+                <h3 style="margin-top: 40px; margin-bottom: 20px; color: var(--accent);">Visão</h3>
+                <p>Ser a referência em soluções integradas para negócios no Brasil, transformando milhares de empresas em organizações sólidas, inovadoras e exponenciais até 2030, impactando diretamente mais de 50 mil líderes e milhões de pessoas de forma indireta.</p>
+                
+                <h3 style="margin-top: 40px; margin-bottom: 20px; color: var(--accent);">Valores</h3>
+                
+                <div class="values-grid">
+                    <div class="value-card">
+                        <h4>Foco Obsessivo no Cliente</h4>
+                    </div>
+                    <div class="value-card">
+                        <h4>Alta Performance e Intensidade</h4>
+                    </div>
+                    <div class="value-card">
+                        <h4>Inovação e Exponencialidade</h4>
+                    </div>
+                    <div class="value-card">
+                        <h4>Coragem e Antifragilidade</h4>
+                    </div>
+                    <div class="value-card">
+                        <h4>Aprendizado e Crescimento Contínuo</h4>
+                    </div>
+                </div>
+                
+                <div style="text-align: center; margin-top: 50px;">
+                    <a href="https://wa.me/5511989023070" class="btn btn--primary">Saiba Mais</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== RODAPÉ ===== -->
+<footer class="footer" role="contentinfo">
+    <div class="container footer__inner">
+        <!-- ===== MARCA DO RODAPÉ ===== -->
+        <div class="footer__brand">
+            <!-- Logo da empresa -->
+            <img src="assets/ibx.png" alt="BX - Consultoria em Marketing Digital" class="footer__logo">
+            
+            <!-- Formulário de contato -->
+            <article class="contact-card">
+                <div>
+                    <h3>Entre em contato conosco</h3>
+                    <form class="contact-form">
+                        <div class="form-group">
+                            <label for="nome">Seu nome</label>
+                            <input type="text" id="nome" placeholder="Seu nome" aria-label="nome" />
+                        </div>
+                        <div class="form-group">
+                            <label for="email">Seu e-mail</label>
+                            <input type="email" id="email" placeholder="Seu e-mail" aria-label="email" />
+                        </div>
+                        <div class="form-group">
+                            <label for="telefone">Seu Telefone</label>
+                            <input type="tel" id="telefone" placeholder="Seu Telefone" aria-label="telefone" />
+                        </div>
+                        <div class="form-footer">
+                            <div class="checkbox-group">
+                                <input type="checkbox" id="notificacoes" />
+                                <label for="notificacoes">Aceito receber notificações</label>
+                            </div>
+                            <button type="submit" class="btn-submit">Para mais detalhes!</button>
+                        </div>
+                    </form>
+                </div>
+            </article>
+        </div>
+
+        <!-- ===== COLUNAS DO RODAPÉ ===== -->
+        <div class="footer__cols">
+            <!-- ===== COLUNA 1 - INSTITUCIONAL ===== -->
+            <div class="footer__col">
+                <h4>INSTITUCIONAL</h4>
+                <ul>
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="nosso-trabalho.html">Nosso Trabalho</a></li>
+                    <li><a href="#sobre-nos">Sobre Nós</a></li>
+                    <li><a href="#nosso-trabalho">Equipe BX</a></li>
+                    <li><a href="#missao">Missão, Visão e Valores</a></li>
+                </ul>
+            </div>
+
+            <!-- ===== COLUNA 2 - SERVIÇOS ===== -->
+            <div class="footer__col">
+                <h4>SERVIÇOS</h4>
+                <ul>
+                    <li><a href="crm.html">Implementação de CRM</a></li>
+                    <li><a href="sites-corporativos.html">Criação de Sites</a></li>
+                    <li><a href="e-commerce.html">E-commerce</a></li>
+                    <li><a href="social_media.html">Social Media</a></li>
+                    <li><a href="trafego_pago.html">Tráfego Pago</a></li>
+                    <li><a href="automacoes_ia.html">Automações com IA</a></li>
+                    <li><a href="dashboard_performance.html">Dashboards</a></li>
+                    <li><a href="edicao_profissional.html">Edição de Vídeos</a></li>
+                </ul>
+            </div>
+
+            <!-- ===== COLUNA 3 - SOLUÇÕES ===== -->
+            <div class="footer__col">
+                <h4>SOLUÇÕES</h4>
+                <ul>
+                    <li><a href="nour_clinicas.html">Sistema Nour Clínicas</a></li>
+                    <li><a href="consultoria_PME.html">Consultoria</a></li>
+                    <li><a href="treinamento_corporativo.html">Treinamentos</a></li>
+                    <li><a href="#">Materiais Gratuitos</a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <!-- ===== PARTE INFERIOR DO RODAPÉ ===== -->
+    <div class="footer__bottom">
+        <div class="container">
+            <div class="footer__copyright">
+                &copy; 2025 BX Assessoria. Todos os direitos reservados.
+            </div>
+        </div>
+    </div>
+</footer>
+
+    <!-- ===== WHATSAPP FLOAT ===== -->
+    <a href="https://wa.me/5511989023070" class="whatsapp-float" target="_blank" rel="noopener noreferrer">
+        <img src="./assets/whatsapp-icon.png" class="whatsapp-icon" alt="WhatsApp">
+    </a>
+
+    <!-- ===== SCRIPTS ===== -->
+    <script>
+    // ===== HAMBURGER MENU FIXED =====
+    document.addEventListener('DOMContentLoaded', function() {
+        console.log('JavaScript carregado - Nosso Trabalho');
+        
+        const hamburger = document.getElementById('hamburger');
+        const navList = document.getElementById('navList');
+        const navItems = document.querySelectorAll('.nav__item.has-dropdown, .nav__item.has-mega');
+        const body = document.body;
+        
+        if (!hamburger || !navList) {
+            console.error('Elementos não encontrados!');
+            return;
+        }
+        
+        console.log('Elementos encontrados:', hamburger, navList);
+        
+        // Toggle menu function
+        function toggleMenu() {
+            const isOpen = navList.classList.contains('nav--open');
+            console.log('Toggle menu, está aberto?', isOpen);
+            
+            if (isOpen) {
+                // Close menu
+                hamburger.classList.remove('active');
+                navList.classList.remove('nav--open');
+                body.classList.remove('menu-open');
+                hamburger.setAttribute('aria-expanded', 'false');
+                
+                // Close all dropdowns
+                navItems.forEach(item => {
+                    item.classList.remove('open');
+                    const dropdown = item.querySelector('.dropdown, .mega-menu');
+                    if (dropdown) dropdown.classList.remove('menu-open');
+                });
+            } else {
+                // Open menu
+                hamburger.classList.add('active');
+                navList.classList.add('nav--open');
+                body.classList.add('menu-open');
+                hamburger.setAttribute('aria-expanded', 'true');
+            }
+        }
+        
+        // Toggle hamburger menu
+        hamburger.addEventListener('click', function(e) {
+            e.stopPropagation();
+            console.log('Hamburger clicado');
+            toggleMenu();
+        });
+        
+        // Handle dropdowns on mobile
+        navItems.forEach(item => {
+            const link = item.querySelector('.nav__link');
+            
+            link.addEventListener('click', function(e) {
+                if (window.innerWidth <= 900) {
+                    e.preventDefault();
+                    e.stopPropagation();
+                    console.log('Dropdown clicado:', item.dataset.key);
+                    
+                    // Toggle current dropdown
+                    const wasOpen = item.classList.contains('open');
+                    item.classList.toggle('open');
+                    const dropdown = item.querySelector('.dropdown, .mega-menu');
+                    if (dropdown) dropdown.classList.toggle('menu-open');
+                    
+                    // Close other dropdowns
+                    if (!wasOpen) {
+                        navItems.forEach(otherItem => {
+                            if (otherItem !== item && otherItem.classList.contains('open')) {
+                                otherItem.classList.remove('open');
+                                const otherDropdown = otherItem.querySelector('.dropdown, .mega-menu');
+                                if (otherDropdown) otherDropdown.classList.remove('menu-open');
+                            }
+                        });
+                    }
+                }
+            });
+        });
+        
+        // Close menu when clicking on a regular link (not dropdown)
+        navList.addEventListener('click', function(e) {
+            if (window.innerWidth <= 900) {
+                const link = e.target.closest('a');
+                if (link) {
+                    const parentItem = link.closest('.nav__item');
+                    const hasDropdown = parentItem && (parentItem.classList.contains('has-dropdown') || 
+                                                       parentItem.classList.contains('has-mega'));
+                    
+                    if (!hasDropdown) {
+                        // Regular link - close menu after delay
+                        console.log('Link regular clicado, fechando menu');
+                        setTimeout(() => {
+                            toggleMenu();
+                        }, 300);
+                    }
+                }
+            }
+        });
+        
+        // Close menu when clicking outside on mobile overlay
+        document.addEventListener('click', function(e) {
+            if (window.innerWidth <= 900) {
+                const isClickInsideNav = navList.contains(e.target);
+                const isClickHamburger = hamburger.contains(e.target);
+                const isMenuOpen = navList.classList.contains('nav--open');
+                
+                if (!isClickInsideNav && !isClickHamburger && isMenuOpen) {
+                    console.log('Clique fora do menu, fechando');
+                    toggleMenu();
+                }
+            }
+        });
+        
+        // Close menu with Escape key
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape' && window.innerWidth <= 900 && 
+                navList.classList.contains('nav--open')) {
+                console.log('Escape pressionado, fechando menu');
+                toggleMenu();
+            }
+        });
+        
+        // Handle window resize
+        window.addEventListener('resize', function() {
+            if (window.innerWidth > 900) {
+                // Reset mobile menu state when resizing to desktop
+                if (navList.classList.contains('nav--open')) {
+                    console.log('Redimensionando para desktop, resetando menu');
+                    hamburger.classList.remove('active');
+                    navList.classList.remove('nav--open');
+                    body.classList.remove('menu-open');
+                    hamburger.setAttribute('aria-expanded', 'false');
+                    
+                    // Close all dropdowns
+                    navItems.forEach(item => {
+                        item.classList.remove('open');
+                        const dropdown = item.querySelector('.dropdown, .mega-menu');
+                        if (dropdown) dropdown.classList.remove('menu-open');
+                    });
+                }
+            }
+        });
+        
+        // Prevent clicks inside dropdowns from closing menu
+        navList.addEventListener('click', function(e) {
+            if (window.innerWidth <= 900) {
+                const isDropdownLink = e.target.closest('.dropdown__link, .mega-menu__link');
+                if (isDropdownLink) {
+                    e.stopPropagation();
+                    console.log('Link de dropdown clicado, mantendo menu aberto');
+                }
+            }
+        });
+    });
+    </script>
+</body>
+</html>
