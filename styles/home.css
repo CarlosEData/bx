@@ -62,7 +62,7 @@ body{
 
 /* ===== CABEÇALHO PRINCIPAL ===== */
 .header{
-  padding: 0;                  /* Remove padding padrão */
+  padding: 15px 0;             /* Espaçamento em cima e embaixo aumentado */
   position: fixed;             /* Posição fixa */
   top: 44px;                   /* Posiciona abaixo da faixa superior */
   left: 0;                     /* Alinhado à esquerda */
@@ -91,7 +91,7 @@ body{
   align-items:center;          /* Alinha itens verticalmente ao centro */
   gap: 40px;                   /* Espaço entre os itens */
   position:relative;           /* Posição relativa */
-  height: 80px;                /* Altura fixa */
+  height: 90px;                /* Altura fixa aumentada para acomodar a logo maior */
 }
 
 /* ===== LADO ESQUERDO DO CABEÇALHO ===== */
@@ -99,7 +99,7 @@ body{
 
 /* ===== LOGO DO CABEÇALHO ===== */
 .header__logo{
-  height: 70px;                /* Altura da logo */
+  height: 90px;                /* Altura da logo aumentada */
   transition: all 0.3s ease;   /* Transição suave */
 }
 

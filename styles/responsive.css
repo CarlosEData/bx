@@ -33,9 +33,8 @@ button, .btn { transition: all .18s ease; }
   .nav__list{ position:fixed; top:0; right:0; height:100vh; width:320px; max-width:88vw; transform:translateX(100%); transition: transform .34s cubic-bezier(.2,.8,.2,1); background:var(--surface-color,#ffffff); z-index:1000; display:flex; flex-direction:column; padding:76px 18px 24px; gap:6px; overflow:auto; box-shadow:-12px 0 32px rgba(9,10,11,0.12); }
   .nav__list.nav__list--open{ transform:translateX(0); }
 
-  /* Make header CTA stack inside menu */
-  .header__cta{ width:100%; margin-top:10px; display:flex; gap:12px; }
-  .header__cta .btn{ width:100%; }
+  /* Hide header CTA on mobile to show only logo and hamburger */
+  .header__cta{ display: none !important; }
 
   /* Vertical nav items */
   .nav__item{ width:100%; }
