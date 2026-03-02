@@ -1,0 +1,6 @@
+User-agent: *
+Allow: /
+Disallow: /components/
+Disallow: /assets/hamburger.js
+
+Sitemap: https://bx-fawn.vercel.app/sitemap.xml

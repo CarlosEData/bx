@@ -3,13 +3,60 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>BX - Assessoria</title>
-  <link rel="shortcut icon" href="assets/ibx.png">
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="styles/home.css">
+
+  <!-- ===== SEO META TAGS ===== -->
+  <title>BX Assessoria | Assessoria 360° em Marketing, Vendas e Tecnologia para PMEs</title>
+  <meta name="description" content="A BX Assessoria é especialista em estruturar negócios para escalar. Assessoria 360° com estratégia, tecnologia, operações e performance para PMEs que buscam crescimento sustentável." />
+  <meta name="keywords" content="BX Assessoria, assessoria 360, marketing digital, consultoria PME, CRM, tráfego pago, social media, automações, e-commerce, sites corporativos" />
+  <meta name="author" content="BX Assessoria" />
+  <meta name="robots" content="index, follow" />
+  <link rel="canonical" href="https://bx-fawn.vercel.app/" />
+
+  <!-- ===== OPEN GRAPH ===== -->
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content="BX Assessoria | Assessoria 360° para Escalar seu Negócio" />
+  <meta property="og:description" content="Estratégia, tecnologia, operações e performance trabalhando juntas para fazer sua empresa escalar de forma sustentável." />
+  <meta property="og:url" content="https://bx-fawn.vercel.app/" />
+  <meta property="og:image" content="assets/ibx.png" />
+  <meta property="og:site_name" content="BX Assessoria" />
+  <meta property="og:locale" content="pt_BR" />
+
+  <!-- ===== FAVICON ===== -->
+  <link rel="shortcut icon" href="assets/ibx.png" />
+
+  <!-- ===== FONTS ===== -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet" />
+
+  <!-- ===== CSS ===== -->
+  <link rel="stylesheet" href="styles/home.css" />
+
+  <!-- ===== SCRIPTS ===== -->
   <script src="scripts.js"></script>
+
+  <!-- ===== SCHEMA MARKUP ===== -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "ProfessionalService",
+    "name": "BX Assessoria",
+    "description": "Assessoria 360° em Marketing, Vendas e Tecnologia para PMEs",
+    "url": "https://bx-fawn.vercel.app/",
+    "logo": "assets/ibx.png",
+    "telephone": "+5511989023070",
+    "address": {
+      "@type": "PostalAddress",
+      "addressCountry": "BR"
+    },
+    "sameAs": [
+      "https://www.linkedin.com/company/bxassessoria"
+    ],
+    "priceRange": "$$",
+    "serviceType": ["Marketing Digital", "Consultoria Empresarial", "Assessoria 360°", "CRM", "Tráfego Pago", "Social Media"]
+  }
+  </script>
+
   <!-- Meta Pixel Code -->
   <script>
     !function(f,b,e,v,n,t,s)
@@ -22,44 +69,42 @@
     'https://connect.facebook.net/en_US/fbevents.js');
     fbq('init', '3457191164418833');
     fbq('trackCustom', 'ViewHomePage');
-    </script>
-    <noscript><img height="1" width="1" style="display:none"
+  </script>
+  <noscript><img height="1" width="1" style="display:none"
     src="https://www.facebook.com/tr?id=3457191164418833&ev=PageView&noscript=1"
-    /></noscript>
+  /></noscript>
   <!-- End Meta Pixel Code -->
 </head>
 <body>
+
   <!-- ===== FAIXA SUPERIOR ===== -->
   <div class="topstrip" role="region" aria-label="Promoção">
-    Agende uma reunião diagnóstica gratuitamente
+    <div class="topstrip__inner">
+      <span>Agende uma reunião diagnóstica gratuitamente</span>
+      <a href="contatos.html" class="topstrip__cta">Agendar agora &rarr;</a>
+    </div>
   </div>
 
   <!-- ===== CABEÇALHO PRINCIPAL ===== -->
   <header class="header" role="banner">
     <div class="container header__inner">
-      <!-- ===== LOGO ===== -->
       <div class="header__left">
-        <a href="#" class="brand" aria-label="BX - Home">
-          <img src="assets/3.png" alt="BX - Consultoria em Marketing Digital" class="header__logo" />
+        <a href="index.html" class="brand" aria-label="BX Assessoria - Home">
+          <img src="assets/3.png" alt="BX Assessoria - Assessoria 360° em Marketing Digital" class="header__logo" />
         </a>
       </div>
 
-      <!-- ===== BOTÃO HAMBÚRGUER (MOBILE) ===== -->
       <button class="hamburger" aria-label="Abrir menu" id="hamburger" aria-expanded="false">
         <span></span>
         <span></span>
         <span></span>
       </button>
 
-      <!-- ===== NAVEGAÇÃO PRINCIPAL ===== -->
-      <nav class="nav header__nav" aria-label="Main Navigation">
+      <nav class="nav header__nav" aria-label="Navegação Principal">
         <ul class="nav__list" id="navList">
-          <!-- ===== ITEM HOME ===== -->
           <li class="nav__item">
-            <a href="index.html" class="nav__link">Home</a>
+            <a href="index.html" class="nav__link nav__link--active">Home</a>
           </li>
-
-          <!-- ===== ITEM NOSSA ASSESSORIA 360º (COM MEGA MENU) ===== -->
           <li class="nav__item has-mega" data-key="assessoria">
             <a href="#" class="nav__link" aria-haspopup="true" aria-expanded="false">
               Nossa Assessoria 360º
@@ -67,12 +112,9 @@
                 <path d="M3 4.5L6 7.5L9 4.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
               </svg>
             </a>
-
-            <!-- ===== MEGA MENU NOSSA ASSESSORIA 360º ===== -->
             <div class="mega-menu" role="menu" aria-hidden="true">
               <div class="mega-menu__content">
                 <div class="mega-menu__grid">
-                  <!-- ===== COLUNA 1 - PARA EVOLUIR SEU NEGÓCIO ===== -->
                   <div class="mega-menu__col">
                     <div class="mega-menu__section">
                       <h4 class="mega-menu__section-title">Para evoluir seu negócio</h4>
@@ -83,8 +125,6 @@
                       </ul>
                     </div>
                   </div>
-                  
-                  <!-- ===== COLUNA 2 - MAIS EFICIÊNCIA ===== -->
                   <div class="mega-menu__col">
                     <div class="mega-menu__section">
                       <h4 class="mega-menu__section-title">Mais eficiência</h4>
@@ -109,8 +149,6 @@
                       </ul>
                     </div>
                   </div>
-                  
-                  <!-- ===== COLUNA 3 - EXECUÇÃO E ACOMPANHAMENTO ===== -->
                   <div class="mega-menu__col">
                     <div class="mega-menu__section">
                       <h4 class="mega-menu__section-title">Execução e Acompanhamento</h4>
@@ -132,13 +170,9 @@
               </div>
             </div>
           </li>
-
-          <!-- ===== ITEM NOSSO TRABALHO (COM DROPDOWN) ===== -->
           <li class="nav__item">
             <a href="nosso-trabalho.html" class="nav__link">Nosso Trabalho</a>
           </li>
-
-          <!-- ===== ITEM SISTEMAS (COM DROPDOWN) ===== -->
           <li class="nav__item has-dropdown" data-key="sistemas">
             <a href="#" class="nav__link" aria-haspopup="true" aria-expanded="false">
               Sistemas
@@ -152,131 +186,274 @@
               </ul>
             </div>
           </li>
-
-        <!-- ===== ITEM CONTATOS (COM DROPDOWN) ===== -->
-                    <li class="nav__item">
+          <li class="nav__item">
             <a href="contatos.html" class="nav__link">Contatos</a>
           </li>
         </ul>
       </nav>
 
-      <!-- ===== CALL TO ACTION DO CABEÇALHO ===== -->
       <div class="header__cta">
-        <a class="btn btn--primary" href="contatos.html">Agende já</a>
+        <a class="btn btn--primary" href="contatos.html" onclick="trackClickAgendeJa()">Agende já</a>
       </div>
     </div>
   </header>
 
-  <!-- ===== SEÇÃO HERO (BANNER PRINCIPAL) ===== -->
-  <section class="hero">
+  <!-- ===== SEÇÃO HERO ===== -->
+  <section class="hero" aria-label="Banner Principal">
     <div class="container hero__inner">
-      <!-- ===== CONTEÚDO DO HERO ===== -->
       <div class="hero__content">
-        <h1 class="hero__title">Seu Negócio Pronto Para Escalar: Estratégia, Estrutura e Performance em Um Só Lugar.</h1>
-        <p class="hero__subtitle">Criamos a estrutura que transforma negócios em máquinas de crescimento. Estratégia, tecnologia, operações e performance trabalhando juntas para fazer a sua empresa escalar de forma sustentável desde o primeiro passo.</p>
-        <a class="btn btn--primary" href="https://wa.me/5511989023070">Saiba Mais</a>
-      </div>
-    </div>
-  </section>
-
-  <!-- ===== SEÇÃO DE METODOLOGIA ===== -->
-  <section class="method">
-    <div class="container">
-      <div class="methodology-title-section">
-        <h2>METODOLOGIA BX</h2>
-        <p>Conheça nossa abordagem estruturada para o crescimento do seu negócio</p>
-      </div>
-      
-      <div class="methodology-cards">
-        <!-- ===== CARD 1 ===== -->
-        <div class="methodology-card">
-          <div class="methodology-icon">1</div>
-          <h3 class="methodology-title">Estruturação Estratégica</h3>
-          <p class="methodology-description">
-            Construímos toda a base de marketing digital do seu negócio, garantindo uma estrutura sólida para que cada ação seja pensada para gerar previsibilidade de crescimento.
-          </p>
+        <span class="hero__badge">Assessoria 360° para PMEs</span>
+        <h1 class="hero__title">Seu Negócio Pronto Para <span class="hero__highlight">Escalar.</span></h1>
+        <p class="hero__subtitle">Estratégia, estrutura e performance em um só lugar. Criamos a base que transforma negócios em máquinas de crescimento sustentável — desde o primeiro passo.</p>
+        <div class="hero__actions">
+          <a class="btn btn--primary btn--lg" href="https://wa.me/5511989023070" onclick="trackClickWhatsapp()">Fale com um Especialista</a>
+          <a class="btn btn--outline btn--lg" href="nosso-trabalho.html">Conheça nosso trabalho</a>
         </div>
-        
-        <!-- ===== CARD 2 ===== -->
-        <div class="methodology-card">
-          <div class="methodology-icon">2</div>
-          <h3 class="methodology-title">Abertura de Novos Canais</h3>
-          <p class="methodology-description">
-            Identificamos e criamos os canais ideais para atrair novos clientes, ampliando sua presença e expandindo suas oportunidades de negócio com estratégia e previsibilidade.
-          </p>
-        </div>
-        
-        <!-- ===== CARD 3 ===== -->
-        <div class="methodology-card">
-          <div class="methodology-icon">3</div>
-          <h3 class="methodology-title">Validação de Processos e Escala</h3>
-          <p class="methodology-description">
-            Testamos, medimos e otimizamos cada etapa da operação para validar o que funciona. Só então escalamos com segurança, mantendo eficiência e alta performance.
-          </p>
-        </div>
-        
-        <!-- ===== CARD 4 ===== -->
-        <div class="methodology-card">
-          <div class="methodology-icon">4</div>
-          <h3 class="methodology-title">Crescimento Sustentável e Exponencial</h3>
-          <p class="methodology-description">
-            Com a estrutura validada, aceleramos o crescimento da sua empresa de forma estratégica, contínua e escalável, garantindo longevidade e previsibilidade nos resultados.
-          </p>
+        <div class="hero__proof">
+          <div class="hero__stat">
+            <span class="hero__stat-number">360°</span>
+            <span class="hero__stat-label">Assessoria Completa</span>
+          </div>
+          <div class="hero__stat-divider"></div>
+          <div class="hero__stat">
+            <span class="hero__stat-number">+50</span>
+            <span class="hero__stat-label">Empresas Atendidas</span>
+          </div>
+          <div class="hero__stat-divider"></div>
+          <div class="hero__stat">
+            <span class="hero__stat-number">4 Pilares</span>
+            <span class="hero__stat-label">Método Proprietário</span>
+          </div>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- ===== SEÇÃO DE CONTEÚDOS EM DESTAQUE ===== -->
-  <section class="featured">
+  <!-- ===== SEÇÃO QUEM SOMOS ===== -->
+  <section class="about" id="quem-somos" aria-label="Quem Somos">
     <div class="container">
-      <h2 class="section-title">CONTEÚDOS EM DESTAQUE</h2>
-      <p class="featured__lead">Acompanhe o que acontece no ecossistema da BX.</p>
+      <div class="about__grid">
+        <div class="about__content">
+          <span class="section-label">Quem Somos</span>
+          <h2 class="section-title">Uma assessoria que <strong>pensa como dono</strong> do seu negócio.</h2>
+          <p class="about__text">A BX Assessoria nasceu com um propósito claro: estruturar negócios para que cresçam com previsibilidade e eficiência. Atuamos como um braço estratégico da sua empresa, integrando marketing, vendas, tecnologia e operações em uma assessoria verdadeiramente 360°.</p>
+          <p class="about__text">Não entregamos apenas serviços — entregamos estrutura, método e visão de longo prazo. Cada decisão é orientada por dados, cada ação é pensada para gerar resultado mensurável.</p>
+        </div>
+        <div class="about__visual">
+          <div class="about__card">
+            <div class="about__card-icon">
+              <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/></svg>
+            </div>
+            <h3>Visão Estratégica</h3>
+            <p>Planejamento orientado por dados e focado em resultados de longo prazo.</p>
+          </div>
+          <div class="about__card">
+            <div class="about__card-icon">
+              <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>
+            </div>
+            <h3>Execução Ágil</h3>
+            <p>Processos validados que garantem velocidade sem perder qualidade.</p>
+          </div>
+          <div class="about__card">
+            <div class="about__card-icon">
+              <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg>
+            </div>
+            <h3>Resultados Reais</h3>
+            <p>Foco absoluto em métricas que impactam diretamente o faturamento.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
 
+  <!-- ===== SEÇÃO O QUE FAZEMOS (360°) ===== -->
+  <section class="services" id="servicos" aria-label="Nossos Serviços">
+    <div class="container">
+      <div class="services__header">
+        <span class="section-label">O que Fazemos</span>
+        <h2 class="section-title">Assessoria 360°: tudo que seu negócio precisa para <strong>crescer.</strong></h2>
+        <p class="section-subtitle">Integramos estratégia, tecnologia, operações e performance em uma solução completa.</p>
+      </div>
+      <div class="services__grid">
+        <a href="diagnostico_comercial.html" class="service-card">
+          <div class="service-card__icon">
+            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/></svg>
+          </div>
+          <h3 class="service-card__title">Diagnóstico Comercial</h3>
+          <p class="service-card__desc">Análise profunda do seu negócio para identificar gargalos e oportunidades de crescimento.</p>
+          <span class="service-card__arrow">&rarr;</span>
+        </a>
+        <a href="consultoria_PME.html" class="service-card">
+          <div class="service-card__icon">
+            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87"/><path d="M16 3.13a4 4 0 010 7.75"/></svg>
+          </div>
+          <h3 class="service-card__title">Consultoria para PMEs</h3>
+          <p class="service-card__desc">Estratégias personalizadas para pequenas e médias empresas escalarem com segurança.</p>
+          <span class="service-card__arrow">&rarr;</span>
+        </a>
+        <a href="crm.html" class="service-card">
+          <div class="service-card__icon">
+            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="14" rx="2" ry="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>
+          </div>
+          <h3 class="service-card__title">Implementação de CRM</h3>
+          <p class="service-card__desc">Organize e automatize seu processo comercial com as melhores ferramentas do mercado.</p>
+          <span class="service-card__arrow">&rarr;</span>
+        </a>
+        <a href="trafego_pago.html" class="service-card">
+          <div class="service-card__icon">
+            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="23 6 13.5 15.5 8.5 10.5 1 18"/><polyline points="17 6 23 6 23 12"/></svg>
+          </div>
+          <h3 class="service-card__title">Tráfego Pago</h3>
+          <p class="service-card__desc">Google Ads, Meta Ads e TikTok Ads com estratégia orientada a ROI e escala.</p>
+          <span class="service-card__arrow">&rarr;</span>
+        </a>
+        <a href="social_media.html" class="service-card">
+          <div class="service-card__icon">
+            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+          </div>
+          <h3 class="service-card__title">Social Media</h3>
+          <p class="service-card__desc">Gestão estratégica de redes sociais com conteúdo que gera autoridade e engajamento.</p>
+          <span class="service-card__arrow">&rarr;</span>
+        </a>
+        <a href="sites-corporativos.html" class="service-card">
+          <div class="service-card__icon">
+            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 014 10 15.3 15.3 0 01-4 10 15.3 15.3 0 01-4-10 15.3 15.3 0 014-10z"/></svg>
+          </div>
+          <h3 class="service-card__title">Sites Corporativos</h3>
+          <p class="service-card__desc">Sites profissionais, responsivos e otimizados para conversão e posicionamento.</p>
+          <span class="service-card__arrow">&rarr;</span>
+        </a>
+      </div>
+      <div class="services__more">
+        <a class="btn btn--dark" href="servicos.html">Ver todos os serviços &rarr;</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== SEÇÃO DIFERENCIAIS ===== -->
+  <section class="differentials" aria-label="Diferenciais">
+    <div class="container">
+      <div class="differentials__header">
+        <span class="section-label">Por que a BX</span>
+        <h2 class="section-title">O que nos torna <strong>diferentes.</strong></h2>
+      </div>
+      <div class="differentials__grid">
+        <div class="diff-card">
+          <span class="diff-card__number">01</span>
+          <h3 class="diff-card__title">Visão 360°</h3>
+          <p class="diff-card__desc">Não atuamos em silos. Integramos marketing, vendas, tecnologia e operações em uma estratégia única e coesa.</p>
+        </div>
+        <div class="diff-card">
+          <span class="diff-card__number">02</span>
+          <h3 class="diff-card__title">Método Proprietário</h3>
+          <p class="diff-card__desc">Nossa metodologia em 4 pilares foi desenvolvida para gerar previsibilidade e escala sustentável.</p>
+        </div>
+        <div class="diff-card">
+          <span class="diff-card__number">03</span>
+          <h3 class="diff-card__title">Foco em Resultado</h3>
+          <p class="diff-card__desc">Cada ação é orientada por dados e métricas claras. Sem achismo, sem vaidade — só resultado.</p>
+        </div>
+        <div class="diff-card">
+          <span class="diff-card__number">04</span>
+          <h3 class="diff-card__title">Parceria Estratégica</h3>
+          <p class="diff-card__desc">Atuamos como extensão da sua equipe, com comprometimento real com o crescimento do seu negócio.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== SEÇÃO METODOLOGIA ===== -->
+  <section class="method" id="metodologia" aria-label="Metodologia BX">
+    <div class="container">
+      <div class="method__header">
+        <span class="section-label">Nossa Metodologia</span>
+        <h2 class="section-title">4 pilares para <strong>escalar</strong> seu negócio.</h2>
+        <p class="section-subtitle">Conheça nossa abordagem estruturada para o crescimento sustentável da sua empresa.</p>
+      </div>
+      <div class="method__grid">
+        <div class="method-card">
+          <div class="method-card__step">01</div>
+          <h3 class="method-card__title">Estruturação Estratégica</h3>
+          <p class="method-card__desc">Construímos toda a base de marketing digital do seu negócio, garantindo uma estrutura sólida para que cada ação seja pensada para gerar previsibilidade de crescimento.</p>
+        </div>
+        <div class="method-card">
+          <div class="method-card__step">02</div>
+          <h3 class="method-card__title">Abertura de Novos Canais</h3>
+          <p class="method-card__desc">Identificamos e criamos os canais ideais para atrair novos clientes, ampliando sua presença e expandindo suas oportunidades de negócio com estratégia e previsibilidade.</p>
+        </div>
+        <div class="method-card">
+          <div class="method-card__step">03</div>
+          <h3 class="method-card__title">Validação de Processos e Escala</h3>
+          <p class="method-card__desc">Testamos, medimos e otimizamos cada etapa da operação para validar o que funciona. Só então escalamos com segurança, mantendo eficiência e alta performance.</p>
+        </div>
+        <div class="method-card">
+          <div class="method-card__step">04</div>
+          <h3 class="method-card__title">Crescimento Sustentável e Exponencial</h3>
+          <p class="method-card__desc">Com a estrutura validada, aceleramos o crescimento da sua empresa de forma estratégica, contínua e escalável, garantindo longevidade e previsibilidade nos resultados.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== SEÇÃO CTA FORTE ===== -->
+  <section class="cta-section" aria-label="Chamada para Ação">
+    <div class="container">
+      <div class="cta-section__inner">
+        <h2 class="cta-section__title">Pronto para estruturar seu crescimento?</h2>
+        <p class="cta-section__text">Agende uma reunião diagnóstica gratuita e descubra como a BX pode transformar a operação do seu negócio.</p>
+        <div class="cta-section__actions">
+          <a class="btn btn--white btn--lg" href="https://wa.me/5511989023070" onclick="trackClickWhatsapp()">Falar pelo WhatsApp</a>
+          <a class="btn btn--outline-white btn--lg" href="contatos.html">Preencher formulário</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== SEÇÃO CONTEÚDOS EM DESTAQUE ===== -->
+  <section class="featured" aria-label="Conteúdos em Destaque">
+    <div class="container">
+      <div class="featured__header">
+        <span class="section-label">Blog BX</span>
+        <h2 class="section-title">Conteúdos em <strong>destaque.</strong></h2>
+        <p class="section-subtitle">Acompanhe o que acontece no ecossistema da BX.</p>
+      </div>
       <div class="cards">
-        <!-- ===== CARD 1 ===== -->
         <article class="card">
           <div class="card__media">
-            <img src="assets/excesso.png" alt="Blog BX - Dicas de Marketing" />
+            <img src="assets/excesso.png" alt="Artigo BX - O excesso de conteúdo e a escassez de mensagem" loading="lazy" />
           </div>
           <div class="card__body">
-            <h3 class="card__kicker">Blog BX</h3>
-            <h4 class="card__title">O excesso de conteúdo e a escassez de mensagem</h4>
+            <span class="card__kicker">Blog BX</span>
+            <h3 class="card__title">O excesso de conteúdo e a escassez de mensagem</h3>
             <p class="card__excerpt">Muita gente posta demais, mas comunica de menos. Conteúdo sem mensagem vira ruído.</p>
-            <a class="btn btn--small" href="https://www.linkedin.com/pulse/o-excesso-de-conte%C3%BAdo-e-escassez-mensagem-felipe-augusto-b8cef/">Clique e descubra!</a>
+            <a class="card__link" href="https://www.linkedin.com/pulse/o-excesso-de-conte%C3%BAdo-e-escassez-mensagem-felipe-augusto-b8cef/" onclick="trackVejaMaisCard1()">Ler artigo &rarr;</a>
           </div>
         </article>
-
-        <!-- ===== CARD 2 ===== -->
         <article class="card">
           <div class="card__media">
-            <img src="assets/custo.png" alt="Blog BX - Estratégias Digitais" />
+            <img src="assets/custo.png" alt="Artigo BX - O custo oculto de operar clínica no modo improviso" loading="lazy" />
           </div>
           <div class="card__body">
-            <h3 class="card__kicker">Blog BX</h3>
-            <h4 class="card__title">O custo oculto de operar clínica no modo "improviso"</h4>
+            <span class="card__kicker">Blog BX</span>
+            <h3 class="card__title">O custo oculto de operar clínica no modo "improviso"</h3>
             <p class="card__excerpt">Trabalhar no improviso gera prejuízos invisíveis: retrabalho, falhas, desgaste e perda de pacientes.</p>
-            <a class="btn btn--small" href="https://www.linkedin.com/pulse/o-custo-oculto-de-operar-cl%C3%ADnica-modo-improviso-felipe-augusto-eoilf/?trackingId=vko1wON1SIieyBoLjhDUvg%3D%3D">Clique e descubra!</a>
+            <a class="card__link" href="https://www.linkedin.com/pulse/o-custo-oculto-de-operar-cl%C3%ADnica-modo-improviso-felipe-augusto-eoilf/?trackingId=vko1wON1SIieyBoLjhDUvg%3D%3D" onclick="trackVejaMaisCard2()">Ler artigo &rarr;</a>
           </div>
         </article>
-
-        <!-- ===== CARD 3 ===== -->
         <article class="card">
           <div class="card__media">
-            <img src="assets/markenting.png" alt="Blog BX - Cases de Sucesso" />
+            <img src="assets/markenting.png" alt="Artigo BX - Marketing não cria reputação, amplifica o que já existe" loading="lazy" />
           </div>
           <div class="card__body">
-            <h3 class="card__kicker">Blog BX</h3>
-            <h4 class="card__title">Marketing não cria reputação — amplifica o que já existe</h4>
+            <span class="card__kicker">Blog BX</span>
+            <h3 class="card__title">Marketing não cria reputação — amplifica o que já existe</h3>
             <p class="card__excerpt">Marketing não conserta nada — ele só torna mais visível o que a clínica realmente é.</p>
-            <a class="btn btn--small" href="https://www.linkedin.com/pulse/marketing-n%C3%A3o-cria-reputa%C3%A7%C3%A3o-amplifica-o-que-j%C3%A1-existe-felipe-augusto-xdhmf/?trackingId=u0puoO2DSimXeOmfl%2BMMZg%3D%3D">Clique e descubra!</a>
+            <a class="card__link" href="https://www.linkedin.com/pulse/marketing-n%C3%A3o-cria-reputa%C3%A7%C3%A3o-amplifica-o-que-j%C3%A1-existe-felipe-augusto-xdhmf/?trackingId=u0puoO2DSimXeOmfl%2BMMZg%3D%3D" onclick="trackVejaMaisCard3()">Ler artigo &rarr;</a>
           </div>
         </article>
       </div>
-
-      <!-- ===== BOTÃO "VER MAIS" ===== -->
       <div class="featured__more">
-        <a class="btn btn--pill" href="https://www.linkedin.com/newsletters/decis%C3%A3o-cl%C3%ADnica-7386941384936689664/">Veja mais conteúdos aqui</a>
+        <a class="btn btn--dark" href="https://www.linkedin.com/newsletters/decis%C3%A3o-cl%C3%ADnica-7386941384936689664/" onclick="trackBotaoVejaMaisAqui()">Veja mais conteúdos &rarr;</a>
       </div>
     </div>
   </section>
@@ -285,48 +462,35 @@
   <footer class="footer" role="contentinfo">
     <div class="container">
       <div class="footer__inner">
-        <!-- ===== CONTACT CARD (ESQUERDA) ===== -->
         <div class="footer__form">
           <article class="contact-card">
             <h3>Entre em contato conosco</h3>
-
             <form class="contact-form">
               <div class="form-group">
                 <label for="nome">Seu nome</label>
-                <input type="text" id="nome" placeholder="Seu nome" />
+                <input type="text" id="nome" placeholder="Digite seu nome" required />
               </div>
-
               <div class="form-group">
                 <label for="email">Seu e-mail</label>
-                <input type="email" id="email" placeholder="Seu e-mail" />
+                <input type="email" id="email" placeholder="Digite seu e-mail" required />
               </div>
-
               <div class="form-group">
                 <label for="telefone">Seu telefone</label>
-                <input type="tel" id="telefone" placeholder="Seu telefone" />
+                <input type="tel" id="telefone" placeholder="(11) 99999-9999" required />
               </div>
-
               <div class="form-footer">
                 <div class="checkbox-group">
                   <input type="checkbox" id="notificacoes" />
-                  <label for="notificacoes">
-                    Aceito receber notificações
-                  </label>
+                  <label for="notificacoes">Aceito receber notificações</label>
                 </div>
-
-                <button type="submit" class="btn-submit" onclick="formValidate()">
-                  Para mais detalhes!
-                </button>
+                <button type="submit" class="btn-submit" onclick="formValidate()">Enviar mensagem</button>
               </div>
             </form>
           </article>
         </div>
-
-        <!-- ===== COLUNAS (DIREITA) ===== -->
         <div class="footer__cols">
-          <!-- INSTITUCIONAL -->
           <div class="footer__col">
-            <h4>INSTITUCIONAL</h4>
+            <h4>Institucional</h4>
             <ul>
               <li><a href="index.html">Home</a></li>
               <li><a href="nosso-trabalho.html">Nosso Trabalho</a></li>
@@ -335,10 +499,8 @@
               <li><a href="#">Missão, Visão e Valores</a></li>
             </ul>
           </div>
-
-          <!-- SERVIÇOS -->
           <div class="footer__col">
-            <h4>SERVIÇOS</h4>
+            <h4>Serviços</h4>
             <ul>
               <li><a href="crm.html">Implementação de CRM</a></li>
               <li><a href="sites-corporativos.html">Criação de Sites</a></li>
@@ -350,10 +512,8 @@
               <li><a href="edicao_profissional.html">Edição de Vídeos</a></li>
             </ul>
           </div>
-
-          <!-- SOLUÇÕES -->
           <div class="footer__col">
-            <h4>SOLUÇÕES</h4>
+            <h4>Soluções</h4>
             <ul>
               <li><a href="nour_clinicas.html">Sistema Nour Clínicas</a></li>
               <li><a href="#">Consultoria de Marketing</a></li>
@@ -364,23 +524,18 @@
         </div>
       </div>
     </div>
-
-    <!-- ===== BARRA INFERIOR ===== -->
     <div class="footer__bottom">
       <div class="container">
-        <p class="footer__copyright">
-          © 2025 BX Assessoria. Todos os direitos reservados.
-        </p>
+        <p class="footer__copyright">© 2025 BX Assessoria. Todos os direitos reservados.</p>
       </div>
     </div>
   </footer>
 
   <!-- ===== WHATSAPP FLOAT ===== -->
   <a href="https://wa.me/5511989023070" class="whatsapp-float" target="_blank" rel="noopener noreferrer">
-    <img src="./assets/whatsapp-icon.png" class="whatsapp-icon" alt="WhatsApp" onclick="trackClickWhatsapp()">
+    <img src="./assets/whatsapp-icon.png" class="whatsapp-icon" alt="Fale conosco pelo WhatsApp" onclick="trackClickWhatsapp()" />
   </a>
-  <script src="assets/hamburger.js"></script>
 
-    
+  <script src="assets/hamburger.js"></script>
 </body>
 </html>
