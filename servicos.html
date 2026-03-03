@@ -19,6 +19,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="styles/home.css">
+  <script src="scripts.js"></script>
 </head>
 <body>
 
@@ -53,7 +54,7 @@
   </div>
 </header>
 
-<section class="hero" style="min-height:60vh;padding:160px 0 80px">
+<section class="hero">
   <div class="container hero__inner">
     <div class="hero__content">
       <span class="hero__badge">Assessoria 360°</span>
@@ -63,11 +64,11 @@
   </div>
 </section>
 
-<section style="padding: 120px 0; background-color: var(--white);">
+<section class="section">
   <div class="container">
-    <h2 class="section-title" style="text-align: center;">Entenda os Benefícios</h2>
-    <p class="section-subtitle" style="margin: 0 auto 60px; text-align: center;">Nossas soluções são desenvolvidas especificamente para clínicas e consultórios, garantindo eficiência, crescimento previsível e processos digitais otimizados.</p>
-    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 30px;">
+    <h2 class="section-title" >Entenda os Benefícios</h2>
+    <p class="section-subtitle" >Nossas soluções são desenvolvidas especificamente para clínicas e consultórios, garantindo eficiência, crescimento previsível e processos digitais otimizados.</p>
+    <div class="grid grid--4-cols">
       <div class="service-card">
         <h3 class="service-card__title">Orientado para Clínicas</h3>
         <p class="service-card__desc">Todos os processos são adaptados para rotinas de clínicas, garantindo eficiência e padronização.</p>
@@ -88,28 +89,28 @@
   </div>
 </section>
 
-<section style="padding: 120px 0; background-color: var(--gray-100);">
+<section class="section method">
   <div class="container">
-    <h2 class="section-title" style="text-align: center;">Nosso Processo</h2>
-    <p class="section-subtitle" style="margin: 0 auto 60px; text-align: center;">Nosso processo foi desenvolvido para atender a necessidade real de clínicas que precisam digitalizar, escalar e padronizar seu marketing e operação.</p>
-    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 30px; text-align: center;">
+    <h2 class="section-title" >Nosso Processo</h2>
+    <p class="section-subtitle" >Nosso processo foi desenvolvido para atender a necessidade real de clínicas que precisam digitalizar, escalar e padronizar seu marketing e operação.</p>
+    <div class="grid grid--4-cols text-center">
       <div>
-        <div style="width: 50px; height: 50px; background-color: var(--primary-color); color: white; border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 20px; font-size: 20px; font-weight: bold;">1</div>
+        <div class="step-number">1</div>
         <h3 class="service-card__title">Diagnóstico da Clínica</h3>
         <p>Mapeamos a operação, gargalos, funil e oportunidades.</p>
       </div>
       <div>
-        <div style="width: 50px; height: 50px; background-color: var(--primary-color); color: white; border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 20px; font-size: 20px; font-weight: bold;">2</div>
+        <div class="step-number">2</div>
         <h3 class="service-card__title">Planejamento Estratégico</h3>
         <p>Definimos estrutura, fluxos, abordagem e integrações necessárias.</p>
       </div>
       <div>
-        <div style="width: 50px; height: 50px; background-color: var(--primary-color); color: white; border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 20px; font-size: 20px; font-weight: bold;">3</div>
+        <div class="step-number">3</div>
         <h3 class="service-card__title">Execução</h3>
         <p>Implementamos o serviço contratado com foco em performance e agilidade.</p>
       </div>
       <div>
-        <div style="width: 50px; height: 50px; background-color: var(--primary-color); color: white; border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 20px; font-size: 20px; font-weight: bold;">4</div>
+        <div class="step-number">4</div>
         <h3 class="service-card__title">Otimização Contínua</h3>
         <p>Avaliamos resultados e ajustamos continuamente para maximizar retornos.</p>
       </div>
@@ -117,11 +118,11 @@
   </div>
 </section>
 
-<section style="padding: 120px 0; background-color: var(--white);">
+<section class="section">
   <div class="container">
-    <h2 class="section-title" style="text-align: center;">Perguntas Frequentes</h2>
-    <p class="section-subtitle" style="margin: 0 auto 60px; text-align: center;">Tire suas dúvidas sobre nossos serviços de criação de sites e landing pages para clínicas</p>
-    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 30px;">
+    <h2 class="section-title" >Perguntas Frequentes</h2>
+    <p class="section-subtitle" >Tire suas dúvidas sobre nossos serviços de criação de sites e landing pages para clínicas</p>
+    <div class="grid grid--2-cols">
       <div class="faq-item">
         <h3 class="faq-question">Quanto tempo leva para ver resultados?</h3>
         <p class="faq-answer">Depende do serviço, mas clínicas costumam notar melhorias entre 15 e 45 dias.</p>
@@ -200,7 +201,7 @@
 
 <a href="https://wa.me/5511989023070" class="whatsapp-float" target="_blank"><img src="./assets/whatsapp-icon.png" class="whatsapp-icon" alt="WhatsApp" /></a>
 <script src="assets/hamburger.js"></script>
-<script src="scripts.js"></script>
+
 
 </body>
 </html>
